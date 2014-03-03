@@ -1,0 +1,12 @@
+alias gitp='git up && git push origin'
+alias tmux="tmux -2"
+alias zr='source ~/.zshrc'
+alias ze='vim ~/.zshrc'
+alias clar='clear'
+alias rake='noglob rake'
+alias http='noglob http'
+alias zexports='vim ~/.zsh/zsh-exports'
+alias zaliases='vim ~/.zsh/zsh-aliases'
+alias rapps='cd ~/Documents/rails-apps'
+alias devops='cd ~/Documents/devops'
+alias vim='vim -w ~/.vimlog "$@"'
