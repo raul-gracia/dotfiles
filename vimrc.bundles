@@ -28,5 +28,6 @@ Bundle 'Lokaltog/vim-powerline'
 Bundle 'stephenmckinney/vim-solarized-powerline'
 Bundle 'scrooloose/nerdtree'
 Bundle 'ddollar/nerdcommenter'
+Bundle 'christoomey/vim-tmux-navigator'
 
 filetype on

@@ -1,5 +1,5 @@
 if filereadable(expand("~/.vimrc.bundles"))
-	source ~/.vimrc.bundles
+  source ~/.vimrc.bundles
 endif
 
 syntax enable
@@ -8,19 +8,22 @@ colorscheme solarized
 set shell=bash
 :let $PATH=$PATH . ':' . $HOME . '/.rvm/bin'
 set t_Co=256
+set tabstop=2
+set shiftwidth=2
+set expandtab
 
 map <leader>tt :call RunRspecLine(line('.'))<cr>
 map <leader>TT :call RunRspec()<cr>
 
 function! RunRspec()
-	execute ":wa"
-	exec ":!rspec % "
+  execute ":wa"
+  exec ":!rspec % "
 endfunction
 
 function! RunRspecLine(args)
-	execute ":wa"
-	let cmd = ":!rspec %:" . a:args
-	execute cmd
+  execute ":wa"
+  let cmd = ":!rspec %:" . a:args
+  execute cmd
 endfunction
 
 
@@ -81,3 +84,8 @@ nmap <silent> <leader>md :!mkdir -p %:p:h<CR>
 
 " Toggle hlsearch with <leader>hs
 nmap <leader>hs :set hlsearch! hlsearch?<CR>
+
+nmap <silent> <c-k> :wincmd k<CR>
+nmap <silent> <c-j> :wincmd j<CR>
+nmap <silent> <c-h> :wincmd h<CR>
+nmap <silent> <c-l> :wincmd l<CR>
