@@ -20,7 +20,7 @@ brew install git
 curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
 ```
 
-### Install oh-my-zsh
+### Install rvm
 
 ```bash
 curl -sSL https://get.rvm.io | bash -s stable --ruby
