@@ -1,5 +1,5 @@
 if filereadable(expand("~/.vimrc.bundles"))
-  source ~/.vimrc.bundles
+	source ~/.vimrc.bundles
 endif
 
 syntax enable
@@ -13,14 +13,14 @@ map <leader>tt :call RunRspecLine(line('.'))<cr>
 map <leader>TT :call RunRspec()<cr>
 
 function! RunRspec()
-  execute ":wa"
-  exec ":!rspec % "
+	execute ":wa"
+	exec ":!rspec % "
 endfunction
 
 function! RunRspecLine(args)
-  execute ":wa"
-  let cmd = ":!rspec %:" . a:args
-  execute cmd
+	execute ":wa"
+	let cmd = ":!rspec %:" . a:args
+	execute cmd
 endfunction
 
 
@@ -58,3 +58,26 @@ imap <down> <nop>
 imap <left> <nop>
 imap <right> <nop>
 
+" Toggle paste mode
+nmap <silent> <F4> :set invpaste<CR>:set paste?<CR>
+imap <silent> <F4> <ESC>:set invpaste<CR>:set paste?<CR>
+
+" format the entire file
+nnoremap <leader>fef :normal! gg=G``<CR>
+
+" upper/lower word
+nmap <leader>u mQviwU`Q
+nmap <leader>l mQviwu`Q
+
+" upper/lower first char of word
+nmap <leader>U mQgewvU`Q
+nmap <leader>L mQgewvu`Q
+
+" cd to the directory containing the file in the buffer
+nmap <silent> <leader>cd :lcd %:h<CR>
+
+" Create the directory containing the file in the buffer
+nmap <silent> <leader>md :!mkdir -p %:p:h<CR>
+
+" Toggle hlsearch with <leader>hs
+nmap <leader>hs :set hlsearch! hlsearch?<CR>
