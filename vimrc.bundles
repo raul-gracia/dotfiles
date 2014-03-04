@@ -28,9 +28,10 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'ddollar/nerdcommenter'
 Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'rking/ag.vim'
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "tomtom/tlib_vim"
-Bundle "garbas/vim-snipmate"
-Bundle "honza/vim-snippets"
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'tomtom/tlib_vim'
+Bundle 'garbas/vim-snipmate'
+Bundle 'honza/vim-snippets'
+Bundle 'ervandew/supertab'
 
 filetype on
