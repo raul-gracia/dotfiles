@@ -27,5 +27,6 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'scrooloose/nerdtree'
 Bundle 'ddollar/nerdcommenter'
 Bundle 'christoomey/vim-tmux-navigator'
+Bundle 'rking/ag.vim'
 
 filetype on
