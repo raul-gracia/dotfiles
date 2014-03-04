@@ -61,8 +61,6 @@ imap <down> <nop>
 imap <left> <nop>
 imap <right> <nop>
 
-let g:Powerline_symbols = 'fancy'
-
 " Toggle paste mode
 nmap <silent> <F4> :set invpaste<CR>:set paste?<CR>
 imap <silent> <F4> <ESC>:set invpaste<CR>:set paste?<CR>
@@ -91,3 +89,7 @@ nmap <silent> <c-k> :wincmd k<CR>
 nmap <silent> <c-j> :wincmd j<CR>
 nmap <silent> <c-h> :wincmd h<CR>
 nmap <silent> <c-l> :wincmd l<CR>
+
+set laststatus=2
+
+set rtp+=~/powerline/powerline/bindings/vim
