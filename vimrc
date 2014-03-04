@@ -18,6 +18,7 @@ set scrolloff=3
 set textwidth=80
 set expandtab
 set nocompatible
+set number
 filetype off
 filetype plugin indent on
 
