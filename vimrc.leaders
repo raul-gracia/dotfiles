@@ -1,0 +1,39 @@
+map <leader>tt :call RunRspecLine(line('.'))<cr>
+map <leader>TT :call RunRspec()<cr>
+
+function! RunRspec()
+  execute ":wa"
+  exec ":!rspec % "
+endfunction
+
+function! RunRspecLine(args)
+  execute ":wa"
+  let cmd = ":!rspec %:" . a:args
+  execute cmd
+endfunction
+
+" Run cucrent file in cucumber
+nmap <leader>cc :! cucumber %<CR>
+
+" Redraw vim interface
+nmap <leader>rd :redraw!<CR>
+
+" format the entire file
+nnoremap <leader>fef :normal! gg=G``<CR>
+
+" upper/lower word
+nmap <leader>u mQviwU`Q
+nmap <leader>l mQviwu`Q
+
+" upper/lower first char of word
+nmap <leader>U mQgewvU`Q
+nmap <leader>L mQgewvu`Q
+
+" cd to the directory containing the file in the buffer
+nmap <silent> <leader>cd :lcd %:h<CR>
+
+" Create the directory containing the file in the buffer
+nmap <silent> <leader>md :!mkdir -p %:p:h<CR>
+
+" Toggle hlsearch with <leader>hs
+nmap <leader>hs :set hlsearch! hlsearch?<CR>

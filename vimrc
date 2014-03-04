@@ -2,6 +2,10 @@ if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles
 endif
 
+if filereadable(expand("~/.vimrc.leaders"))
+  source ~/.vimrc.leaders
+endif
+
 syntax enable
 set background=dark
 colorscheme solarized
@@ -10,39 +14,21 @@ set shell=bash
 set t_Co=256
 set tabstop=2
 set shiftwidth=2
-set expandtab
-
-map <leader>tt :call RunRspecLine(line('.'))<cr>
-map <leader>TT :call RunRspec()<cr>
-
-function! RunRspec()
-  execute ":wa"
-  exec ":!rspec % "
-endfunction
-
-function! RunRspecLine(args)
-  execute ":wa"
-  let cmd = ":!rspec %:" . a:args
-  execute cmd
-endfunction
-
-
-"paste overriding selection
-vnoremap p "_dP
-nmap <leader>fef ggVG=<C-o><C-o>zz
 set scrolloff=3
+set textwidth=80
+set expandtab
+set nocompatible
+filetype off
+filetype plugin indent on
+
+" Paste overriding selection
+vnoremap p "_dP
 
 nmap <silent> <C-D> :NERDTreeToggle<CR>
 nmap <silent> <C-F> <C-h><C-h>:vertical resize 40<CR><C-l>
-nmap <leader>cc :! cucumber %<CR>
-nmap <leader>rd :redraw!<CR>
+
 " Remove trailling space on save
 autocmd BufWritePre * :%s/\s\+$//e
-
-set nocompatible               " be iMproved
-filetype off                   " required!
-
-filetype plugin indent on     " required!
 
 " EasyAlign remap
 vnoremap <silent> <Enter> :EasyAlign<cr>
@@ -51,7 +37,7 @@ vnoremap <silent> <Enter> :EasyAlign<cr>
 :highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
 :set colorcolumn=80
 
-" disable arrow keys
+" Disable arrow keys
 map <up> <nop>
 map <down> <nop>
 map <left> <nop>
@@ -65,31 +51,19 @@ imap <right> <nop>
 nmap <silent> <F4> :set invpaste<CR>:set paste?<CR>
 imap <silent> <F4> <ESC>:set invpaste<CR>:set paste?<CR>
 
-" format the entire file
-nnoremap <leader>fef :normal! gg=G``<CR>
-
-" upper/lower word
-nmap <leader>u mQviwU`Q
-nmap <leader>l mQviwu`Q
-
-" upper/lower first char of word
-nmap <leader>U mQgewvU`Q
-nmap <leader>L mQgewvu`Q
-
-" cd to the directory containing the file in the buffer
-nmap <silent> <leader>cd :lcd %:h<CR>
-
-" Create the directory containing the file in the buffer
-nmap <silent> <leader>md :!mkdir -p %:p:h<CR>
-
-" Toggle hlsearch with <leader>hs
-nmap <leader>hs :set hlsearch! hlsearch?<CR>
-
+" Better window movement
 nmap <silent> <c-k> :wincmd k<CR>
 nmap <silent> <c-j> :wincmd j<CR>
 nmap <silent> <c-h> :wincmd h<CR>
 nmap <silent> <c-l> :wincmd l<CR>
 
+" Powerline config
 set laststatus=2
-
 set rtp+=~/powerline/powerline/bindings/vim
+
+" Backup to ~/.tmp
+set backup
+set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set backupskip=/tmp/*,/private/tmp/*
+set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set writebackup

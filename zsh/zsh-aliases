@@ -1,4 +1,11 @@
-alias gitp='git up && git push origin'
+# Git related
+alias g='git'
+alias gp='git up && git push origin'
+alias gci='git ci'
+alias gst='git st'
+alias gaa='git add --all'
+
+
 alias tmux="tmux -2"
 alias zr='source ~/.zshrc'
 alias ze='vim ~/.zshrc'
