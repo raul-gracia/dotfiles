@@ -1,0 +1,17 @@
+Host cai-rails-live.cloud.which.co.uk
+    Hostname cai-rails-live.cloud.which.co.uk
+    Port 22
+    User elderly
+    IdentityFile ~/.ssh/jenkins_key
+
+Host jenkins-job-generator
+    Hostname devops-tools-live.cloud.which.co.uk
+    Port 22
+    User generator
+    IdentityFile ~/.ssh/jenkins_key
+
+Host developer-dashboard
+    Hostname devops-tools-live.cloud.which.co.uk
+    Port 22
+    User dashboard
+    IdentityFile ~/.ssh/jenkins_key
