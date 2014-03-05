@@ -22,3 +22,5 @@
   autocrlf = input
 [merge]
   ff = only
+[commit]
+  template = ~/.gitmessage
