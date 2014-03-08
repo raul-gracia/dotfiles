@@ -22,8 +22,10 @@ end
 task :install_dotfiles => :install_tools do
   print_info 'Installing dotfiles...'
   excluded_files = %w{README.md Brewfile Gemfile Rakefile}
+  print_info "Executing: rcup -d . #{excluded_files.map{|f| "-x #{f}"}.join(' ')}"
   `rcup -d . #{excluded_files.map{|f| "-x #{f}"}.join(' ')}`
   Rake::Task["configure_tmux_powerline"].invoke
+  Rake::Task["configure_vim_vundle"].invoke
 end
 
 task :configure_tmux_powerline do
@@ -37,6 +39,14 @@ task :configure_tmux_powerline do
     puts 'Downloading Patched Monaco font...'
     `http https://gist.githubusercontent.com/baopham/1838072/raw/2c0e00770826e651d1e355962e751325edb0f1ee/Monaco+for+Powerline.otf > ~/Library/Fonts/Monaco_for_Powerline.otf`
   end
+end
+
+task :configure_vim_vundle do
+  print_info 'Configuring Vundle.vim...'
+  unless File.exist? File.expand_path('~/.vim/bundle/vundle')
+    `git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle`
+  end
+  `vim +BundleInstall +qall`
 end
 
 
