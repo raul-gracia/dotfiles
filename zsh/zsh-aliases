@@ -1,9 +1,12 @@
 # Git related
 alias g='git'
 alias gp='git up && git push origin'
-alias gci='git ci'
+alias gc='git c'
 alias gst='git st'
 alias gaa='git add --all'
+alias ga='git add'
+alias gph='git push heroku'
+alias gup='git up'
 
 
 alias tmux="tmux -2"
