@@ -34,5 +34,6 @@ Bundle 'garbas/vim-snipmate'
 Bundle 'honza/vim-snippets'
 Bundle 'ervandew/supertab'
 Bundle 'junegunn/vim-easy-align'
+Bundle 'tpope/vim-surround'
 
 filetype on
