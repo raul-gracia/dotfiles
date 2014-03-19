@@ -19,3 +19,6 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 setopt auto_cd
 cdpath=($HOME/Documents/rails-apps $HOME/Documents/devops)
+
+# Homebrew
+PATH=/usr/local/bin:$PATH

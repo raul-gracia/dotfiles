@@ -35,5 +35,7 @@ Bundle 'honza/vim-snippets'
 Bundle 'ervandew/supertab'
 Bundle 'junegunn/vim-easy-align'
 Bundle 'tpope/vim-surround'
+Bundle 'kana/vim-textobj-user'
+Bundle 'nelstrom/vim-textobj-rubyblock'
 
 filetype on

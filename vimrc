@@ -6,6 +6,7 @@ if filereadable(expand("~/.vimrc.leaders"))
   source ~/.vimrc.leaders
 endif
 
+runtime macros/matchit.vim
 syntax enable
 set background=dark
 colorscheme solarized
@@ -19,7 +20,6 @@ set textwidth=80
 set expandtab
 set nocompatible
 set number
-filetype off
 filetype plugin indent on
 
 " Paste overriding selection
