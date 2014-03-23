@@ -1,5 +1,5 @@
-map <leader>tt :call RunRspecLine(line('.'))<cr>
-map <leader>TT :call RunRspec()<cr>
+map <leader>t :call RunRspecLine(line('.'))<cr>
+map <leader>tt :call RunRspec()<cr>
 
 function! RunRspec()
   execute ":wa"
@@ -43,5 +43,22 @@ nmap <leader>gb :Gblame<CR>
 nmap <leader>gs :Gstatus<CR>
 nmap <leader>gd :Gdiff<CR>
 nmap <leader>gl :Glog<CR>
-nmap <leader>gc :Gcommit<CR>
+nmap <leader>gc :Gcommit -v<CR>
 nmap <leader>gp :Git push<CR>
+nmap <leader>gaa :Git add --all<CR>
+
+
+" Autoload config after saving file
+if has("autocmd")
+  autocmd bufwritepost .vimrc source $MYVIMRC
+  autocmd bufwritepost .vimrc.leaders source $MYVIMRC
+  autocmd bufwritepost .vimrc.bundles source $MYVIMRC
+  autocmd bufwritepost vimrc source $MYVIMRC
+  autocmd bufwritepost vimrc.leaders source $MYVIMRC
+  autocmd bufwritepost vimrc.bundles source $MYVIMRC
+endif
+
+nmap <leader>rl :source $MYVIMRC<CR>
+nmap <leader>v :tabedit $MYVIMRC<CR>
+nmap <leader>vl :tabedit ~/.vimrc.leaders<CR>
+nmap <leader>vb :tabedit ~/.vimrc.bundles<CR>

@@ -7,6 +7,9 @@ alias gaa='git add --all'
 alias ga='git add'
 alias gph='git push heroku'
 alias gup='git up'
+alias glg='git lg'
+alias gdfc='git diff --cached --color-words'
+alias gdf='git diff --color-words'
 
 
 alias tmux="tmux -2"

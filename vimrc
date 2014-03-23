@@ -16,16 +16,17 @@ set t_Co=256
 set tabstop=2
 set shiftwidth=2
 set scrolloff=3
-set textwidth=80
+set backspace=2
 set expandtab
 set nocompatible
 set number
+set encoding=utf-8
 filetype plugin indent on
 
 " Paste overriding selection
 vnoremap p "_dP
 
-nmap <silent> <C-D> :NERDTreeToggle<CR>
+nmap <silent> <C-D> :NERDTreeToggle %<CR>
 nmap <silent> <C-F> <C-h><C-h>:vertical resize 40<CR><C-l>
 
 " Remove trailling space on save
@@ -70,4 +71,7 @@ set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set writebackup
 
 " Auto open nerdtree
-autocmd vimenter * if !argc() | NERDTree | endif
+set autochdir
+let NERDTreeChDirMode=2
+set laststatus=2
+set noshowmode
