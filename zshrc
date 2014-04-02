@@ -6,12 +6,12 @@ plugins=(git rails ruby brew bundler gem heroku node npm pow powder rvm)
 
 source $ZSH/oh-my-zsh.sh
 
-if [ -f ~/.zsh/zsh-aliases ]; then
-  source ~/.zsh/zsh-aliases
+if [ -f $HOME/.zsh/zsh-aliases ]; then
+  source $HOME/.zsh/zsh-aliases
 fi
 
-if [ -f ~/.zsh/zsh-exports ]; then
-  source ~/.zsh/zsh-exports
+if [ -f $HOME/.zsh/zsh-exports ]; then
+  source $HOME/.zsh/zsh-exports
 fi
 
 PATH=$PATH:/usr/local/share/npm/bin
