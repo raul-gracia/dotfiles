@@ -30,3 +30,4 @@ alias vim='vim -w ~/.vimlog "$@"'
 alias tmux="tmux -2"
 alias rake='noglob rake'
 alias http='noglob http'
+alias rdb='rake db:migrate db:test:prepare'
