@@ -11,16 +11,22 @@ alias glg='git lg'
 alias gdfc='git diff --cached --color-words'
 alias gdf='git diff --color-words'
 
-
-alias tmux="tmux -2"
+# Zsh
 alias zr='source ~/.zshrc'
 alias ze='vim ~/.zshrc'
-alias clar='clear'
-alias rake='noglob rake'
-alias http='noglob http'
 alias zexports='vim ~/.zsh/zsh-exports'
 alias zaliases='vim ~/.zsh/zsh-aliases'
+
+# Typos
+alias cl='clear'
+alias clar='clear'
+
+# Shortcuts
 alias rapps='cd ~/Documents/rails-apps'
 alias devops='cd ~/Documents/devops'
-alias vim='vim -w ~/.vimlog "$@"'
 alias dotfiles='vim ~/dotfiles'
+
+alias vim='vim -w ~/.vimlog "$@"'
+alias tmux="tmux -2"
+alias rake='noglob rake'
+alias http='noglob http'
