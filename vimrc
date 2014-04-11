@@ -71,7 +71,11 @@ set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set writebackup
 
 " Auto open nerdtree
-set autochdir
-let NERDTreeChDirMode=2
+"set autochdir
+let NERDTreeChDirMode=0
 set laststatus=2
 set noshowmode
+
+" Ctrlp.vim
+let g:ctrlp_working_path_mode = '0'
+let g:ctrlp_open_new_file = 't'

@@ -25,6 +25,7 @@ alias clar='clear'
 alias rapps='cd ~/Documents/rails-apps'
 alias devops='cd ~/Documents/devops'
 alias dotfiles='vim ~/dotfiles'
+alias dofiles='vim ~/dotfiles'
 
 alias vim='vim -w ~/.vimlog "$@"'
 alias tmux="tmux -2"
