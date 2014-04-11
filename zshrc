@@ -2,7 +2,7 @@
 ZSH=$HOME/.oh-my-zsh
 
 ZSH_THEME="steeef_simplified"
-plugins=(git rails ruby brew bundler gem heroku node npm pow powder rvm)
+plugins=(git rails ruby brew bundler vundle gem heroku node npm pow powder rvm)
 
 source $ZSH/oh-my-zsh.sh
 

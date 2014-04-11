@@ -50,12 +50,12 @@ nmap <leader>gaa :Git add --all<CR>
 
 " Autoload config after saving file
 if has("autocmd")
-  autocmd bufwritepost .vimrc source $MYVIMRC
-  autocmd bufwritepost .vimrc.leaders source $MYVIMRC
-  autocmd bufwritepost .vimrc.bundles source $MYVIMRC
-  autocmd bufwritepost vimrc source $MYVIMRC
-  autocmd bufwritepost vimrc.leaders source $MYVIMRC
-  autocmd bufwritepost vimrc.bundles source $MYVIMRC
+  autocmd bufwritepost .vimrc source ~/.vimrc
+  autocmd bufwritepost .vimrc.leaders source ~/.vimrc
+  autocmd bufwritepost .vimrc.bundles source ~/.vimrc
+  autocmd bufwritepost vimrc source ~/.vimrc
+  autocmd bufwritepost vimrc.leaders source ~/.vimrc
+  autocmd bufwritepost vimrc.bundles source ~/.vimrc
 endif
 
 nmap <leader>rl :source $MYVIMRC<CR>
