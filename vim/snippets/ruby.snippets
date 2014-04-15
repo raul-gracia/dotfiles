@@ -1,0 +1,8 @@
+snippet reqdesc
+	require 'spec_helper'
+
+	describe ${1:`substitute(substitute(vim_snippets#Filename(), '_spec$', '', ''), '\(_\|^\)\(.\)', '\u\2', 'g')`} do
+		it '${2:works}' do
+			${0}
+		end
+	end
