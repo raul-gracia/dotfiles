@@ -1,0 +1,32 @@
+#!/usr/bin/env ruby
+# encoding: utf-8
+
+require 'erb'
+require 'fileutils'
+
+TMUX_SCRIPTS_FOLDER = File.expand_path('~/.tmuxgen')
+
+PROJECT_PATH = File.expand_path(ARGV[0])
+PROJECT_NAME = File.basename(PROJECT_PATH)
+
+puts "Project path: #{PROJECT_PATH}"
+puts "Project name: #{PROJECT_NAME}"
+
+case ARGV[1]
+when '--rails'
+  template = File.read(File.expand_path("#{TMUX_SCRIPTS_FOLDER}/templates/rails.erb"))
+  renderer = ERB.new(template)
+  filename = "#{TMUX_SCRIPTS_FOLDER}/#{PROJECT_NAME}-tmux"
+  File.write(filename, renderer.result)
+  FileUtils.chmod('+x', filename)
+when '--ruby'
+  template = File.read(File.expand_path("#{TMUX_SCRIPTS_FOLDER}/templates/ruby.erb"))
+  renderer = ERB.new(template)
+  filename = "#{TMUX_SCRIPTS_FOLDER}/#{PROJECT_NAME}-tmux"
+  File.write(filename, renderer.result)
+  FileUtils.chmod('+x', filename)
+else
+  puts 'template not specified'
+end
+
+

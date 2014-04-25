@@ -22,3 +22,6 @@ cdpath=($HOME/Documents/rails-apps $HOME/Documents/devops)
 
 # Homebrew
 PATH=/usr/local/bin:$PATH
+
+# TmuxGEN
+PATH=$PATH:$HOME/.tmuxgen/bin:$HOME/.tmuxgen
