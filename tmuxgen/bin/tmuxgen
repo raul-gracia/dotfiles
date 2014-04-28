@@ -7,7 +7,7 @@ require 'fileutils'
 TMUX_SCRIPTS_FOLDER = File.expand_path('~/.tmuxgen')
 
 PROJECT_PATH = File.expand_path(ARGV[0])
-PROJECT_NAME = File.basename(PROJECT_PATH)
+PROJECT_NAME = File.basename(PROJECT_PATH).gsub('.', '-')
 
 puts "Project path: #{PROJECT_PATH}"
 puts "Project name: #{PROJECT_NAME}"
