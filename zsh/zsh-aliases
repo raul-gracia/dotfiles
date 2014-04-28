@@ -20,15 +20,17 @@ alias zaliases='vim ~/.zsh/zsh-aliases'
 # Typos
 alias cl='clear'
 alias clar='clear'
+alias dofiles='dotfiles'
 
 # Shortcuts
 alias rapps='cd ~/Documents/rails-apps'
 alias devops='cd ~/Documents/devops'
 alias dotfiles='cd ~/dotfiles && vim . && cd -'
-alias dofiles='dotfiles'
 
 alias vim='vim -w ~/.vimlog "$@"'
 alias tmux="tmux -2"
 alias rake='noglob rake'
 alias http='noglob http'
 alias rdb='rake db:migrate db:test:prepare'
+alias be='bundle exec'
+alias beg='bundle exec guard -c'

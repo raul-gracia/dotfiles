@@ -25,3 +25,6 @@ PATH=/usr/local/bin:$PATH
 
 # TmuxGEN
 PATH=$PATH:$HOME/.tmuxgen/bin:$HOME/.tmuxgen
+
+setopt auto_cd
+cdpath=($HOME/Documents/rails-apps $HOME/Documents/devops)
