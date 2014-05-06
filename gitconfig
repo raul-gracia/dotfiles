@@ -24,3 +24,6 @@
   ff = only
 [commit]
   template = ~/.gitmessage
+[status]
+  sort = 1
+  branch = 1
