@@ -15,3 +15,9 @@ Host developer-dashboard
     Port 22
     User dashboard
     IdentityFile ~/.ssh/jenkins_key
+
+Host ra-api-dev
+    Hostname ra-api-dev.cloud.which.co.uk
+    Port 22
+    User webadmin
+    IdentityFile ~/.ssh/jenkins_key
