@@ -22,7 +22,7 @@ end
 task :install_dotfiles => :install_tools do
   print_info 'Installing dotfiles...'
   excluded_files = %w{README.md Brewfile Gemfile Rakefile VimLauncher.app}
-  print_info "Executing: rcup -d . #{excluded_files.map{|f| "-x #{f}"}.join(' ')}"
+  print_info "Executing: rcup -fd . #{excluded_files.map{|f| "-x #{f}"}.join(' ')}"
   `rcup -d . #{excluded_files.map{|f| "-x #{f}"}.join(' ')}`
   Rake::Task["configure_tmux_powerline"].invoke
   Rake::Task["configure_vim_vundle"].invoke
