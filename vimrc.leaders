@@ -1,16 +1,7 @@
-map <leader>t :call RunRspecLine(line('.'))<cr>
-map <leader>tt :call RunRspec()<cr>
-
-function! RunRspec()
-  execute ":wa"
-  exec ":!rspec % "
-endfunction
-
-function! RunRspecLine(args)
-  execute ":wa"
-  let cmd = ":!rspec %:" . a:args
-  execute cmd
-endfunction
+map <leader>t :call RunNearestSpec()<cr>
+map <leader>tt :call RunCurrentSpecFile()<cr>
+map <Leader>tl :call RunLastSpec()<CR>
+map <Leader>ta :call RunAllSpecs()<CR>
 
 " Run cucrent file in cucumber
 nmap <leader>cc :! cucumber %<CR>
