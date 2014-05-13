@@ -21,3 +21,8 @@ Host ra-api-dev
     Port 22
     User webadmin
     IdentityFile ~/.ssh/jenkins_key
+
+Host devops-tools-live
+    Hostname devops-tools-live.cloud.which.co.uk
+    Port 22
+    User root
