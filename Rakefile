@@ -24,6 +24,11 @@ task :install_dotfiles => :install_tools do
   excluded_files = %w{README.md Brewfile Gemfile Rakefile VimLauncher.app}
   print_info "Executing: rcup -fd . #{excluded_files.map{|f| "-x #{f}"}.join(' ')}"
   `rcup -d . #{excluded_files.map{|f| "-x #{f}"}.join(' ')}`
+  unless File.exist? File.expand_path('~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting')
+    `mkdir -p ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting`
+    print_info "Cloning zsh-syntax-highlighting..."
+    `git clone git://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting`
+  end
   Rake::Task["configure_tmux_powerline"].invoke
   Rake::Task["configure_vim_vundle"].invoke
 end
