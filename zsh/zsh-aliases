@@ -10,6 +10,7 @@ alias gup='g up'
 alias glg='g lg'
 alias gdfc='g diff --cached --color-words'
 alias gdf='g diff --color-words'
+alias hpr='hub pull-request'
 
 # Zsh
 alias zr='source ~/.zshrc'
