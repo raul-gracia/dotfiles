@@ -11,6 +11,7 @@ alias glg='g lg'
 alias gdfc='g diff --cached --color-words'
 alias gdf='g diff --color-words'
 alias hpr='hub pull-request'
+alias hlog='heroku logs -t -a'
 
 # Zsh
 alias zr='source ~/.zshrc'

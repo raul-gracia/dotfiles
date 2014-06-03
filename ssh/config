@@ -1,3 +1,5 @@
+ServerAliveInterval 60
+
 Host cai-rails-live.cloud.which.co.uk
     Hostname cai-rails-live.cloud.which.co.uk
     Port 22
