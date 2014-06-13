@@ -1,17 +1,23 @@
 # Git related
 alias g='noglob git'
-alias gp='g up && git push origin'
+alias gp='g up && g push origin'
 alias gc='g c'
 alias gst='g st'
 alias gaa='g add --all'
 alias ga='g add'
-alias gph='g push heroku'
+#alias gph='g push heroku'
 alias gup='g up'
 alias glg='g lg'
 alias gdfc='g diff --cached --color-words'
 alias gdf='g diff --color-words'
-alias hpr='hub pull-request'
+alias hpr='hub pull-request -b'
 alias hlog='heroku logs -t -a'
+alias hconf='heroku config -a'
+alias current_branch="git branch | grep '\*' | ruby -e 'puts STDIN.read.match(/\* (.*)/)[1]'"
+
+function gph {
+  git push $1 `current_branch`:master
+}
 
 # Zsh
 alias zr='source ~/.zshrc'
