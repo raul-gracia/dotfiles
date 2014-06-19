@@ -1,11 +1,10 @@
 # Git related
 alias g='noglob git'
-alias gp='g up && g push origin'
+alias gp='g up && bundle exec rake test && bundle exec rake jshint && g push origin `current_branch`'
 alias gc='g c'
 alias gst='g st'
 alias gaa='g add --all'
 alias ga='g add'
-#alias gph='g push heroku'
 alias gup='g up'
 alias glg='g lg'
 alias gdfc='g diff --cached --color-words'
@@ -14,6 +13,10 @@ alias hpr='hub pull-request -b'
 alias hlog='heroku logs -t -a'
 alias hconf='heroku config -a'
 alias current_branch="git branch | grep '\*' | ruby -e 'puts STDIN.read.match(/\* (.*)/)[1]'"
+
+function create-remote-branch {
+  git checkout -b $1 && git push origin $1
+}
 
 function gph {
   git push $1 `current_branch`:master
