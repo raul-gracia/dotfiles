@@ -39,12 +39,15 @@ alias rapps='cd ~/Documents/rails-apps'
 alias devops='cd ~/Documents/devops'
 alias dotfiles='cd ~/dotfiles && vim . && cd -'
 
-alias vim='vim -w ~/.vimlog "$@"'
+#alias vim='vim -w ~/.vimlog "$@"'
 alias tmux="tmux -2"
-alias rake='noglob rake'
 alias http='noglob http'
+alias docs='cd ~/Documents'
+alias upgradeall='upgrade_oh_my_zsh && brew update && brew upgrade && rvm get head'
+
+# Rails
+alias rake='noglob rake'
 alias rdb='rake db:migrate db:test:prepare'
 alias be='bundle exec'
 alias beg='bundle exec guard -c'
-alias docs='cd ~/Documents'
-alias upgradeall='upgrade_oh_my_zsh && brew update && brew upgrade && rvm get head'
+alias rs='bundle exec rails server --binding 127.0.0.1'
