@@ -28,3 +28,4 @@ cask install skype
 cask install smartgithg
 cask install google-chrome
 cask install firefox
+cask install atom
