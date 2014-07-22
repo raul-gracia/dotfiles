@@ -1,7 +1,7 @@
 # Git related
 alias g='noglob git'
-alias gp='g up && g push origin `current_branch`'
-alias gpr='g up && bundle exec rake test && bundle exec rake jshint && g push origin `current_branch`'
+alias gp='g push origin `current_branch`'
+alias gpt='bundle exec rake test && bundle exec rake jshint && g push origin `current_branch`'
 alias gc='g c'
 alias gst='g st'
 alias gaa='g add --all'
