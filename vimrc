@@ -83,6 +83,7 @@ let g:ctrlp_prompt_mappings = {
     \ 'AcceptSelection("e")': ['<c-t>'],
     \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
     \ }
+let g:ctrlp_custom_ignore = '\v[\/]\(tmp|log)$'
 
 " Set spell checking for .markdown files
 au BufRead,BufNewFile *.md set spell spelllang=en_gb

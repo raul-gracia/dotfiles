@@ -37,5 +37,6 @@ Bundle 'tpope/vim-surround'
 Bundle 'kana/vim-textobj-user'
 Bundle 'nelstrom/vim-textobj-rubyblock'
 Bundle 'mattn/emmet-vim'
+Bundle 'jnwhiteh/vim-golang'
 
 filetype plugin indent on     " required
