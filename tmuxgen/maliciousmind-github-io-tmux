@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 SESSION=maliciousmind-github-io
-FOLDER=/Users/rlario/Documents/maliciousmind.github.io
+FOLDER=~/Documents/rails-apps/maliciousmind.github.io
 
 tmux -2 new-session -d -s $SESSION
 

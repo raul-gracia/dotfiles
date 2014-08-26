@@ -26,7 +26,7 @@ when '--ruby'
   File.write(filename, renderer.result)
   FileUtils.chmod('+x', filename)
 else
-  puts 'template not specified'
+  puts 'template not specified, options are: --rails or --ruby'
 end
 
 
