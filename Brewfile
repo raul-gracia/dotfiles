@@ -30,3 +30,4 @@ cask install smartgithg
 cask install google-chrome
 cask install firefox
 cask install atom
+cask install limechat
