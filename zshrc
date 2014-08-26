@@ -28,3 +28,6 @@ PATH=$PATH:$HOME/.tmuxgen/bin:$HOME/.tmuxgen
 
 setopt auto_cd
 cdpath=($HOME/Documents/rails-apps $HOME/Documents/devops)
+
+# Brew Cask
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"

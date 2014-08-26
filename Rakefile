@@ -10,7 +10,7 @@ end
 
 task :install_global_gems do
   print_info 'Bundling...'
-  `bundle install && rm Gemfile.lock` # install global gems
+  `gem install bundle && bundle install && rm Gemfile.lock` # install global gems
 end
 
 task :install_tools => [:install_brew_modules, :install_global_gems] do

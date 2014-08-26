@@ -36,6 +36,8 @@ alias dofiles='dotfiles'
 
 # Shortcuts
 alias rapps='cd ~/Documents/rails-apps'
+alias dev='cd ~/Documents/development'
+alias mag='cd ~/Documents/development/magnetic'
 alias devops='cd ~/Documents/devops'
 alias dotfiles='cd ~/dotfiles && vim . && cd -'
 

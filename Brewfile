@@ -11,6 +11,7 @@ install python
 install the_silver_searcher
 install gist
 install hub
+install tmux
 
 # Plugins
 install phantomjs
