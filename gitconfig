@@ -29,3 +29,5 @@
   branch = 1
 [push]
 	default = simple
+[pull]
+  rebase = true
