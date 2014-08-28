@@ -45,7 +45,7 @@ alias dotfiles='cd ~/dotfiles && vim . && cd -'
 alias tmux="tmux -2"
 alias http='noglob http'
 alias docs='cd ~/Documents'
-alias upgradeall='upgrade_oh_my_zsh && brew update && brew upgrade && rvm get head'
+alias upgradeall='upgrade_oh_my_zsh && brew update && brew upgrade && rvm get head --auto-dotfiles'
 
 # Rails
 alias rake='noglob rake'
