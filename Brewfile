@@ -22,7 +22,6 @@ install caskroom/cask/brew-cask
 
 cask install alfred
 cask install keepassx
-cask install dash
 cask install spotify
 cask install iterm2
 cask install skype
