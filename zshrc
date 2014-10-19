@@ -14,14 +14,14 @@ if [ -f $HOME/.zsh/zsh-exports ]; then
   source $HOME/.zsh/zsh-exports
 fi
 
-PATH=$PATH:/usr/local/share/npm/bin
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+export PATH=$PATH:/usr/local/share/npm/bin
+export PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 setopt auto_cd
 cdpath=($HOME/Documents/rails-apps $HOME/Documents/devops)
 
 # Homebrew
-PATH=/usr/local/bin:$PATH
+export PATH="/usr/local/bin:$PATH"
 
 # TmuxGEN
 PATH=$PATH:$HOME/.tmuxgen/bin:$HOME/.tmuxgen
