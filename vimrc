@@ -11,7 +11,7 @@ syntax enable
 set background=dark
 colorscheme solarized
 set shell=/bin/zsh
-:let $PATH=$PATH . ':' . $HOME . '/.rvm/bin'
+let $PATH=$PATH . ':' . $HOME . '/.rvm/bin'
 set t_Co=256
 set tabstop=2
 set shiftwidth=2
@@ -86,6 +86,8 @@ let g:ctrlp_prompt_mappings = {
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\.git$\|log$',
   \ }
+let g:ctrlp_user_command = 'find %s -type f'
+let g:ctrlp_show_hidden = 1
 " Set spell checking for .markdown files
 au BufRead,BufNewFile *.md set spell spelllang=en_gb
 au BufRead,BufNewFile *.markdown set spell spelllang=en_gb
