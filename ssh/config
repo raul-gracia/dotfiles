@@ -1,36 +1,7 @@
 ServerAliveInterval 60
 
-Host cai-rails-live.cloud.which.co.uk
-    Hostname cai-rails-live.cloud.which.co.uk
+Host abin1
+    Hostname abin1.aws.mgnt.cc
     Port 22
-    User elderly
-    IdentityFile ~/.ssh/jenkins_key
-
-Host jenkins-job-generator
-    Hostname devops-tools-live.cloud.which.co.uk
-    Port 22
-    User generator
-    IdentityFile ~/.ssh/jenkins_key
-
-Host developer-dashboard
-    Hostname devops-tools-live.cloud.which.co.uk
-    Port 22
-    User dashboard
-    IdentityFile ~/.ssh/jenkins_key
-
-Host ra-api-dev
-    Hostname ra-api-dev.cloud.which.co.uk
-    Port 22
-    User webadmin
-    IdentityFile ~/.ssh/jenkins_key
-
-Host devops-tools-live
-    Hostname devops-tools-live.cloud.which.co.uk
-    Port 22
-    User root
-
-Host ci.which.co.uk
-    Hostname ci.which.co.uk
-    Port 22
-    User jenkins
-    IdentityFile ~/.ssh/jenkins_key
+    User raul
+    IdentityFile ~/.ssh/id_rsa

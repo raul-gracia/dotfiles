@@ -1,5 +1,6 @@
 # Git related
 alias g='noglob git'
+alias gb='g branch'
 alias gp='g push origin `current_branch`'
 alias gpt='bundle exec rake test && bundle exec rake jshint && g push origin `current_branch`'
 alias gc='g c'
@@ -14,6 +15,9 @@ alias hpr='hub pull-request -b'
 alias hlog='heroku logs -t -a'
 alias hconf='heroku config -a'
 alias current_branch="git branch | grep '\*' | ruby -e 'puts STDIN.read.match(/\* (.*)/)[1]'"
+alias last_commit="git rev-parse HEAD"
+alias previous_commit="git rev-parse HEAD~1"
+alias mysql="mysql -uroot"
 
 function create-remote-branch {
   git checkout -b $1 && git push origin $1
@@ -21,6 +25,22 @@ function create-remote-branch {
 
 function gph {
   git push $1 `current_branch`:master
+}
+
+function review {
+  if [ $# -eq 1 ]; then
+    codereview --rev `last_commit` -t $1 -r RayParker --send_mail
+  else
+    echo "Usage: review 'message for the code review'"
+  fi
+}
+
+function ammend_review {
+  if [ $# -eq 2 ]; then
+    codereview --rev `last_commit` -i $1 -t $2 -r RayParker --send_mail
+  else
+    echo "Usage: review 4590002 'message for the ammend review'"
+  fi
 }
 
 # Zsh
@@ -49,7 +69,7 @@ alias upgradeall='upgrade_oh_my_zsh && brew update && brew upgrade && rvm get he
 
 # Rails
 alias rake='noglob rake'
-alias rdb='rake db:migrate db:test:prepare'
+alias rdb='rake db:migrate'
 alias be='bundle exec'
 alias beg='bundle exec guard -c'
 alias rs='bundle exec rails server --binding 127.0.0.1'

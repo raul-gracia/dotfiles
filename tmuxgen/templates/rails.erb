@@ -9,16 +9,19 @@ tmux rename-window -t $SESSION:1 IDE
 
 # Set up the splits
 tmux split-window -v
-tmux select-pane -t 1
-tmux split-window -h
 
 # Provision the splits
 tmux select-pane -t 1
 tmux send-keys "cd $FOLDER && vim ." C-m
-tmux select-pane -t 2
-tmux send-keys "cd $FOLDER && be guard -c" C-m
-tmux resize-pane -x 80
-tmux select-pane -t 3
+if grep -q guard Gemfile; then
+  tmux split-window -h
+  tmux select-pane -t 2
+  tmux send-keys "cd $FOLDER && be guard -c" C-m
+  tmux resize-pane -x 80
+  tmux select-pane -t 3
+else
+  tmux select-pane -t 2
+fi
 tmux send-keys "cd $FOLDER && clear" C-m
 tmux resize-pane -y 10
 

@@ -14,14 +14,11 @@
   ca = commit --amend
   c = commit -v
   co = checkout
-  cor = !sh -c 'git checkout -b $1 origin/$1' -
   st = status
 [core]
   excludesfile = ~/.gitignore
   autocrlf = input
 	editor = vim
-[merge]
-  ff = only
 [commit]
   template = ~/.gitmessage
 [status]
