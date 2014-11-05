@@ -29,7 +29,7 @@ function gph {
 
 function review {
   if [ $# -eq 1 ]; then
-    codereview --rev `last_commit` -t $1 -r RayParker --send_mail
+    codereview --rev `last_commit` -t $1 -r CJ --send_mail
   else
     echo "Usage: review 'message for the code review'"
   fi
@@ -37,7 +37,7 @@ function review {
 
 function ammend_review {
   if [ $# -eq 2 ]; then
-    codereview --rev `last_commit` -i $1 -t $2 -r RayParker --send_mail
+    codereview --rev `last_commit` -i $1 -t $2 -r CJ --send_mail
   else
     echo "Usage: review 4590002 'message for the ammend review'"
   fi
