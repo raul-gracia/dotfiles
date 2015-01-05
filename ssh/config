@@ -1,4 +1,5 @@
 ServerAliveInterval 60
+ForwardAgent yes
 
 Host abin1
     Hostname abin1.aws.mgnt.cc

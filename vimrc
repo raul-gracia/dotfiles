@@ -30,7 +30,7 @@ nmap <silent> <C-D> :NERDTreeToggle %<CR>
 nmap <silent> <C-F> <C-h><C-h>:vertical resize 40<CR><C-l>
 
 " Remove trailling space on save
-autocmd BufWritePre * :%s/\s\+$//e
+"autocmd BufWritePre * :%s/\s\+$//e
 
 " EasyAlign remap
 vnoremap <silent> <Enter> :EasyAlign<cr>
@@ -84,9 +84,9 @@ let g:ctrlp_prompt_mappings = {
     \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
     \ }
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|log$',
+  \ 'dir':  '\.git$\|log$\|tmp$',
   \ }
-let g:ctrlp_user_command = 'find %s -type f'
+"let g:ctrlp_user_command = 'find %s -type f'
 let g:ctrlp_show_hidden = 1
 " Set spell checking for .markdown files
 au BufRead,BufNewFile *.md set spell spelllang=en_gb

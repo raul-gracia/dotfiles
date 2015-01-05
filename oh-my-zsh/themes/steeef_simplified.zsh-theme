@@ -91,7 +91,7 @@ function prompt_steeef_simplified_setup {
 
   # Define prompts.
   #PROMPT="${_prompt_steeef_simplified_colors[3]}%n%f@${_prompt_steeef_simplified_colors[2]}%m%f ${_prompt_steeef_simplified_colors[5]}%~%f "'${vcs_info_msg_0_}'"$ "
-  PROMPT="[${_prompt_steeef_simplified_colors[3]}%n%f] ${_prompt_steeef_simplified_colors[5]}%~%f "'${vcs_info_msg_0_}'"$ "
+  PROMPT="[${_prompt_steeef_simplified_colors[3]}%n%f] ${_prompt_steeef_simplified_colors[5]}%C%f "'${vcs_info_msg_0_}'"$ "
   RPROMPT='%F{blue}${ruby_info[version]}'
 }
 

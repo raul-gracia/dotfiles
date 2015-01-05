@@ -14,9 +14,8 @@ alias gdf='g diff --color-words'
 alias hpr='hub pull-request -b'
 alias hlog='heroku logs -t -a'
 alias hconf='heroku config -a'
-alias current_branch="git branch | grep '\*' | ruby -e 'puts STDIN.read.match(/\* (.*)/)[1]'"
+alias current_branch="git rev-parse --abbrev-ref HEAD"
 alias last_commit="git rev-parse HEAD"
-alias previous_commit="git rev-parse HEAD~1"
 alias mysql="mysql -uroot"
 
 function create-remote-branch {
@@ -27,19 +26,33 @@ function gph {
   git push $1 `current_branch`:master
 }
 
+# Code review tool
+alias gp='g push origin `current_branch`'
+alias current_branch="git rev-parse --abbrev-ref HEAD"
+alias last_commit_message_long="git --no-pager log -1 --pretty=%B"
+alias last_commit_message_short="git --no-pager log -1 --pretty=%s"
+alias previous_commit_hash="git rev-parse HEAD~1"
 function review {
-  if [ $# -eq 1 ]; then
-    codereview --rev `last_commit` -t $1 -r CJ --send_mail
-  else
-    echo "Usage: review 'message for the code review'"
-  fi
+  gp
+  codereview --rev HEAD~1 \
+    --title="`last_commit_message_short`" \
+    --message="Branch: `current_branch`
+ 
+`last_commit_message_long`" \
+    --reviewers=CJ,fabio,stephen --send_mail
 }
-
 function ammend_review {
-  if [ $# -eq 2 ]; then
-    codereview --rev `last_commit` -i $1 -t $2 -r CJ --send_mail
+  if [ $# -eq 1 ]; then
+    gp
+    codereview --rev HEAD~1 \
+      --issue=$1 \
+      --title="`last_commit_message_short`" \
+      --message="Branch: `current_branch` 
+    
+`last_commit_message_long`" \
+      --reviewers=CJ,fabio,stephen --send_mail
   else
-    echo "Usage: review 4590002 'message for the ammend review'"
+    echo "Usage: $0 4590002"
   fi
 }
 
