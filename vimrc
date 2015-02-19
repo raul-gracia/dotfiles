@@ -30,7 +30,7 @@ nmap <silent> <C-D> :NERDTreeToggle %<CR>
 nmap <silent> <C-F> <C-h><C-h>:vertical resize 40<CR><C-l>
 
 " Remove trailling space on save
-"autocmd BufWritePre * :%s/\s\+$//e
+autocmd BufWritePre * :%s/\s\+$//e
 
 " EasyAlign remap
 vnoremap <silent> <Enter> :EasyAlign<cr>
@@ -51,7 +51,7 @@ imap <right> <nop>
 
 " Toggle paste mode
 nmap <silent> <F4> :set invpaste<CR>:set paste?<CR>
-imap <silent> <F4> <ESC>:set invpaste<CR>:set paste?<CR>
+imap <silent> <F4> <ESC>:set invpaste<CR>:set paste?<CR>i
 
 " Better window movement
 nmap <silent> <c-k> :wincmd k<CR>
@@ -91,3 +91,12 @@ let g:ctrlp_show_hidden = 1
 " Set spell checking for .markdown files
 au BufRead,BufNewFile *.md set spell spelllang=en_gb
 au BufRead,BufNewFile *.markdown set spell spelllang=en_gb
+au BufRead,BufNewFile *.rabl setf ruby
+
+" go-vim
+" format with goimports instead of gofmt
+let g:go_fmt_command = "goimports"
+
+let g:UltiSnipsExpandTrigger="ss"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"

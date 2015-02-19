@@ -4,7 +4,7 @@ alias gb='g branch'
 alias gp='g push origin `current_branch`'
 alias gpt='bundle exec rake test && bundle exec rake jshint && g push origin `current_branch`'
 alias gc='g c'
-alias gst='g st'
+alias gst='g st -s'
 alias gaa='g add --all'
 alias ga='g add'
 alias gup='g up'
@@ -13,8 +13,10 @@ alias gdfc='g diff --cached --color-words'
 alias gdf='g diff --color-words'
 alias hpr='hub pull-request -b'
 alias hlog='heroku logs -t -a'
+alias hlg='heroku logs -t'
 alias hconf='heroku config -a'
 alias current_branch="git rev-parse --abbrev-ref HEAD"
+alias magnetic_repo_name="git remote show origin -n | grep 'Fetch' | ruby -e 'puts \$stdin.read.match(/Magnetic\/(.*)\.git/)[1]'"
 alias last_commit="git rev-parse HEAD"
 alias mysql="mysql -uroot"
 
@@ -36,10 +38,11 @@ function review {
   gp
   codereview --rev HEAD~1 \
     --title="`last_commit_message_short`" \
-    --message="Branch: `current_branch`
- 
+    --message="Repo: `magnetic_repo_name`
+Branch: `current_branch`
+
 `last_commit_message_long`" \
-    --reviewers=CJ,fabio,stephen --send_mail
+    --reviewers=CJ,fabio,stephen,rob --send_mail
 }
 function ammend_review {
   if [ $# -eq 1 ]; then
@@ -47,10 +50,11 @@ function ammend_review {
     codereview --rev HEAD~1 \
       --issue=$1 \
       --title="`last_commit_message_short`" \
-      --message="Branch: `current_branch` 
-    
+    --message="Repo: `magnetic_repo_name`
+Branch: `current_branch`
+
 `last_commit_message_long`" \
-      --reviewers=CJ,fabio,stephen --send_mail
+      --reviewers=CJ,fabio,rob --send_mail
   else
     echo "Usage: $0 4590002"
   fi
@@ -78,7 +82,7 @@ alias dotfiles='cd ~/dotfiles && vim . && cd -'
 #alias tmux="tmux -2"
 alias http='noglob http'
 alias docs='cd ~/Documents'
-alias upgradeall='upgrade_oh_my_zsh && brew update && brew upgrade && rvm get head --auto-dotfiles'
+alias upgradeall='upgrade_oh_my_zsh && brew update && brew upgrade && rvm get head'
 
 # Rails
 alias rake='noglob rake'

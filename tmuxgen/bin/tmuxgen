@@ -29,4 +29,6 @@ else
   puts 'template not specified, options are: --rails or --ruby'
 end
 
-
+exec 'zsh'
+exec 'source ~/.zshrc'
+exec 'exit'
