@@ -1,3 +1,4 @@
+" Rspec
 map <leader>t :call RunNearestSpec()<cr>
 map <leader>tt :call RunCurrentSpecFile()<cr>
 map <Leader>tl :call RunLastSpec()<CR>
@@ -49,8 +50,8 @@ if has("autocmd")
   autocmd bufwritepost vimrc.bundles nested source ~/.vimrc
 endif
 
-nmap <leader>rl :source $MYVIMRC<CR>
-nmap <leader>v :tabedit $MYVIMRC<CR>
+nmap <leader>vr :source $MYVIMRC<CR>
+nmap <leader>ve :tabedit $MYVIMRC<CR>
 nmap <leader>vl :tabedit ~/.vimrc.leaders<CR>
 nmap <leader>vb :tabedit ~/.vimrc.bundles<CR>
 

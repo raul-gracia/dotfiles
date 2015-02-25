@@ -18,7 +18,7 @@ export PATH=$PATH:/usr/local/share/npm/bin
 export PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 setopt auto_cd
-cdpath=($HOME/Documents/rails-apps $HOME/Documents/devops)
+cdpath=($HOME/Documents/rails-apps $HOME/Documents/devops $HOME/Documents/development/magnetic)
 
 # Homebrew
 export PATH="/usr/local/bin:$PATH"

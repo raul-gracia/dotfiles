@@ -70,6 +70,10 @@ set backupskip=/tmp/*,/private/tmp/*
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set writebackup
 
+
+" Rspec
+let g:rspec_command = "!spring rspec {spec}"
+
 " Auto open nerdtree
 "set autochdir
 let NERDTreeChDirMode=0
