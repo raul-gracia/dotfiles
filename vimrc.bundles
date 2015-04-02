@@ -42,5 +42,6 @@ Plugin 'mattn/emmet-vim'
 Plugin 'fatih/vim-go'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'majutsushi/tagbar'
+Plugin 'mxw/vim-jsx'
 
 filetype plugin indent on     " required

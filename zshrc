@@ -17,9 +17,6 @@ fi
 export PATH=$PATH:/usr/local/share/npm/bin
 export PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
-setopt auto_cd
-cdpath=($HOME/Documents/rails-apps $HOME/Documents/devops $HOME/Documents/development/magnetic)
-
 # Homebrew
 export PATH="/usr/local/bin:$PATH"
 
@@ -27,7 +24,7 @@ export PATH="/usr/local/bin:$PATH"
 PATH=$PATH:$HOME/.tmuxgen/bin:$HOME/.tmuxgen
 
 setopt auto_cd
-cdpath=($HOME/Documents/rails-apps $HOME/Documents/devops)
+cdpath=($HOME/Documents/rails-apps $HOME/Documents/devops $HOME/Documents/development/magnetic)
 
 # Brew Cask
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"

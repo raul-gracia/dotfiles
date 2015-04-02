@@ -72,7 +72,7 @@ set writebackup
 
 
 " Rspec
-let g:rspec_command = "!spring rspec {spec}"
+let g:rspec_command = "!rspec {spec}"
 
 " Auto open nerdtree
 "set autochdir
@@ -101,6 +101,10 @@ au BufRead,BufNewFile *.rabl setf ruby
 " format with goimports instead of gofmt
 let g:go_fmt_command = "goimports"
 
-let g:UltiSnipsExpandTrigger="ss"
+let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+
+" React.js
+let g:jsx_ext_required = 0

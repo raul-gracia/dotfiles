@@ -75,3 +75,7 @@ au FileType go nmap <Leader>cg <Plug>(go-callgraph)
 
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
+
+
+" Go to tag in new tab
+nnoremap <silent><Leader>gtag <C-w><C-]><C-w>T
