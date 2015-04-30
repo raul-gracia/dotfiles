@@ -18,7 +18,7 @@ if grep -q guard Gemfile; then
   tmux split-window -h
   tmux select-pane -t 2
   tmux send-keys "source ~/.zshrc" C-m
-  tmux send-keys "cd $FOLDER && be guard -c" C-m
+  tmux send-keys "cd $FOLDER && while bundle exec guard -c; do echo "Restarting Guard..."; done" C-m
   tmux resize-pane -x 80
   tmux select-pane -t 3
 else
