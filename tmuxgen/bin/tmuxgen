@@ -9,22 +9,36 @@ TMUX_SCRIPTS_FOLDER = File.expand_path('~/.tmuxgen')
 PROJECT_PATH = File.expand_path(ARGV[0])
 PROJECT_NAME = File.basename(PROJECT_PATH).gsub('.', '-')
 
-puts "Project path: #{PROJECT_PATH}"
-puts "Project name: #{PROJECT_NAME}"
+def print_help
+  puts """
+  tmuxgen A tmux script generator
+
+  Usage:
+    tmuxgen folder_path --flag
+
+    --flag: the type of template to render, options are: --rails, --ruby or --go
+  """
+end
+
+def render_template(template_name)
+  puts "Project path: #{PROJECT_PATH}"
+  puts "Project name: #{PROJECT_NAME}"
+
+  template = File.read(File.expand_path("#{TMUX_SCRIPTS_FOLDER}/templates/#{template_name}.erb"))
+  renderer = ERB.new(template)
+  filename = "#{TMUX_SCRIPTS_FOLDER}/#{PROJECT_NAME}-tmux"
+  File.write(filename, renderer.result)
+  FileUtils.chmod('+x', filename)
+end
+
 
 case ARGV[1]
 when '--rails'
-  template = File.read(File.expand_path("#{TMUX_SCRIPTS_FOLDER}/templates/rails.erb"))
-  renderer = ERB.new(template)
-  filename = "#{TMUX_SCRIPTS_FOLDER}/#{PROJECT_NAME}-tmux"
-  File.write(filename, renderer.result)
-  FileUtils.chmod('+x', filename)
+  render_template("rails")
 when '--ruby'
-  template = File.read(File.expand_path("#{TMUX_SCRIPTS_FOLDER}/templates/ruby.erb"))
-  renderer = ERB.new(template)
-  filename = "#{TMUX_SCRIPTS_FOLDER}/#{PROJECT_NAME}-tmux"
-  File.write(filename, renderer.result)
-  FileUtils.chmod('+x', filename)
+  render_template("ruby")
+when '--go'
+  render_template("go")
 else
-  puts 'template not specified, options are: --rails or --ruby'
+  print_help
 end

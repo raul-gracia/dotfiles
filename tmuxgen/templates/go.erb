@@ -1,6 +1,7 @@
 #!/usr/bin/env zsh
 SESSION=<%= PROJECT_NAME %>
 FOLDER=<%= PROJECT_PATH %>
+cd $FOLDER
 
 tmux -2 new-session -d -s $SESSION
 
@@ -14,12 +15,12 @@ tmux split-window -v
 
 # Provision the splits
 tmux select-pane -t 1
-tmux send-keys "cd $FOLDER && vim ." C-m
+tmux send-keys "vim ." C-m
 tmux select-pane -t 2
-tmux send-keys "cd $FOLDER && be guard -c" C-m
+tmux send-keys "goconvey" C-m
 tmux resize-pane -x 35
 tmux select-pane -t 3
-tmux send-keys "cd $FOLDER && clear" C-m
+tmux send-keys "clear" C-m
 tmux resize-pane -y 10
 
 # Attach to session
