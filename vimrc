@@ -105,6 +105,11 @@ let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
-
 " React.js
 let g:jsx_ext_required = 0
+
+" Relative numbers
+:au FocusLost * :set number
+:au FocusGained * :set relativenumber
+autocmd InsertEnter * :set number
+autocmd InsertLeave * :set relativenumber
