@@ -43,7 +43,7 @@ function review {
 Branch: `current_branch`
 
 `last_commit_message_long`" \
-    --reviewers=CJ,brian,stephen,rob --send_mail
+    --reviewers=CJ,stephen,rob --send_mail
 }
 function ammend_review {
   if [ $# -eq 1 ]; then
@@ -55,7 +55,7 @@ function ammend_review {
 Branch: `current_branch`
 
 `last_commit_message_long`" \
-      --reviewers=CJ,brian,stephen,rob --send_mail
+      --reviewers=CJ,stephen,rob --send_mail
   else
     echo "Usage: $0 4590002"
   fi
