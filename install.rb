@@ -7,6 +7,7 @@ puts 'Installing tools...'
 `pip install --upgrade pip`
 `pip install --upgrade httpie`
 `pip install git+git://github.com/Lokaltog/powerline`
+`pip install psutil`
 
 puts 'Installing dotfiles...'
 excluded_files = %w{README.md Brewfile Gemfile install.rb VimLauncher.app
