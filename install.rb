@@ -4,6 +4,7 @@ puts 'Bundling...'
 `gem install bundle && bundle install && rm Gemfile.lock` # install global gems
 
 puts 'Installing tools...'
+`pip install --upgrade pip`
 `pip install --upgrade httpie`
 `pip install git+git://github.com/Lokaltog/powerline`
 
