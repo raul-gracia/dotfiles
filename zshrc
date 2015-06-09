@@ -28,3 +28,6 @@ cdpath=($HOME/Documents/rails-apps $HOME/Documents/devops $HOME/Documents/develo
 
 # Brew Cask
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+
+#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
+[[ -s "/Users/maliciousmind/.gvm/bin/gvm-init.sh" ]] && source "/Users/maliciousmind/.gvm/bin/gvm-init.sh"

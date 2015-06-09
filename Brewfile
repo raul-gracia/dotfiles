@@ -1,32 +1,28 @@
-# Taps
-tap thoughtbot/formulae
-tap homebrew/dupes
-
-# Tools
-install rcm
-install vim
-install git
-install homebrew/dupes/grep
-install python
-install the_silver_searcher
-install gist
-install hub
-install tmux
-
-# Plugins
-install phantomjs
-
-
-# Cask
-install caskroom/cask/brew-cask
-
-cask install alfred
-cask install keepassx
-cask install spotify
-cask install iterm2
-cask install skype
-cask install smartgithg
-cask install google-chrome
-cask install firefox
-cask install atom
-cask install limechat
+tap 'thoughtbot/formulae'
+tap 'homebrew/dupes'
+tap 'caskroom/cask'
+brew 'gpg2'
+brew 'rcm'
+brew 'vim'
+brew 'git'
+brew 'homebrew/dupes/grep'
+brew 'python'
+brew 'the_silver_searcher'
+brew 'gist'
+brew 'hub'
+brew 'tmux'
+brew 'phantomjs'
+brew 'mysql'
+cask 'alfred'
+cask 'dropbox'
+cask 'slack'
+cask 'flux'
+cask 'virtualbox'
+cask 'keepassx'
+cask 'spotify'
+cask 'iterm2'
+cask 'skype'
+cask 'smartgithg'
+cask 'google-chrome'
+cask 'firefox'
+cask 'atom'
