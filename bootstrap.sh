@@ -14,7 +14,8 @@ if ! command -v fish > /dev/null 2>&1 ; then
   echo "Now that we can brew, let's install fish (your friendly shell)"
   brew install fish
   echo "Now that we have fish let's make it our default shell"
-  chsh -s /usr/local/bin/fish
+  sudo bash -c "echo '/usr/local/bin/fish' >> /etc/shells"
+  chpass -s /usr/local/bin/fish `whoami`
 else
   echo 'Fish already installed! Nice one!'
   echo 'Upgrading (just in case)'

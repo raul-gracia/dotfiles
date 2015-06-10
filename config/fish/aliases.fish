@@ -1,8 +1,7 @@
 # Git related
-alias g='noglob git'
+alias g='git'
 alias gb='g branch'
-alias gp='g push origin `current_branch`'
-alias gpt='bundle exec rake test && bundle exec rake jshint && g push origin `current_branch`'
+alias gpt='bundle exec rake test; and bundle exec rake jshint; and gp'
 alias gc='g c'
 alias gst='g st -s'
 alias gaa='g add --all'
@@ -15,57 +14,57 @@ alias hpr='hub pull-request -b'
 alias hlog='heroku logs -t -a'
 alias hlg='heroku logs -t'
 alias hconf='heroku config -a'
-alias hp='g push heroku `current_branch`:master'
+alias hp='g push heroku (current_branch):master'
 alias current_branch="git rev-parse --abbrev-ref HEAD"
 alias magnetic_repo_name="git remote show origin -n | grep 'Fetch' | ruby -e 'puts \$stdin.read.match(/Magnetic\/(.*)\.git/)[1]'"
 alias last_commit="git rev-parse HEAD"
 alias mysql="mysql -uroot"
 
-function create-remote-branch {
-  git checkout -b $1 && git push origin $1
-}
+function create-remote-branch
+  git checkout -b $1; and git push origin $1
+end
 
-function gph {
-  git push $1 `current_branch`:master
-}
+function gph
+  git push $1 (current_branch):master
+end
 
 # Code review tool
-alias gp='g push origin `current_branch`'
+alias gp='g push origin (current_branch)'
 alias current_branch="git rev-parse --abbrev-ref HEAD"
 alias last_commit_message_long="git --no-pager log -1 --pretty=%B"
 alias last_commit_message_short="git --no-pager log -1 --pretty=%s"
 alias previous_commit_hash="git rev-parse HEAD~1"
-function review {
+function review
   gp
   codereview --rev HEAD~1 \
-    --title="`last_commit_message_short`" \
-    --message="Repo: `magnetic_repo_name`
-Branch: `current_branch`
+    --title=(last_commit_message_short) \
+    --message="Repo: "(magnetic_repo_name)"
+Branch: "(current_branch)"
 
-`last_commit_message_long`" \
+"(last_commit_message_long) \
     --reviewers=CJ,stephen,rob --send_mail
-}
-function ammend_review {
-  if [ $# -eq 1 ]; then
+end
+
+function ammend_review
+  if test (count $argv) -eq 1
     gp
     codereview --rev HEAD~1 \
-      --issue=$1 \
-      --title="`last_commit_message_short`" \
-    --message="Repo: `magnetic_repo_name`
-Branch: `current_branch`
+      --issue=$argv[1] \
+      --title=(last_commit_message_short) \
+      --message="Repo: "(magnetic_repo_name)"
+Branch: "(current_branch)"
 
-`last_commit_message_long`" \
-      --reviewers=CJ,stephen,rob --send_mail
+"(last_commit_message_long) \
+    --reviewers=CJ,stephen,rob --send_mail
   else
-    echo "Usage: $0 4590002"
-  fi
-}
+    echo "Usage: $_ 4590002"
+  end
+end
 
-# Zsh
-alias zr='source ~/.zshrc'
-alias ze='vim ~/.zshrc'
-alias zexports='vim ~/.zsh/zsh-exports'
-alias zaliases='vim ~/.zsh/zsh-aliases'
+alias fr='source ~/.config/fish/config.fish'
+alias fe='vim ~/.config/fish/config.fish'
+alias fexports='vim ~/.config/fish/exports.fish'
+alias faliases='vim ~/.config/fish/aliases.fish'
 
 # Typos
 alias cl='clear'
@@ -77,17 +76,17 @@ alias rapps='cd ~/Documents/rails-apps'
 alias dev='cd ~/Documents/development'
 alias mag='cd ~/Documents/development/magnetic'
 alias devops='cd ~/Documents/devops'
-alias dotfiles='cd ~/dotfiles && vim . && cd -'
+alias dotfiles='cd ~/dotfiles; and vim .; and cd -'
 alias godev='cd $GOPATH/src/github.com/maliciousmind'
 
 #alias vim='vim -w ~/.vimlog "$@"'
 #alias tmux="tmux -2"
-alias http='noglob http'
+alias http='http'
 alias docs='cd ~/Documents'
-alias upgradeall='upgrade_oh_my_zsh && brew update && brew upgrade && rvm get head'
+alias upgradeall='brew update; and brew upgrade'
 
 # Rails
-alias rake='noglob rake'
+alias rake='rake'
 alias rdb='rake db:migrate'
 alias be='bundle exec'
 alias beg='bundle exec guard -c'

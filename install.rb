@@ -11,7 +11,8 @@ puts 'Installing tools...'
 
 puts 'Installing dotfiles...'
 excluded_files = %w{README.md Brewfile Gemfile install.rb VimLauncher.app
-alfred-workflows setup.fish Solarized-Dark.itermcolors Solarized-Light.itermcolors}
+alfred-workflows setup.fish Solarized-Dark.itermcolors Solarized-Light.itermcolors
+bootstrap.sh}
 puts "Executing: rcup -fd . #{excluded_files.map{|f| "-x #{f}"}.join(' ')}"
 `rcup -fd . #{excluded_files.map{|f| "-x #{f}"}.join(' ')}`
 
