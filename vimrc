@@ -61,7 +61,6 @@ nmap <silent> <c-l> :wincmd l<CR>
 
 " Powerline config
 set laststatus=2
-set rtp+=~/powerline/powerline/bindings/vim
 
 " Backup to ~/.tmp
 set backup

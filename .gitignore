@@ -1,4 +1,4 @@
 .bundle/
 Gemfile.lock
 .DS_Store
-config/fish/export.fish
+export.fish

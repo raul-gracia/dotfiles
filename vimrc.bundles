@@ -44,5 +44,7 @@ Plugin 'fatih/vim-go'
 Plugin 'majutsushi/tagbar'
 Plugin 'mxw/vim-jsx'
 Plugin 'dag/vim-fish'
+Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
+
 
 filetype plugin indent on     " required

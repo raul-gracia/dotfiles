@@ -3,6 +3,7 @@ alias g='git'
 alias gb='g branch'
 alias gpt='bundle exec rake test; and bundle exec rake jshint; and gp'
 alias gc='g c'
+alias gco='g co'
 alias gst='g st -s'
 alias gaa='g add --all'
 alias ga='g add'
@@ -61,7 +62,7 @@ Branch: "(current_branch)"
   end
 end
 
-alias fr='source ~/.config/fish/config.fish'
+alias fr='source ~/.config/fish/config.fish > /dev/null 2>&1'
 alias fe='vim ~/.config/fish/config.fish'
 alias fexports='vim ~/.config/fish/exports.fish'
 alias faliases='vim ~/.config/fish/aliases.fish'
