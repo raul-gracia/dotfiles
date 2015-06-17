@@ -1,28 +1,11 @@
 #!/usr/bin/ruby
 
-puts 'Bundling...'
-`gem install bundle && bundle install && rm Gemfile.lock` # install global gems
-
-puts 'Installing tools...'
-`pip install --upgrade pip`
-`pip install --upgrade httpie`
-`pip install git+git://github.com/Lokaltog/powerline`
-`pip install psutil`
-`pip install awscli`
-`pip install powerline-status`
-
 puts 'Installing dotfiles...'
 excluded_files = %w{README.md Brewfile Gemfile install.rb VimLauncher.app
 alfred-workflows setup.fish Solarized-Dark.itermcolors Solarized-Light.itermcolors
 bootstrap.sh}
 puts "Executing: rcup -fd . #{excluded_files.map{|f| "-x #{f}"}.join(' ')}"
 `rcup -fd . #{excluded_files.map{|f| "-x #{f}"}.join(' ')}`
-
-puts 'Configuring powerline...'
-# Configure tmux-powerline
-unless File.exist? File.expand_path('~/powerline')
-  `git clone git@github.com:Lokaltog/powerline.git ~/powerline`
-end
 
 unless File.exist? File.expand_path('~/Library/Fonts/Monaco_for_Powerline.otf')
   puts 'Downloading Patched Monaco font...'

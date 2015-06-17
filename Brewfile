@@ -13,8 +13,8 @@ brew 'hub'
 brew 'tmux'
 brew 'phantomjs'
 brew 'mysql'
-brew 'rbenv', args: ['--HEAD']
-brew 'ruby-build'
+brew 'rbenv', args: ['HEAD']
+brew 'ruby-build', args: ['HEAD']
 brew 'node'
 brew 'psutils'
 brew 'postgresql'

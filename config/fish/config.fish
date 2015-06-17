@@ -1,8 +1,6 @@
+set -e
 # Path to your oh-my-fish.
 set fish_path $HOME/.oh-my-fish
-
-# Path to your custom folder (default path is ~/.oh-my-fish/custom)
-#set fish_custom $HOME/dotfiles/oh-my-fish
 
 # Load oh-my-fish configuration.
 source $fish_path/oh-my-fish.fish
@@ -12,11 +10,9 @@ source $fish_path/oh-my-fish.fish
 Theme 'robbyrussell'
 Plugin 'theme'
 Plugin 'brew'
-Plugin 'bundler'
 Plugin 'gem'
 Plugin 'node'
 Plugin 'rails'
-Plugin 'rbenv'
 Plugin 'tmux'
 
 
@@ -30,10 +26,23 @@ end
 
 function fish_title;end
 function fish_greeting;end
-set -gx PATH $PATH /usr/local/share/npm/bin
-# TmuxGEN
-set -gx PATH $PATH $HOME/.tmuxgen/bin $HOME/.tmuxgen
+set default_path /usr/bin /usr/sbin /bin /sbin
+set homebrew /usr/local/bin /usr/local/sbin
+set brew_rbenv "/usr/local/var/rbenv/shims"
+set tmux_gen $HOME/.tmuxgen/bin $HOME/.tmuxgen
+set npm_bin /usr/local/share/npm/bin
+
+# Exports for go
+set -xg GOPATH $HOME/go
+set -xg GOBIN $GOPATH/bin
+
+set appengine_python $HOME/Documents/go_appengine
+
+set -gx PATH $homebrew $brew_rbenv $default_path $tmux_gen $npm_bin $GOBIN \
+             '/usr/local/opt/go/libexec/bin' $appengine_python
+
 set -gx RBENV_ROOT /usr/local/var/rbenv
+set -e SHELL
 status --is-interactive; and . (rbenv init -|psub)
 
 function varclear --description 'Remove duplicates from environment variable'
