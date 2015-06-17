@@ -17,6 +17,7 @@ brew 'rbenv', args: ['--HEAD']
 brew 'ruby-build'
 brew 'node'
 brew 'psutils'
+brew 'postgresql'
 cask 'alfred'
 cask 'dropbox'
 cask 'slack'

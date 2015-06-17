@@ -42,8 +42,11 @@ function review
     --message="Repo: "(magnetic_repo_name)"
 Branch: "(current_branch)"
 
-"(last_commit_message_long) \
-    --reviewers=CJ,stephen,rob --send_mail
+Desc: "(last_commit_message_long)"
+
+Done.
+" \
+    #--reviewers=CJ,stephen,rob --send_mail
 end
 
 function ammend_review
@@ -55,7 +58,7 @@ function ammend_review
       --message="Repo: "(magnetic_repo_name)"
 Branch: "(current_branch)"
 
-"(last_commit_message_long) \
+"(last_commit_message_long)"" \
     --reviewers=CJ,stephen,rob --send_mail
   else
     echo "Usage: $_ 4590002"

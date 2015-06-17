@@ -15,7 +15,6 @@ Plugin 'brew'
 Plugin 'bundler'
 Plugin 'gem'
 Plugin 'node'
-Plugin 'pbcopy'
 Plugin 'rails'
 Plugin 'rbenv'
 Plugin 'tmux'
@@ -36,3 +35,9 @@ set -gx PATH $PATH /usr/local/share/npm/bin
 set -gx PATH $PATH $HOME/.tmuxgen/bin $HOME/.tmuxgen
 set -gx RBENV_ROOT /usr/local/var/rbenv
 status --is-interactive; and . (rbenv init -|psub)
+
+function varclear --description 'Remove duplicates from environment variable'
+  set -l unique_values (echo $argv[2..-1] | ruby -e 'puts $stdin.read.split.uniq.join("\n")')
+  set $argv[1] $unique_values
+end
+varclear PATH $PATH
