@@ -20,8 +20,8 @@ if test -f $HOME/.config/fish/aliases.fish
   source $HOME/.config/fish/aliases.fish
 end
 
-if test -f $HOME/.config/fish/export.fish
-  source $HOME/.config/fish/export.fish
+if test -f $HOME/.config/fish/exports.fish
+  source $HOME/.config/fish/exports.fish
 end
 
 function fish_title;end

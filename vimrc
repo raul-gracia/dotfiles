@@ -21,6 +21,7 @@ set expandtab
 set nocompatible
 set number
 set encoding=utf-8
+set relativenumber
 filetype plugin indent on
 
 " Paste overriding selection
