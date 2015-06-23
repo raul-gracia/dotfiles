@@ -1,6 +1,7 @@
 tap 'thoughtbot/formulae'
 tap 'homebrew/dupes'
 tap 'caskroom/cask'
+
 brew 'gpg2'
 brew 'rcm'
 brew 'vim'
@@ -13,11 +14,15 @@ brew 'hub'
 brew 'tmux'
 brew 'phantomjs'
 brew 'mysql'
+
 brew 'rbenv', args: ['HEAD']
 brew 'ruby-build', args: ['HEAD']
+brew 'rbenv-gem-rehash'
+
 brew 'node'
 brew 'psutils'
 brew 'postgresql'
+
 cask 'alfred'
 cask 'dropbox'
 cask 'slack'
@@ -34,3 +39,5 @@ cask 'atom'
 cask 'bettertouchtool'
 cask 'heroku-toolbelt'
 cask 'dash'
+cask 'sourcetree'
+cask 'betterzip'

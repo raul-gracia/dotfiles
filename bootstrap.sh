@@ -31,5 +31,4 @@ else
   git clone git@github.com:maliciousmind/dotfiles.git ~/dotfiles
   cd ~/dotfiles
 fi
-git checkout moving_to_fish
 fish setup.fish
