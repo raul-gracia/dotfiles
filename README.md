@@ -1,34 +1,19 @@
 # My Dot files
 
-## Requirements
-
-### Install homebrew
-
-```bash
-ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
-```
-
-### Install git
-
-```bash
-brew install git
-```
-
-### Install oh-my-zsh
-
-```bash
-curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
-```
-
-### Install rvm
-
-```bash
-curl -sSL https://get.rvm.io | bash -s stable --ruby
-```
-
-
 ## Installation
 
 ```bash
-rake install
+curl -s https://raw.githubusercontent.com/maliciousmind/dotfiles/master/bootstrap.sh | bash
 ```
+
+# Description
+
+This will script will:
+* Install/Update homebrew
+* Install/Update fish shell
+* Install oh my fish
+* Clone and symlink all my dotfiles
+* Install the most common OSX tools and UI Apps that I use
+* Configure everything correctly (vim, tmux, Monaco font, ...)
+
+For the complete list of tools check the [Brewfile](https://raw.githubusercontent.com/maliciousmind/dotfiles/master/Brewfile)
