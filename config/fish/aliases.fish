@@ -20,13 +20,10 @@ alias current_branch="git rev-parse --abbrev-ref HEAD"
 alias magnetic_repo_name="git remote show origin -n | grep 'Fetch' | ruby -e 'puts \$stdin.read.match(/Magnetic\/(.*)\.git/)[1]'"
 alias last_commit="git rev-parse HEAD"
 alias mysql="mysql -uroot"
-
-function create-remote-branch
-  git checkout -b $1; and git push origin $1
-end
+alias bb="cd ~/dotfiles; and brew bundle; and cd -"
 
 function gph
-  git push $1 (current_branch):master
+  git push $argv (current_branch):master
 end
 
 # Code review tool
@@ -79,7 +76,6 @@ alias dofiles='dotfiles'
 alias rapps='cd ~/Documents/rails-apps'
 alias dev='cd ~/Documents/development'
 alias mag='cd ~/Documents/development/magnetic'
-alias devops='cd ~/Documents/devops'
 alias dotfiles='cd ~/dotfiles; and vim .; and cd -'
 alias godev='cd $GOPATH/src/github.com/maliciousmind'
 
@@ -90,7 +86,6 @@ alias docs='cd ~/Documents'
 alias upgradeall='brew update; and brew upgrade'
 
 # Rails
-alias rake='rake'
 alias rdb='rake db:migrate'
 alias be='bundle exec'
 alias beg='bundle exec guard -c'

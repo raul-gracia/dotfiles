@@ -14,6 +14,7 @@ brew 'hub'
 brew 'tmux'
 brew 'phantomjs'
 brew 'mysql'
+brew 'boot2docker'
 
 brew 'rbenv', args: ['HEAD']
 brew 'ruby-build', args: ['HEAD']
@@ -41,3 +42,4 @@ cask 'heroku-toolbelt'
 cask 'dash'
 cask 'sourcetree'
 cask 'betterzip'
+cask 'mou'

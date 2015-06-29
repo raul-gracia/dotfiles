@@ -50,3 +50,13 @@ function varclear --description 'Remove duplicates from environment variable'
   set $argv[1] $unique_values
 end
 varclear PATH $PATH
+
+
+function ggi --description 'Gobally install a gem ie: for all ruby versions'
+  set -l versions (rbenv versions | ruby -e '$stdin.read.split("\n").each { |l| version = l.match(/(\d\.\d\.\d-?p?\d{3}?)/); puts version[0] if version;}')
+  for version in $versions
+    echo Installing $argv[1] for $version
+    rbenv local $version
+    gem install $argv[1] > /dev/null
+  end
+end
