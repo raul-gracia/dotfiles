@@ -16,7 +16,7 @@
   co = checkout
   st = status
 [core]
-  excludesfile = ~/.gitignore
+	excludesfile = /Users/raul/.gitignore_global
   autocrlf = input
 	editor = vim
 [commit]
@@ -32,3 +32,9 @@
 	required = true
 	clean = git media clean %f
 	smudge = git media smudge %f
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /opt/homebrew-cask/Caskroom/sourcetree/2.0.5.2/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true

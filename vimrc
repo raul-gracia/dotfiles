@@ -21,6 +21,7 @@ set expandtab
 set nocompatible
 set number
 set encoding=utf-8
+set relativenumber
 filetype plugin indent on
 
 " Paste overriding selection
@@ -61,7 +62,6 @@ nmap <silent> <c-l> :wincmd l<CR>
 
 " Powerline config
 set laststatus=2
-set rtp+=~/powerline/powerline/bindings/vim
 
 " Backup to ~/.tmp
 set backup
