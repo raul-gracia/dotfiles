@@ -27,36 +27,38 @@ function gph
 end
 
 # Code review tool
-alias gp='g push origin (current_branch)'
+alias gp="g push origin (current_branch)"
 alias current_branch="git rev-parse --abbrev-ref HEAD"
 alias last_commit_message_long="git --no-pager log -1 --pretty=%B"
 alias last_commit_message_short="git --no-pager log -1 --pretty=%s"
 alias previous_commit_hash="git rev-parse HEAD~1"
+
+function code_review_message
+  last_commit_message_long | pipeset commit_description
+  echo "Repo: "(magnetic_repo_name)"
+Branch: "(current_branch)".
+
+"$commit_description
+end
+
 function review
   gp
+  code_review_message | pipeset message_arg
   codereview --rev HEAD~1 \
     --title=(last_commit_message_short) \
-    --message="Repo: "(magnetic_repo_name)"
-Branch: "(current_branch)"
-
-Desc: "(last_commit_message_long)"
-
-Done.
-" \
-    #--reviewers=CJ,stephen,rob --send_mail
+    --message=$message_arg \
+    --reviewers=CJ,stephen,rob --send_mail
 end
 
 function ammend_review
   if test (count $argv) -eq 1
     gp
+    code_review_message | pipeset message_arg
     codereview --rev HEAD~1 \
       --issue=$argv[1] \
       --title=(last_commit_message_short) \
-      --message="Repo: "(magnetic_repo_name)"
-Branch: "(current_branch)"
-
-"(last_commit_message_long)"" \
-    --reviewers=CJ,stephen,rob --send_mail
+      --message=$message_arg \
+      --reviewers=CJ,stephen,rob --send_mail
   else
     echo "Usage: $_ 4590002"
   end
@@ -90,3 +92,26 @@ alias rdb='rake db:migrate'
 alias be='bundle exec'
 alias beg='bundle exec guard -c'
 alias rs='bundle exec rails server --binding 127.0.0.1'
+
+
+function pipeset --no-scope-shadowing
+    set -l _options
+    set -l _variables
+    for _item in $argv
+        switch $_item
+            case '-*'
+                set _options $_options $_item
+            case '*'
+                set _variables $_variables  $_item
+        end
+    end
+    for _variable in $_variables
+        set $_variable ""
+    end
+    while read _line
+        for _variable in $_variables
+            set $_options $_variable $$_variable$_line\n
+        end
+    end
+    return 0
+end
