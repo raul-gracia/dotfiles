@@ -11,8 +11,9 @@ rbenv global 2.2.2
 echo 'Bundling...'
 gem install bundle; and bundle install; and rm Gemfile.lock
 echo 'Installing pip tools...'
-set formulae  'pip' 'httpie' 'psutil' \
+set pip_tools 'pip' 'httpie' 'psutil' \
               'git+git://github.com/powerline/powerline' 'awscli' \
+              'ansible'
 
 for pip_tool in $pip_tools
   pip install --upgrade $pip_tool
