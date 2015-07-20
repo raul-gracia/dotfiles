@@ -15,6 +15,7 @@ alias dev='cd ~/Documents/development'
 alias mag='cd ~/Documents/development/magnetic'
 alias dotfiles='cd ~/dotfiles; and vim .; and cd -'
 alias godev='cd $GOPATH/src/github.com/maliciousmind'
+alias serve_dir='ruby -run -e httpd . -p 5000'
 
 alias docs='cd ~/Documents'
 alias upgradeall='brew update; and brew upgrade'
