@@ -70,9 +70,12 @@ set backupskip=/tmp/*,/private/tmp/*
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set writebackup
 
-
-" Rspec
-let g:rspec_command = "!rspec {spec}"
+" RSpec.vim mappings
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
+let g:rspec_command = "Dispatch bin/rspec {spec}"
 
 " Auto open nerdtree
 "set autochdir
@@ -113,3 +116,7 @@ let g:jsx_ext_required = 0
 :au FocusGained * :set relativenumber
 autocmd InsertEnter * :set number
 autocmd InsertLeave * :set relativenumber
+
+" Ctags
+map <Leader>rt :!ctags --tag-relative --extra=+f -Rf.git/tags --exclude=.git,pkg -languages=-javascript,sql<CR><CR>
+set tags+=.git/tags

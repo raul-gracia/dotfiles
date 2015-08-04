@@ -16,6 +16,8 @@ alias mag='cd ~/Documents/development/magnetic'
 alias dotfiles='cd ~/dotfiles; and vim .; and cd -'
 alias godev='cd $GOPATH/src/github.com/maliciousmind'
 alias serve_dir='ruby -run -e httpd . -p 5000'
+alias ttt='tmux attach -t'
+alias tls='tmux ls'
 
 alias docs='cd ~/Documents'
 alias upgradeall='brew update; and brew upgrade'
@@ -32,6 +34,7 @@ alias g='git'
 alias gb='g branch'
 alias gpt='bundle exec rake test; and bundle exec rake jshint; and gp'
 alias gc='g c'
+alias gca='gc --amend'
 alias gco='g co'
 alias gst='g st -s'
 alias gaa='g add --all'
@@ -67,6 +70,7 @@ alias bb='cd ~/dotfiles; and brew bundle; and cd -'
 
 # Code review tool
 alias gp='g push origin (current_branch)'
+alias gpf='gp --force'
 alias current_branch='git rev-parse --abbrev-ref HEAD'
 alias last_commit_message_long='git --no-pager log -1 --pretty=%B'
 alias last_commit_message_short='git --no-pager log -1 --pretty=%s'
@@ -86,7 +90,6 @@ function review
   else
     set revision_hash (branch_creation_commit)
   end
-  echo $revision_hash
   gp
   code_review_message | pipeset message_arg
   codereview --rev $revision_hash\

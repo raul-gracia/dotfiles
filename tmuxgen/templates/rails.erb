@@ -13,7 +13,7 @@ tmux split-window -v
 # Provision the splits
 tmux select-pane -t 1
 tmux send-keys "cd $FOLDER; and vim ." C-m
-if grep -q guard Gemfile; then
+if [ -f Guardfile ]; then
   tmux split-window -h
   tmux select-pane -t 2
   tmux send-keys "cd $FOLDER; and while bundle exec guard -c; do echo "Restarting Guard..."; done" C-m
