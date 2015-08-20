@@ -15,6 +15,7 @@ brew 'tmux'
 brew 'phantomjs'
 brew 'mysql'
 brew 'boot2docker'
+brew 'youtube-dl'
 
 brew 'rbenv', args: ['HEAD']
 brew 'ruby-build', args: ['HEAD']

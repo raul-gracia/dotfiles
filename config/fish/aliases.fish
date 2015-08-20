@@ -20,7 +20,7 @@ alias ttt='tmux attach -t'
 alias tls='tmux ls'
 
 alias docs='cd ~/Documents'
-alias upgradeall='brew update; and brew upgrade; and omf update; and omf self-upgrade'
+alias upgradeall='brew update; and brew upgrade; and omf update; and omf self-update'
 
 # Rails
 alias rdb='rake db:migrate'
@@ -28,6 +28,7 @@ alias rdbt='rake db:migrate db:test:prepare'
 alias be='bundle exec'
 alias beg='bundle exec guard -c'
 alias rs='bundle exec rails server --binding 127.0.0.1'
+#alias rc='bundle exec rails console'
 
 # Git
 alias g='git'
