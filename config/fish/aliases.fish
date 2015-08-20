@@ -30,6 +30,9 @@ alias beg='bundle exec guard -c'
 alias rs='bundle exec rails server --binding 127.0.0.1'
 #alias rc='bundle exec rails console'
 
+alias b2d='boot2docker'
+alias dc='docker-compose'
+
 # Git
 alias g='git'
 alias gb='g branch'
@@ -80,7 +83,7 @@ alias previous_commit_hash='git rev-parse HEAD~1'
 function code_review_message
   last_commit_message_long | pipeset commit_description
   echo "Repo: "(magnetic_repo_name)"
-Branch: "(current_branch)".
+Branch: "(current_branch)"
 
 "$commit_description
 end
