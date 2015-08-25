@@ -14,8 +14,9 @@ brew 'hub'
 brew 'tmux'
 brew 'phantomjs'
 brew 'mysql'
-brew 'boot2docker'
 brew 'youtube-dl'
+brew 'go'
+brew 'ctags'
 
 brew 'rbenv', args: ['HEAD']
 brew 'ruby-build', args: ['HEAD']
@@ -29,7 +30,6 @@ cask 'alfred'
 cask 'dropbox'
 cask 'slack'
 cask 'flux'
-cask 'virtualbox'
 cask 'keepassx'
 cask 'spotify'
 cask 'iterm2'
@@ -46,3 +46,4 @@ cask 'betterzip'
 cask 'mou'
 cask 'transmission'
 cask 'vlc'
+cask 'dockertoolbox' # docker, docker-machine, docker-compose, kitematic, virtualbox

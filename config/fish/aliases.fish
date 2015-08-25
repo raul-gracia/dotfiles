@@ -30,8 +30,16 @@ alias beg='bundle exec guard -c'
 alias rs='bundle exec rails server --binding 127.0.0.1'
 #alias rc='bundle exec rails console'
 
-alias b2d='boot2docker'
 alias dc='docker-compose'
+function codeclimate
+  docker run \
+    --interactive --tty --rm \
+    --env CODE_PATH="$PWD" \
+    --volume "$PWD":/code \
+    --volume /var/run/docker.sock:/var/run/docker.sock \
+    --volume /tmp/cc:/tmp/cc \
+    codeclimate/codeclimate $argv
+end
 
 # Git
 alias g='git'
