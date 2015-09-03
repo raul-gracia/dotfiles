@@ -1,4 +1,4 @@
-omf install
+curl -L git.io/omf | sh
 fish_update_completions
 echo 'Brewing...'
 brew tap Homebrew/bundle

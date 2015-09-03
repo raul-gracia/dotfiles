@@ -80,7 +80,6 @@ let g:rspec_command = "Dispatch bin/rspec {spec}"
 " Auto open nerdtree
 "set autochdir
 let NERDTreeChDirMode=0
-set laststatus=2
 set noshowmode
 
 " Ctrlp.vim

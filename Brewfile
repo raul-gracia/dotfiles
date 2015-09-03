@@ -47,3 +47,4 @@ cask 'mou'
 cask 'transmission'
 cask 'vlc'
 cask 'dockertoolbox' # docker, docker-machine, docker-compose, kitematic, virtualbox
+cask 'github-desktop'
