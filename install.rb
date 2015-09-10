@@ -17,4 +17,8 @@ unless File.exist? File.expand_path('~/.vim/bundle/vundle')
 end
 `vim +BundleInstall +qall`
 
+puts 'Installing tmux plugins...'
+unless File.exist? File.expand_path('~/.tmux/plugins/tpm')
+  `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm`
+end
 puts 'Everything installed corectly!'

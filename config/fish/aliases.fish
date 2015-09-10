@@ -16,7 +16,7 @@ alias mag='cd ~/Documents/development/magnetic'
 alias dotfiles='cd ~/dotfiles; and vim .; and cd -'
 alias godev='cd $GOPATH/src/github.com/maliciousmind'
 alias serve_dir='ruby -run -e httpd . -p 5000'
-alias ttt='tmux attach -t'
+alias tat='tmux attach -t'
 alias tls='tmux ls'
 
 alias docs='cd ~/Documents'

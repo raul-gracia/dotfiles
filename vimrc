@@ -10,7 +10,9 @@ runtime macros/matchit.vim
 syntax enable
 set background=dark
 colorscheme solarized
-set shell=/bin/zsh
+if $SHELL =~ 'fish'
+  set shell='/bin/sh'
+endif
 let $PATH=$PATH . ':' . $HOME . '/.rvm/bin'
 set t_Co=256
 set tabstop=2
