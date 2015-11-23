@@ -12,12 +12,15 @@ alias dofiles='dotfiles'
 # Shortcuts
 alias rapps='cd ~/Documents/rails-apps'
 alias dev='cd ~/Documents/development'
-alias mag='cd ~/Documents/development/magnetic'
+alias mot='cd ~/Documents/development/motivii'
+alias mas='cd ~/Documents/development/motivii/Maslow'
 alias dotfiles='cd ~/dotfiles; and vim .; and cd -'
 alias godev='cd $GOPATH/src/github.com/maliciousmind'
-alias serve_dir='ruby -run -e httpd . -p 5000'
+alias serve_dir='ruby -run -e httpd . -p 5055'
 alias tat='tmux attach -t'
 alias tls='tmux ls'
+
+alias time_in_london='cd ~/Dropbox/time_in_london/; and bundle exec ruby time_in_london.rb; and cd -'
 
 alias docs='cd ~/Documents'
 alias upgradeall='brew update; and brew upgrade; and omf update; and omf self-update'
@@ -48,6 +51,7 @@ alias gpt='bundle exec rake test; and bundle exec rake jshint; and gp'
 alias gc='g c'
 alias gca='gc --amend'
 alias gco='g co'
+alias gcob='gco -b'
 alias gst='g st -s'
 alias gaa='g add --all'
 alias ga='g add'
@@ -55,9 +59,15 @@ alias gup='g up'
 alias glg='g lg'
 alias gdfc='g diff --cached --color-words --patience'
 alias gdf='g diff --color-words --patience'
+alias gp='g push origin (current_branch)'
+alias gpf='gp --force'
 alias current_branch='git rev-parse --abbrev-ref HEAD'
-alias magnetic_repo_name="git remote show origin -n | grep 'Fetch' | ruby -e 'puts \$stdin.read.match(/Magnetic\/(.*)\.git/)[1]'"
 alias clean_local_branches='git branch --merged develop | grep -v master | grep -v develop | xargs git branch -d'
+alias hpr='hub pull-request -b'
+alias current_branch='git rev-parse --abbrev-ref HEAD'
+alias last_commit_message_long='git --no-pager log -1 --pretty=%B'
+alias last_commit_message_short='git --no-pager log -1 --pretty=%s'
+alias previous_commit_hash='git rev-parse HEAD~1'
 
 alias last_commit='git rev-parse HEAD'
 function gph
@@ -69,67 +79,22 @@ function branch_creation_commit
 end
 
 # heroku
-alias hpr='hub pull-request -b'
-alias hlog='heroku logs -t -a'
-alias hlg='heroku logs -t'
-alias hconf='heroku config -a'
+alias hk='/usr/local/Cellar/heroku-toolbelt/3.42.17/bin/heroku'
+alias hlog='hk logs -t -a'
+alias hlg='hk logs -t'
+alias hconf='hk config -a'
 alias hp='g push heroku (current_branch):master'
 
+function production
+  eval $argv --app motivii-maslow-production
+end
+
+function staging
+  eval $argv --app motivii-maslow-staging
+end
 
 alias mysql='mysql -uroot'
 alias bb='cd ~/dotfiles; and brew bundle; and cd -'
-
-
-# Code review tool
-alias gp='g push origin (current_branch)'
-alias gpf='gp --force'
-alias current_branch='git rev-parse --abbrev-ref HEAD'
-alias last_commit_message_long='git --no-pager log -1 --pretty=%B'
-alias last_commit_message_short='git --no-pager log -1 --pretty=%s'
-alias previous_commit_hash='git rev-parse HEAD~1'
-
-function code_review_message
-  last_commit_message_long | pipeset commit_description
-  echo "Repo: "(magnetic_repo_name)"
-Branch: "(current_branch)"
-
-"$commit_description
-end
-
-function review
-  if test (count $argv) -eq 1
-    set revision_hash $argv[1]
-  else
-    set revision_hash (branch_creation_commit)
-  end
-  gp
-  code_review_message | pipeset message_arg
-  codereview --rev $revision_hash\
-    --title=(last_commit_message_short) \
-    --message=$message_arg \
-    --reviewers=CJ,stephen,rob,dcrosta --send_mail
-end
-
-function ammend_review
-  if test (count $argv) -eq 2
-    set revision_hash $argv[2]
-  else
-    set revision_hash (branch_creation_commit)
-  end
-  if test (count $argv) -ge 1
-    gp
-    code_review_message | pipeset message_arg
-    codereview --rev $revision_hash \
-      --issue=$argv[1] \
-      --title=(last_commit_message_short) \
-      --message=$message_arg \
-      --reviewers=CJ,stephen,rob,dcrosta --send_mail
-  else
-    echo "Usage: $_ 4590002 optional_hash"
-  end
-end
-
-
 
 function pipeset --no-scope-shadowing
     set -l _options

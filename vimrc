@@ -22,8 +22,10 @@ set backspace=2
 set expandtab
 set nocompatible
 set number
-set encoding=utf-8
 set relativenumber
+set encoding=utf-8
+set splitbelow
+set splitright
 filetype plugin indent on
 
 " Paste overriding selection
@@ -77,7 +79,7 @@ map <Leader>t :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
-let g:rspec_command = "Dispatch bin/rspec {spec}"
+let g:rspec_command = "! bundle exec rspec {spec}"
 
 " Auto open nerdtree
 "set autochdir
