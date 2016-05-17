@@ -23,6 +23,7 @@ end
 function fish_title;end
 function fish_greeting;end
 
+# Exports for PATH
 set default_path /usr/bin /usr/sbin /bin /sbin
 set homebrew /usr/local/bin /usr/local/sbin
 set brew_rbenv "/usr/local/var/rbenv/shims"

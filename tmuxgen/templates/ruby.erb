@@ -14,12 +14,15 @@ tmux split-window -v
 
 # Provision the splits
 tmux select-pane -t 1
-tmux send-keys "cd $FOLDER; and vim ." C-m
+tmux send-keys "cd $FOLDER" C-m
+tmux send-keys "vim ." C-m
 tmux select-pane -t 2
-tmux send-keys "cd $FOLDER; and be guard -c" C-m
+tmux send-keys "cd $FOLDER" C-m
+tmux send-keys "beg" C-m
 tmux resize-pane -x 35
 tmux select-pane -t 3
-tmux send-keys "cd $FOLDER; and clear" C-m
+tmux send-keys "cd $FOLDER" C-m
+tmux send-keys "clear" C-m
 tmux resize-pane -y 10
 
 # Attach to session

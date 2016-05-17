@@ -9,8 +9,8 @@ endif
 runtime macros/matchit.vim
 syntax enable
 set background=dark
+"set background=light
 colorscheme solarized
-let $PATH=$PATH . ':' . $HOME . '/.rvm/bin'
 set t_Co=256
 set tabstop=2
 set shiftwidth=2
@@ -28,8 +28,6 @@ filetype plugin indent on
 " Paste overriding selection
 vnoremap p "_dP
 
-nmap <silent> <C-D> :NERDTreeToggle %<CR>
-nmap <silent> <C-F> <C-h><C-h>:vertical resize 40<CR><C-l>
 
 " Remove trailling space on save
 autocmd BufWritePre * :%s/\s\+$//e
@@ -79,9 +77,11 @@ map <Leader>a :call RunAllSpecs()<CR>
 let g:rspec_command = "! bundle exec rspec {spec}"
 
 " Auto open nerdtree
-"set autochdir
-let NERDTreeChDirMode=0
-set noshowmode
+map <C-d> :NERDTreeToggle<CR>
+nmap <silent> <C-D> :NERDTreeToggle<CR>
+nmap <silent> <C-E> :NERDTreeFind<CR>
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
 
 " Ctrlp.vim
 let g:ctrlp_working_path_mode = '0'
@@ -99,6 +99,7 @@ let g:ctrlp_show_hidden = 1
 au BufRead,BufNewFile *.md set spell spelllang=en_gb
 au BufRead,BufNewFile *.markdown set spell spelllang=en_gb
 au BufRead,BufNewFile *.rabl setf ruby
+au BufRead,BufNewFile *.xlsx.axlsx setf ruby
 
 " go-vim
 " format with goimports instead of gofmt
@@ -112,11 +113,19 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:jsx_ext_required = 0
 
 " Relative numbers
-:au FocusLost * :set number
-:au FocusGained * :set relativenumber
-autocmd InsertEnter * :set number
-autocmd InsertLeave * :set relativenumber
+":au FocusLost * :set number
+":au FocusGained * :set relativenumber
+"autocmd InsertEnter * :set number
+"autocmd InsertLeave * :set relativenumber
 
 " Ctags
 map <Leader>rt :!ctags --tag-relative --extra=+f -Rf.git/tags --exclude=.git,pkg -languages=-javascript,sql<CR><CR>
 set tags+=.git/tags
+
+" Haml Lint
+let g:syntastic_haml_checkers = ['haml_lint', 'haml']
+let g:syntastic_ruby_checkers = ['mri', 'rubocop']
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0

@@ -10,10 +10,10 @@ alias clar='clear'
 alias dofiles='dotfiles'
 
 # Shortcuts
-alias rapps='cd ~/Documents/rails-apps'
-alias dev='cd ~/Documents/development'
-alias mot='cd ~/Documents/development/motivii'
-alias mas='cd ~/Documents/development/motivii/Maslow'
+alias rapps='cd ~/Dropbox/rails-apps'
+alias dev='cd ~/Dropbox/development'
+alias mot='cd ~/Dropbox/development/motivii'
+alias mas='cd ~/Dropbox/development/motivii/Maslow'
 alias dotfiles='cd ~/dotfiles; and vim .; and cd -'
 alias godev='cd $GOPATH/src/github.com/maliciousmind'
 alias serve_dir='ruby -run -e httpd . -p 5055'
@@ -21,6 +21,7 @@ alias tat='tmux attach -t'
 alias tls='tmux ls'
 
 alias time_in_london='cd ~/Dropbox/time_in_london/; and bundle exec ruby time_in_london.rb; and cd -'
+alias time_until='cd ~/Dropbox/time_in_london/; and bundle exec ruby time_until.rb $argv; and cd -'
 
 alias docs='cd ~/Documents'
 alias upgradeall='brew update; and brew upgrade; and omf update; and omf self-update'
@@ -31,7 +32,8 @@ alias rdbt='rake db:migrate db:test:prepare'
 alias be='bundle exec'
 alias beg='bundle exec guard -c'
 alias rs='bundle exec rails server --binding 127.0.0.1'
-#alias rc='bundle exec rails console'
+alias berc='bundle exec rails console'
+alias bec='bundle exec cucumber'
 
 alias dc='docker-compose'
 function codeclimate
@@ -63,7 +65,7 @@ alias gp='g push origin (current_branch)'
 alias gpf='gp --force'
 alias current_branch='git rev-parse --abbrev-ref HEAD'
 alias clean_local_branches='git branch --merged develop | grep -v master | grep -v develop | xargs git branch -d'
-alias hpr='hub pull-request -b'
+alias hpr='gp; and hub pull-request -b'
 alias current_branch='git rev-parse --abbrev-ref HEAD'
 alias last_commit_message_long='git --no-pager log -1 --pretty=%B'
 alias last_commit_message_short='git --no-pager log -1 --pretty=%s'
@@ -79,7 +81,7 @@ function branch_creation_commit
 end
 
 # heroku
-alias hk='/usr/local/Cellar/heroku-toolbelt/3.42.17/bin/heroku'
+alias hk='/usr/local/Cellar/heroku-toolbelt/3.42.22/bin/heroku'
 alias hlog='hk logs -t -a'
 alias hlg='hk logs -t'
 alias hconf='hk config -a'
@@ -93,8 +95,19 @@ function staging
   eval $argv --app motivii-maslow-staging
 end
 
+function railsgirls
+  eval $argv --app desolate-coast-9056
+end
+
 alias mysql='mysql -uroot'
 alias bb='cd ~/dotfiles; and brew bundle; and cd -'
+alias ssh_wordpress='ssh -i /Users/maliciousmind/Dropbox/cloud-guru/wordpress.pem ubuntu@ec2-54-155-62-78.eu-west-1.compute.amazonaws.com'
+alias ssh_analytics_staging='ssh ubuntu@ec2-52-17-15-20.eu-west-1.compute.amazonaws.com'
+alias ssh_analytics_production='ssh ubuntu@ec2-52-30-80-71.eu-west-1.compute.amazonaws.com'
+alias rails-development-box='ssh ubuntu@54.194.162.16'
+alias check_sidekiq_failures='cd ~/Dropbox/development/motivii/automated_sidekiq_failures/; be ruby check_failures.rb; cd -'
+alias redis='redis-server --sentinel; and sleep 1; and redis-cli flushall; and sleep 1; and pkill redis; and sleep 1; and redis-server'
+alias prc='production hk run rails c'
 
 function pipeset --no-scope-shadowing
     set -l _options
