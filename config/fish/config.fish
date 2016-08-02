@@ -25,20 +25,18 @@ function fish_greeting;end
 
 # Exports for PATH
 set default_path /usr/bin /usr/sbin /bin /sbin
-set homebrew /usr/local/bin /usr/local/sbin
+set homebrew /usr/local/bin
 set brew_rbenv "/usr/local/var/rbenv/shims"
 set tmux_gen $HOME/.tmuxgen/bin $HOME/.tmuxgen
-set npm_bin /usr/local/share/npm/bin
 
 # Exports for go
 set -xg GOPATH $HOME/go
 set -xg GOBIN $GOPATH/bin
 
-set appengine_go $HOME/Documents/go_appengine
 set go_root /usr/local/opt/go/libexec/bin
 
-set -gx PATH $appengine_go $go_root $homebrew $brew_rbenv \
-$default_path $tmux_gen $npm_bin $GOBIN
+set -gx PATH $go_root $homebrew $brew_rbenv \
+$default_path $tmux_gen $GOBIN
 
 set -gx RBENV_ROOT /usr/local/var/rbenv
 set -e SHELL
@@ -52,3 +50,7 @@ function ggi --description 'Gobally install a gem ie: for all ruby versions'
     gem install $argv[1] > /dev/null
   end
 end
+
+# Start and configure docker
+#docker-machine start > /dev/null 2>&1
+#eval (docker-machine env default --shell fish)

@@ -19,6 +19,7 @@ alias godev='cd $GOPATH/src/github.com/maliciousmind'
 alias serve_dir='ruby -run -e httpd . -p 5055'
 alias tat='tmux attach -t'
 alias tls='tmux ls'
+alias chr='cd ~/Dropbox/development/digital-chronos'
 
 alias time_in_london='cd ~/Dropbox/time_in_london/; and bundle exec ruby time_in_london.rb; and cd -'
 alias time_until='cd ~/Dropbox/time_in_london/; and bundle exec ruby time_until.rb $argv; and cd -'
@@ -34,17 +35,6 @@ alias beg='bundle exec guard -c'
 alias rs='bundle exec rails server --binding 127.0.0.1'
 alias berc='bundle exec rails console'
 alias bec='bundle exec cucumber'
-
-alias dc='docker-compose'
-function codeclimate
-  docker run \
-    --interactive --tty --rm \
-    --env CODE_PATH="$PWD" \
-    --volume "$PWD":/code \
-    --volume /var/run/docker.sock:/var/run/docker.sock \
-    --volume /tmp/cc:/tmp/cc \
-    codeclimate/codeclimate $argv
-end
 
 # Git
 alias g='git'
@@ -87,12 +77,24 @@ alias hlg='hk logs -t'
 alias hconf='hk config -a'
 alias hp='g push heroku (current_branch):master'
 
-function production
-  eval $argv --app motivii-maslow-production
+function fx-prod
+  eval $argv --app fx-production
 end
 
-function staging
+function fx-test
+  eval $argv --app foreign-exchange
+end
+
+function mot-stg
   eval $argv --app motivii-maslow-staging
+end
+
+function staging_sidekiq
+  staging hk config | grep SIDE
+end
+
+function prod_sidekiq
+  production hk config | grep SIDE
 end
 
 function railsgirls
@@ -106,7 +108,7 @@ alias ssh_analytics_staging='ssh ubuntu@ec2-52-17-15-20.eu-west-1.compute.amazon
 alias ssh_analytics_production='ssh ubuntu@ec2-52-30-80-71.eu-west-1.compute.amazonaws.com'
 alias rails-development-box='ssh ubuntu@54.194.162.16'
 alias check_sidekiq_failures='cd ~/Dropbox/development/motivii/automated_sidekiq_failures/; be ruby check_failures.rb; cd -'
-alias redis='redis-server --sentinel; and sleep 1; and redis-cli flushall; and sleep 1; and pkill redis; and sleep 1; and redis-server'
+alias redis='redis-server --daemonize yes; and redis-cli flushall'
 alias prc='production hk run rails c'
 
 function pipeset --no-scope-shadowing

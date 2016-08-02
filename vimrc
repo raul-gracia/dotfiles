@@ -69,12 +69,11 @@ set backupskip=/tmp/*,/private/tmp/*
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set writebackup
 
-" RSpec.vim mappings
-map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
-let g:rspec_command = "! bundle exec rspec {spec}"
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>g :TestVisit<CR>
 
 " Auto open nerdtree
 map <C-d> :NERDTreeToggle<CR>
@@ -95,6 +94,8 @@ let g:ctrlp_custom_ignore = {
   \ }
 "let g:ctrlp_user_command = 'find %s -type f'
 let g:ctrlp_show_hidden = 1
+
+
 " Set spell checking for .markdown files
 au BufRead,BufNewFile *.md set spell spelllang=en_gb
 au BufRead,BufNewFile *.markdown set spell spelllang=en_gb
