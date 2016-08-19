@@ -105,11 +105,7 @@ end
 
 alias mysql='mysql -uroot'
 alias bb='cd ~/dotfiles; brew bundle; cd -'
-alias ssh_wordpress='ssh -i /Users/maliciousmind/Dropbox/cloud-guru/wordpress.pem ubuntu@ec2-54-155-62-78.eu-west-1.compute.amazonaws.com'
-alias ssh_analytics_staging='ssh ubuntu@ec2-52-17-15-20.eu-west-1.compute.amazonaws.com'
-alias ssh_analytics_production='ssh ubuntu@ec2-52-30-80-71.eu-west-1.compute.amazonaws.com'
 alias rails-development-box='ssh ubuntu@54.194.162.16'
-alias check_sidekiq_failures='cd ~/Dropbox/development/motivii/automated_sidekiq_failures/; be ruby check_failures.rb; cd -'
 alias redis='redis-server --daemonize yes; and redis-cli flushall'
 alias prc='production hk run rails c'
 
