@@ -1,9 +1,3 @@
-" Rspec
-map <leader>t :call RunNearestSpec()<cr>
-map <leader>tt :call RunCurrentSpecFile()<cr>
-map <Leader>tl :call RunLastSpec()<CR>
-map <Leader>ta :call RunAllSpecs()<CR>
-
 " Run cucrent file in cucumber
 nmap <leader>cc :! cucumber %<CR>
 

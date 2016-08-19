@@ -1,15 +1,14 @@
-curl -L git.io/omf | sh
 fish_update_completions
 echo 'Brewing...'
 brew tap Homebrew/bundle
 brew bundle
 ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents
 launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
-rbenv install 2.2.2
-rbenv global 2.2.2
+rbenv install 2.3.1
+rbenv global 2.3.1
 
 echo 'Bundling...'
-gem install bundle; and bundle install; and rm Gemfile.lock
+gem install bundler; and bundle install; and rm Gemfile.lock
 echo 'Installing pip tools...'
 set pip_tools 'pip' 'httpie' 'psutil' \
               'git+git://github.com/powerline/powerline' 'awscli' \

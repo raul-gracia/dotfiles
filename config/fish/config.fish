@@ -50,7 +50,3 @@ function ggi --description 'Gobally install a gem ie: for all ruby versions'
     gem install $argv[1] > /dev/null
   end
 end
-
-# Start and configure docker
-#docker-machine start > /dev/null 2>&1
-#eval (docker-machine env default --shell fish)

@@ -1,8 +1,2 @@
 ServerAliveInterval 60
 ForwardAgent yes
-
-Host *.smq.mgnt.cc
-  ProxyCommand ssh raul@209.18.123.65 nc %h %p
-
-Host *.sjc.mgnt.cc
-  ProxyCommand ssh raul@66.70.55.33 nc %h %p
