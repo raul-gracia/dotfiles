@@ -34,5 +34,8 @@ Plugin 'janko-m/vim-test'
 Plugin 'mattn/webapi-vim'
 Plugin 'alexbel/vim-rubygems'
 Plugin 'slim-template/vim-slim'
+Plugin 'christoomey/vim-tmux-navigator'
+
+Plugin 'vim-scripts/TeTrIs.vim'
 
 filetype plugin indent on     " required

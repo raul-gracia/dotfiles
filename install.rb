@@ -4,8 +4,8 @@ puts 'Installing dotfiles...'
 excluded_files = %w{README.md Brewfile Gemfile install.rb others
 setup.fish bootstrap.sh}
 excluded_files_args = excluded_files.map{|f| "-x #{f}"}.join(' ')
-puts "Executing: rcup -fd . #{excluded_file_args}"
-`rcup -fd . #{excluded_file_args}`
+puts "Executing: rcup -fd . #{excluded_files_args}"
+`rcup -fd . #{excluded_files_args}`
 
 unless File.exist? File.expand_path('~/Library/Fonts/Monaco_for_Powerline.otf')
   puts 'Downloading Patched Monaco font...'

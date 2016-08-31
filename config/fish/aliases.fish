@@ -29,8 +29,8 @@ alias docs='cd ~/Documents'
 alias upgradeall='brew update; and brew upgrade; and omf update; and omf self-update'
 
 # Rails
-alias rdb='rake db:migrate'
-alias rdbt='rake db:migrate db:test:prepare'
+alias rdb='bundle exec rake db:migrate'
+alias rdbt='bundle exec rake db:migrate db:test:prepare'
 alias be='bundle exec'
 alias beg='bundle exec guard -c'
 alias rs='bundle exec rails server --binding 127.0.0.1'
@@ -73,7 +73,7 @@ function branch_creation_commit
 end
 
 # heroku
-alias hk='/usr/local/Cellar/heroku-toolbelt/3.42.22/bin/heroku'
+alias hk='/usr/local/bin/heroku'
 alias hlog='hk logs -t -a'
 alias hlg='hk logs -t'
 alias hconf='hk config -a'
@@ -82,13 +82,23 @@ alias hp='g push heroku (current_branch):master'
 function fx-prod
   eval $argv --app fx-production
 end
+function fx-prod-deploy
+  gco master; and gup; fx-prod hk pg:backups capture; and g push production master; and fx-prod run rake db:migrate
+end
 
 function fx-test
   eval $argv --app foreign-exchange
 end
+function fx-test-deploy
+  gco develop; and gup; and g push test develop:master; and fx-test run rake db:migrate
+end
 
 function mot-stg
   eval $argv --app motivii-maslow-staging
+end
+
+function mot-prod
+  eval $argv --app motivii-maslow-production
 end
 
 function staging_sidekiq
@@ -104,7 +114,7 @@ function railsgirls
 end
 
 alias mysql='mysql -uroot'
-alias bb='cd ~/dotfiles; brew bundle; cd -'
+alias bb='cd ~/dotfiles; brew update; and brew upgrade; and brew bundle; cd -'
 alias rails-development-box='ssh ubuntu@54.194.162.16'
 alias redis='redis-server --daemonize yes; and redis-cli flushall'
 alias prc='production hk run rails c'
