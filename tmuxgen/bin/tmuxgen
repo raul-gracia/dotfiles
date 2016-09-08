@@ -39,6 +39,8 @@ when '--ruby'
   render_template("ruby")
 when '--go'
   render_template("go")
+when '--phoenix'
+  render_template("phoenix")
 else
   print_help
 end

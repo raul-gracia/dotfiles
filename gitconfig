@@ -1,6 +1,7 @@
 [user]
   email = raulgracialario@gmail.com
   name = Raul Gracia
+	signingkey = C7C7585D
 [color]
   ui = auto
   branch = auto
@@ -22,6 +23,7 @@
 	editor = vim
 [commit]
   template = ~/.gitmessage
+	gpgsign = true
 [status]
   sort = 1
   branch = 1

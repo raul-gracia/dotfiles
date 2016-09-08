@@ -37,11 +37,14 @@ alias rs='bundle exec rails server --binding 127.0.0.1'
 alias berc='bundle exec rails console'
 alias bec='bundle exec cucumber'
 
+# Phoenix
+alias mps='mix phoenix.server'
+
 # Git
 alias g='git'
 alias gb='g branch'
 alias gpt='bundle exec rake test; and bundle exec rake jshint; and gp'
-alias gc='g c'
+alias gc='g c -S'
 alias gca='gc --amend'
 alias gco='g co'
 alias gcob='gco -b'
@@ -87,7 +90,7 @@ function fx-prod-deploy
 end
 
 function fx-test
-  eval $argv --app foreign-exchange
+  eval $argv --app fx-test
 end
 function fx-test-deploy
   gco develop; and gup; and g push test develop:master; and fx-test run rake db:migrate

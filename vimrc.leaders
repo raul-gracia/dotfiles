@@ -1,6 +1,3 @@
-" Run cucrent file in cucumber
-nmap <leader>cc :! cucumber %<CR>
-
 " Redraw vim interface
 nmap <leader>rd :redraw!<CR>
 
@@ -14,9 +11,6 @@ nmap <leader>l mQviwu`Q
 " upper/lower first char of word
 nmap <leader>U mQgewvU`Q
 nmap <leader>L mQgewvu`Q
-
-" cd to the directory containing the file in the buffer
-nmap <silent> <leader>cd :lcd %:h<CR>
 
 " Create the directory containing the file in the buffer
 nmap <silent> <leader>md :!mkdir -p %:p:h<CR>
