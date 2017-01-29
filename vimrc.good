@@ -1,0 +1,27 @@
+set encoding=utf-8
+
+if filereadable(expand("~/.vimrc.plugs"))
+  source ~/.vimrc.plugs
+endif
+
+if filereadable(expand("~/.vimrc.leaders"))
+  source ~/.vimrc.leaders
+endif
+
+set mouse=""
+set background=dark
+set tabstop=2
+set shiftwidth=2
+set scrolloff=3
+set backspace=2
+set expandtab
+set number
+set relativenumber
+set splitbelow
+set splitright
+set colorcolumn=80
+
+
+autocmd BufWritePre * :%s/\s\+$//e
+
+

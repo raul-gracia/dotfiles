@@ -1,0 +1,9 @@
+call plug#begin('~/.config/nvim/plugged')
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+let g:deoplete#enable_at_startup = 1
+" use tab for completion
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+
+Plug 'altercation/vim-colors-solarized'
+colorscheme solarized
+call plug#end()

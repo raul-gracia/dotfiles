@@ -9,6 +9,13 @@ Plugin 'gmarik/vundle'
 
 " Define bundles via Github repos
 Plugin 'kien/ctrlp.vim'
+
+" Completion
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'ervandew/supertab'
+Plugin 'mattn/emmet-vim'
+
 Plugin 'tpope/vim-endwise'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'tpope/vim-fugitive'
@@ -18,23 +25,29 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'ddollar/nerdcommenter'
 Plugin 'rking/ag.vim'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'ervandew/supertab'
 Plugin 'junegunn/vim-easy-align'
-Plugin 'mattn/emmet-vim'
 Plugin 'fatih/vim-go'
 Plugin 'mxw/vim-jsx'
 Plugin 'dag/vim-fish'
-Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
+" Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plugin 'tpope/vim-projectionist'
-Plugin 'elixir-lang/vim-elixir'
-Plugin 'avdgaag/vim-phoenix'
 Plugin 'janko-m/vim-test'
 Plugin 'mattn/webapi-vim'
 Plugin 'alexbel/vim-rubygems'
 Plugin 'slim-template/vim-slim'
 Plugin 'christoomey/vim-tmux-navigator'
+
+Plugin 'burnettk/vim-angular'
+Plugin 'amadeus/vim-mjml'
+
+Plugin 'majutsushi/tagbar'
+Plugin 'ternjs/tern_for_vim'
+
+" Elixir/phoenix/elm
+Plugin 'slashmili/alchemist.vim'
+Plugin 'elixir-lang/vim-elixir'
+Plugin 'avdgaag/vim-phoenix'
+Plugin 'ElmCast/elm-vim'
 
 Plugin 'vim-scripts/TeTrIs.vim'
 

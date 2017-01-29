@@ -21,6 +21,8 @@
 	excludesfile = /Users/raul/.gitignore_global
   autocrlf = input
 	editor = vim
+[init]
+  templateDir = '~/.git_template'
 [commit]
   template = ~/.gitmessage
 	gpgsign = true
@@ -28,7 +30,7 @@
   sort = 1
   branch = 1
 [push]
-	default = simple
+	default = current
 [pull]
   rebase = true
 [filter "media"]
@@ -45,3 +47,5 @@
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
 	required = true
+[gui]
+	recentrepo = /Users/maliciousmind/Dropbox/Development/gaincapital/foreign-exchange

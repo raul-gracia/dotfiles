@@ -10,10 +10,11 @@ alias clar='clear'
 alias dofiles='dotfiles'
 
 # Shortcuts
-alias rapps='cd ~/Dropbox/rails-apps'
+alias drop='cd ~/Dropbox'
 alias dev='cd ~/Dropbox/development'
 alias mot='cd ~/Dropbox/development/motivii'
 alias mas='cd ~/Dropbox/development/motivii/Maslow'
+alias gain='cd ~/Dropbox/development/gaincapital'
 alias fx='cd ~/Dropbox/development/gaincapital/foreign-exchange'
 alias dotfiles='cd ~/dotfiles; and vim .; and cd -'
 alias godev='cd $GOPATH/src/github.com/maliciousmind'
@@ -23,10 +24,12 @@ alias tls='tmux ls'
 alias chr='cd ~/Dropbox/development/digital-chronos'
 
 alias time_in_london='cd ~/Dropbox/time_in_london/; and bundle exec ruby time_in_london.rb; and cd -'
-alias time_until='cd ~/Dropbox/time_in_london/; and bundle exec ruby time_until.rb $argv; and cd -'
+function time_until
+  cd ~/Dropbox/time_in_london/; and bundle exec ruby time_until.rb $argv; and cd -
+end
 
 alias docs='cd ~/Documents'
-alias upgradeall='brew update; and brew upgrade; and omf update; and omf self-update'
+alias upgradeall='brew update; and brew upgrade; and omf update'
 
 # Rails
 alias rdb='bundle exec rake db:migrate'
@@ -36,6 +39,8 @@ alias beg='bundle exec guard -c'
 alias rs='bundle exec rails server --binding 127.0.0.1'
 alias berc='bundle exec rails console'
 alias bec='bundle exec cucumber'
+alias berr='bundle exec rake routes'
+alias berrg='bundle exec rake routes | grep '
 
 # Phoenix
 alias mps='mix phoenix.server'
@@ -57,6 +62,7 @@ alias gdfc='g diff --cached --color-words --patience'
 alias gdf='g diff --color-words --patience'
 alias gp='g push origin (current_branch)'
 alias gpf='gp --force'
+alias gtags='g ctags'
 alias current_branch='git rev-parse --abbrev-ref HEAD'
 alias clean_local_branches='git branch --merged develop | grep -v master | grep -v develop | xargs git branch -d'
 alias hpr='gp; and hub pull-request -b'
@@ -83,17 +89,24 @@ alias hconf='hk config -a'
 alias hp='g push heroku (current_branch):master'
 
 function fx-prod
-  eval $argv --app fx-production
+  eval hk $argv --app fx-production
 end
 function fx-prod-deploy
-  gco master; and gup; fx-prod hk pg:backups capture; and g push production master; and fx-prod run rake db:migrate
+  gco master; and gup; fx-prod pg:backups capture; and g push production master; and fx-prod run rake db:migrate
+end
+function fx-prod-deploy-simple
+  gco master; and gup; and g push production master; and gco -
 end
 
 function fx-test
-  eval $argv --app fx-test
+  eval hk $argv --app fx-test
 end
 function fx-test-deploy
   gco develop; and gup; and g push test develop:master; and fx-test run rake db:migrate
+end
+
+function fx-reports
+  eval hk $argv --app fx-reports
 end
 
 function mot-stg
@@ -116,7 +129,6 @@ function railsgirls
   eval $argv --app desolate-coast-9056
 end
 
-alias mysql='mysql -uroot'
 alias bb='cd ~/dotfiles; brew update; and brew upgrade; and brew bundle; cd -'
 alias rails-development-box='ssh ubuntu@54.194.162.16'
 alias redis='redis-server --daemonize yes; and redis-cli flushall'
