@@ -1,0 +1,32 @@
+#!/usr/bin/env zsh
+SESSION=<%= PROJECT_NAME %>
+FOLDER=<%= PROJECT_PATH %>
+
+tmux -2 new-session -d -s $SESSION
+
+# Setup a window for IDE
+tmux rename-window -t $SESSION:1 IDE
+
+# Set up the splits
+tmux split-window -v
+
+# Provision the splits
+tmux select-pane -t 1
+tmux send-keys "cd $FOLDER" C-m
+tmux send-keys "vim ." C-m
+tmux select-pane -t 2
+tmux send-keys "cd $FOLDER" C-m
+tmux send-keys "clear" C-m
+tmux resize-pane -y 10
+tmux split-window -h
+tmux select-pane -t 3
+tmux send-keys "cd $FOLDER" C-m
+tmux send-keys "iex -S mix" C-m
+
+# Setup a window for Background Tasks
+tmux new-window -t $SESSION:2 -n 'BT'
+
+# Move to IDE window
+tmux select-window -t $SESSION:1
+# Attach to session
+tmux -2 attach-session -t $SESSION

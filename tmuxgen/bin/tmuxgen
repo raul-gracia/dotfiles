@@ -10,37 +10,41 @@ PROJECT_PATH = File.expand_path(ARGV[0])
 PROJECT_NAME = File.basename(PROJECT_PATH).gsub('.', '-')
 
 def print_help
+  options = '--'
+  options << template_list[0..-2].join(', --')
+  options << " or --"
+  options << template_list.last
+
   puts """
   tmuxgen A tmux script generator
 
   Usage:
     tmuxgen folder_path --flag
 
-    --flag: the type of template to render, options are: --rails, --ruby or --go
+    --flag: the type of template to render, options are: #{options}
   """
 end
 
 def render_template(template_name)
   puts "Project path: #{PROJECT_PATH}"
   puts "Project name: #{PROJECT_NAME}"
+  path = File.expand_path("#{TMUX_SCRIPTS_FOLDER}/templates/#{template_name}.erb")
 
-  template = File.read(File.expand_path("#{TMUX_SCRIPTS_FOLDER}/templates/#{template_name}.erb"))
-  renderer = ERB.new(template)
-  filename = "#{TMUX_SCRIPTS_FOLDER}/#{PROJECT_NAME}-tmux"
-  File.write(filename, renderer.result)
-  FileUtils.chmod('+x', filename)
+  if File.exist?(path)
+    template = File.read(path)
+    renderer = ERB.new(template)
+    filename = "#{TMUX_SCRIPTS_FOLDER}/#{PROJECT_NAME}-tmux"
+    File.write(filename, renderer.result)
+    FileUtils.chmod('+x', filename)
+  else
+    print_help
+  end
+end
+
+def template_list
+  template_files = Dir["#{TMUX_SCRIPTS_FOLDER}/templates/*.erb"]
+  template_files.map{|p| p.match(/.*\/(.*)\.erb/)[1]}.sort
 end
 
 
-case ARGV[1]
-when '--rails'
-  render_template("rails")
-when '--ruby'
-  render_template("ruby")
-when '--go'
-  render_template("go")
-when '--phoenix'
-  render_template("phoenix")
-else
-  print_help
-end
+render_template(ARGV[1])
