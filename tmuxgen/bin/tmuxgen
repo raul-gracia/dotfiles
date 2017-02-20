@@ -25,9 +25,11 @@ def print_help
   """
 end
 
-def render_template(template_name)
+def render_template(argument)
   puts "Project path: #{PROJECT_PATH}"
   puts "Project name: #{PROJECT_NAME}"
+
+  template_name = argument.gsub('--', '')
   path = File.expand_path("#{TMUX_SCRIPTS_FOLDER}/templates/#{template_name}.erb")
 
   if File.exist?(path)
