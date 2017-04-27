@@ -14,16 +14,21 @@ alias drop='cd ~/Dropbox'
 alias dev='cd ~/Dropbox/development'
 alias mot='cd ~/Dropbox/development/motivii'
 alias mas='cd ~/Dropbox/development/motivii/Maslow'
-alias gain='cd ~/Dropbox/development/gaincapital'
-alias fx='cd ~/Dropbox/development/gaincapital/foreign-exchange'
+alias asc='cd ~/Dropbox/development/ascential'
+alias kit='cd ~/Dropbox/development/ascential/kitchener'
+alias cana='cd ~/Dropbox/development/ascential/canneslions-app'
+alias canb='cd ~/Dropbox/development/ascential/canneslions-backend'
 alias dotfiles='cd ~/dotfiles; and vim .; and cd -'
-alias godev='cd $GOPATH/src/github.com/maliciousmind'
 alias serve_dir='ruby -run -e httpd . -p 5055'
 alias tat='tmux attach -t'
 alias tls='tmux ls'
 alias chr='cd ~/Dropbox/development/digital-chronos'
+alias dc='docker-compose'
+alias dce='dc exec'
+alias dcew='dce web'
+alias kt='dc run -e MIX_ENV=test web mix test'
 
-alias time_in_london='cd ~/Dropbox/time_in_london/; and bundle exec ruby time_in_london.rb; and cd -'
+alias time_in_london='cd ~/Dropbox/time_in_london/; bundle check; or bundle install; bundle exec ruby time_in_london.rb; cd -'
 function time_until
   cd ~/Dropbox/time_in_london/; and bundle exec ruby time_until.rb $argv; and cd -
 end
@@ -44,10 +49,14 @@ alias berrg='bundle exec rake routes | grep '
 
 # Phoenix
 alias mps='mix phoenix.server'
+alias mpr='mix phoenix.routes'
+alias mdp='mix deps.get'
+alias mpc='iex -S mix'
 
 # Git
 alias g='git'
 alias gb='g branch'
+alias gbd='g branch -d'
 alias gpt='bundle exec rake test; and bundle exec rake jshint; and gp'
 alias gc='g c -S'
 alias gca='gc --amend'
@@ -60,11 +69,15 @@ alias gup='g up'
 alias glg='g lg'
 alias gdfc='g diff --cached --color-words --patience'
 alias gdf='g diff --color-words --patience'
-alias gp='g push origin (current_branch)'
+alias gp='g push -u origin (current_branch)'
 alias gpf='gp --force'
 alias gtags='g ctags'
 alias current_branch='git rev-parse --abbrev-ref HEAD'
 alias clean_local_branches='git branch --merged develop | grep -v master | grep -v develop | xargs git branch -d'
+function create_remote_branch
+  gcob $argv
+  gp
+end
 alias hpr='gp; and hub pull-request -b'
 alias bbpr='gp; and bitbucket pull_request (current_branch)'
 alias current_branch='git rev-parse --abbrev-ref HEAD'
@@ -87,43 +100,6 @@ alias hlog='hk logs -t -a'
 alias hlg='hk logs -t'
 alias hconf='hk config -a'
 alias hp='g push heroku (current_branch):master'
-
-function fx-prod
-  eval hk $argv --app fx-production
-end
-function fx-prod-deploy
-  gco master; and gup; fx-prod pg:backups capture; and g push production master; and fx-prod run rake db:migrate
-end
-function fx-prod-deploy-simple
-  gco master; and gup; and g push production master; and gco -
-end
-
-function fx-test
-  eval hk $argv --app fx-test
-end
-function fx-test-deploy
-  gco develop; and gup; and g push test develop:master; and fx-test run rake db:migrate
-end
-
-function fx-reports
-  eval hk $argv --app fx-reports
-end
-
-function mot-stg
-  eval $argv --app motivii-maslow-staging
-end
-
-function mot-prod
-  eval $argv --app motivii-maslow-production
-end
-
-function staging_sidekiq
-  staging hk config | grep SIDE
-end
-
-function prod_sidekiq
-  production hk config | grep SIDE
-end
 
 function railsgirls
   eval $argv --app desolate-coast-9056

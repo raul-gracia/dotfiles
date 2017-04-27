@@ -13,42 +13,45 @@ Plugin 'kien/ctrlp.vim'
 " Completion
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+Plugin 'letientai299/vim-react-snippets', { 'branch': 'es6' }
 Plugin 'ervandew/supertab'
 Plugin 'mattn/emmet-vim'
+
+" React
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+Plugin 'w0rp/ale'
 
 Plugin 'tpope/vim-endwise'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rails'
+
 Plugin 'altercation/vim-colors-solarized'
+
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'ddollar/nerdcommenter'
+
 Plugin 'rking/ag.vim'
+Plugin 'majutsushi/tagbar'
+Plugin 'ternjs/tern_for_vim'
+
 Plugin 'junegunn/vim-easy-align'
 Plugin 'fatih/vim-go'
-Plugin 'mxw/vim-jsx'
 Plugin 'dag/vim-fish'
-" Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
+"Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plugin 'tpope/vim-projectionist'
-Plugin 'janko-m/vim-test'
-Plugin 'mattn/webapi-vim'
-Plugin 'alexbel/vim-rubygems'
 Plugin 'slim-template/vim-slim'
 Plugin 'christoomey/vim-tmux-navigator'
 
 Plugin 'burnettk/vim-angular'
 Plugin 'amadeus/vim-mjml'
 
-Plugin 'majutsushi/tagbar'
-Plugin 'ternjs/tern_for_vim'
-
 " Elixir/phoenix/elm
 Plugin 'slashmili/alchemist.vim'
 Plugin 'elixir-lang/vim-elixir'
 Plugin 'avdgaag/vim-phoenix'
 Plugin 'ElmCast/elm-vim'
-
-Plugin 'vim-scripts/TeTrIs.vim'
 
 filetype plugin indent on     " required

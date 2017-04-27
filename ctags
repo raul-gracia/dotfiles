@@ -1,6 +1,5 @@
 --recurse=yes
 --tag-relative=yes
---exclude=.git
 
 --exclude=node_modules
 --exclude=bower_components
@@ -14,6 +13,8 @@
 --exclude=*.md
 --exclude=.sass-cache
 --exclude=Gruntfile.js
+--exclude=_build
+--exclude=deps
 
 --langdef=scss
 --langmap=scss:.scss

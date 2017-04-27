@@ -22,7 +22,6 @@
   autocrlf = input
 	editor = vim
 [init]
-  templateDir = '~/.git_template'
 [commit]
   template = ~/.gitmessage
 	gpgsign = true

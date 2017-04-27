@@ -84,7 +84,7 @@ let g:ctrlp_prompt_mappings = {
     \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
     \ }
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|log$\|tmp$',
+  \ 'dir':  '\.git$\|log$\|tmp$\|_build$\|node_modules$\|deps$',
   \ }
 "let g:ctrlp_user_command = 'find %s -type f'
 let g:ctrlp_show_hidden = 1
@@ -103,6 +103,10 @@ let g:go_fmt_command = "goimports"
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+"let g:UltiSnipsSnippetDirectories=["UltiSnips", "custom-snippets"]
+
+" Enable snipMate compatibility feature.
+let g:neosnippet#enable_snipmate_compatibility = 1
 
 " React.js
 let g:jsx_ext_required = 0
@@ -112,10 +116,6 @@ let g:jsx_ext_required = 0
 ":au FocusGained * :set relativenumber
 "autocmd InsertEnter * :set number
 "autocmd InsertLeave * :set relativenumber
-
-" Ctags
-map <Leader>rt :!ctags --tag-relative --extra=+f -Rf.git/tags --exclude=.git,pkg -languages=-javascript,sql<CR><CR>
-set tags+=.git/tags
 
 " Haml Lint
 let g:syntastic_haml_checkers = ['haml_lint', 'haml']
@@ -129,3 +129,23 @@ let g:syntastic_check_on_wq = 0
 python from powerline.vim import setup as powerline_setup
 python powerline_setup()
 python del powerline_setup
+
+" TagBar
+nmap <F8> :TagbarToggle<CR>
+let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
+let g:tagbar_type_elixir = {
+    \ 'ctagstype' : 'elixir',
+    \ 'kinds' : [
+        \ 'f:functions',
+        \ 'functions:functions',
+        \ 'c:callbacks',
+        \ 'd:delegates',
+        \ 'e:exceptions',
+        \ 'i:implementations',
+        \ 'a:macros',
+        \ 'o:operators',
+        \ 'm:modules',
+        \ 'p:protocols',
+        \ 'r:records'
+    \ ]
+\ }

@@ -27,7 +27,6 @@ nmap <leader>gc :Gcommit -v<CR>
 nmap <leader>gp :Git push<CR>
 nmap <leader>gaa :Git add --all<CR>
 
-
 " Autoload config after saving file
 if has("autocmd")
   autocmd bufwritepost .vimrc nested source ~/.vimrc
@@ -42,8 +41,6 @@ nmap <leader>vr :source $MYVIMRC<CR>
 nmap <leader>ve :tabedit $MYVIMRC<CR>
 nmap <leader>vl :tabedit ~/.vimrc.leaders<CR>
 nmap <leader>vb :tabedit ~/.vimrc.bundles<CR>
-
-
 
 " Go related
 au FileType go nmap <Leader>s <Plug>(go-implements)
@@ -60,10 +57,3 @@ au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
 au FileType go nmap <Leader>dt <Plug>(go-def-tab)
 au FileType go nmap <Leader>e <Plug>(go-rename)
 au FileType go nmap <Leader>cg <Plug>(go-callgraph)
-
-" Tagbar
-nmap <F8> :TagbarToggle<CR>
-
-
-" Go to tag in new tab
-nnoremap <silent><Leader>gtag <C-w><C-]><C-w>T
