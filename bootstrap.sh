@@ -21,7 +21,7 @@ else
   echo 'Upgrading (just in case)'
   brew upgrade fish
 fi
-curl -L http://get.oh-my.fish | fish
+curl -L https://get.oh-my.fish | fish
 
 # HERE WE WILL START WITH THE ACTUALL INSTALLATION
 if [ -d ~/dotfiles ]; then

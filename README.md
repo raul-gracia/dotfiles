@@ -9,9 +9,9 @@ curl -s https://raw.githubusercontent.com/maliciousmind/dotfiles/master/bootstra
 # Description
 
 This will script will:
-* Install/Update homebrew
-* Install/Update fish shell
-* Install oh my fish
+* Install/Update [homebrew](https://brew.sh)
+* Install/Update [fish shell](https://fishshell.com)
+* Install [oh my fish](https://github.com/oh-my-fish/oh-my-fish)
 * Clone and symlink all my dotfiles
 * Install the most common OSX tools and UI Apps that I use
 * Configure everything correctly (vim, tmux, Monaco font, ...)

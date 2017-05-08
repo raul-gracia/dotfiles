@@ -18,4 +18,22 @@ for pip_tool in $pip_tools
   pip install --upgrade $pip_tool
 end
 
-ruby install.rb
+echo 'Installing dotfiles...'
+set excluded_files 'bootstrap.sh' 'Brewfile' 'Gemfile' 'install.rb' \
+                   'README.md' 'setup.fish' 'others'
+echo 'Executing: rcup -fd . '(echo '-x '{$excluded_files})
+rcup -fd . '-x '{excluded_files_args}
+
+echo 'Configuring Vundle.vim...'
+if not test -d '/Users/'(whoami)'/.vim/bundle/vundle'
+  git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+end
+vim +BundleInstall +qall
+vim +BundleUpdate +qall
+
+echo 'Installing tmux plugins...'
+if not test -d '/Users/'(whoami)'/.tmux/plugins/tpm'
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+end
+
+echo 'Everything installed corectly!'
