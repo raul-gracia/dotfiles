@@ -84,7 +84,7 @@ let g:ctrlp_prompt_mappings = {
     \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
     \ }
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|log$\|tmp$\|_build$\|node_modules$\|deps$',
+  \ 'dir':  '\.git$\|log$\|tmp$\|_build$\|node_modules$\|deps$\|android/\.gradle$\|android/app$\|flow-typed$\|ios/build$',
   \ }
 "let g:ctrlp_user_command = 'find %s -type f'
 let g:ctrlp_show_hidden = 1

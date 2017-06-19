@@ -46,6 +46,9 @@ alias berc='bundle exec rails console'
 alias bec='bundle exec cucumber'
 alias berr='bundle exec rake routes'
 alias berrg='bundle exec rake routes | grep '
+alias berg='bundle exec rails g'
+alias bergg='bundle exec rails g | grep'
+alias latest_ruby2="brew upgrade; ruby-build --definitions | grep '^2.\d.\d\$' | tail -n 1"
 
 # Phoenix
 alias mps='mix phoenix.server'
@@ -117,6 +120,14 @@ alias hp='g push heroku (current_branch):master'
 
 function railsgirls
   eval $argv --app desolate-coast-9056
+end
+
+function rcruit
+  eval $argv --app rcruit
+end
+
+function rcruit-stag
+  eval $argv --app rcruit-staging
 end
 
 alias bb='cd ~/dotfiles; brew update; and brew upgrade; and brew bundle; cd -'
