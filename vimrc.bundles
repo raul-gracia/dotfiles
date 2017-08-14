@@ -2,56 +2,84 @@ set nocompatible
 
 filetype off
 set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
-" Let Vundle manage Vundle
-Plugin 'gmarik/vundle'
+call plug#begin()
 
 " Define bundles via Github repos
-Plugin 'kien/ctrlp.vim'
+Plug 'kien/ctrlp.vim'
+let g:ctrlp_working_path_mode = '0'
+let g:ctrlp_open_new_file = 't'
+let g:ctrlp_prompt_mappings = {
+    \ 'AcceptSelection("e")': ['<c-t>'],
+    \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
+    \ }
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\.git$\|log$\|tmp$\|_build$\|node_modules$\|deps$\|android/\.gradle$\|android/app$\|flow-typed$\|ios/build$',
+  \ }
+let g:ctrlp_show_hidden = 1
 
 " Completion
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'letientai299/vim-react-snippets', { 'branch': 'es6' }
-Plugin 'ervandew/supertab'
-Plugin 'mattn/emmet-vim'
+Plug 'SirVer/ultisnips'
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+"
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'mattn/emmet-vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+let g:airline_theme='solarized'
+let g:airline_solarized_bg='dark'
+
+Plug 'janko-m/vim-test'
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>g :TestVisit<CR>
 
 " React
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
-Plugin 'w0rp/ale'
+"Plug 'pangloss/vim-javascript'
+"Plug 'mxw/vim-jsx'
 
-Plugin 'tpope/vim-endwise'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-rails'
+Plug 'w0rp/ale'
+Plug 'tpope/vim-endwise'
+"Plug 'kchmck/vim-coffee-script'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rails'
+Plug 'altercation/vim-colors-solarized'
 
-Plugin 'altercation/vim-colors-solarized'
 
-Plugin 'scrooloose/nerdtree'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'ddollar/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+" Auto open nerdtree
+map <C-d> :NERDTreeToggle<CR>
+nmap <silent> <C-D> :NERDTreeToggle<CR>
+nmap <silent> <C-E> :NERDTreeFind<CR>
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
 
-Plugin 'rking/ag.vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'ternjs/tern_for_vim'
 
-Plugin 'junegunn/vim-easy-align'
-Plugin 'fatih/vim-go'
-Plugin 'dag/vim-fish'
-"Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
-Plugin 'tpope/vim-projectionist'
-Plugin 'slim-template/vim-slim'
-Plugin 'christoomey/vim-tmux-navigator'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'ddollar/nerdcommenter'
 
-Plugin 'burnettk/vim-angular'
-Plugin 'amadeus/vim-mjml'
+Plug 'rking/ag.vim'
+"Plug 'majutsushi/tagbar'
+"Plug 'ternjs/tern_for_vim'
+
+Plug 'junegunn/vim-easy-align'
+Plug 'dag/vim-fish'
+"Plug 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
+"Plug 'tpope/vim-projectionist'
+"Plug 'slim-template/vim-slim'
+Plug 'christoomey/vim-tmux-navigator'
+
+"Plug 'burnettk/vim-angular'
+"Plug 'amadeus/vim-mjml'
 
 " Elixir/phoenix/elm
-Plugin 'slashmili/alchemist.vim'
-Plugin 'elixir-lang/vim-elixir'
-Plugin 'avdgaag/vim-phoenix'
-Plugin 'ElmCast/elm-vim'
+"Plug 'slashmili/alchemist.vim'
+Plug 'elixir-lang/vim-elixir'
+"Plug 'avdgaag/vim-phoenix'
+"Plug 'ElmCast/elm-vim'
+call plug#end()
 
 filetype plugin indent on     " required

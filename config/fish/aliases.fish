@@ -1,3 +1,5 @@
+alias vim='nvim'
+
 # Fish
 alias fr='source ~/.config/fish/config.fish > /dev/null 2>&1'
 alias fe='vim ~/.config/fish/config.fish'
@@ -12,12 +14,6 @@ alias dofiles='dotfiles'
 # Shortcuts
 alias drop='cd ~/Dropbox'
 alias dev='cd ~/Dropbox/development'
-alias mot='cd ~/Dropbox/development/motivii'
-alias mas='cd ~/Dropbox/development/motivii/Maslow'
-alias asc='cd ~/Dropbox/development/ascential'
-alias kit='cd ~/Dropbox/development/ascential/kitchener'
-alias cana='cd ~/Dropbox/development/ascential/canneslions-app'
-alias canb='cd ~/Dropbox/development/ascential/canneslions-backend'
 alias dotfiles='cd ~/dotfiles; and vim .; and cd -'
 alias serve_dir='ruby -run -e httpd . -p 5055'
 alias tat='tmux attach -t'
@@ -131,5 +127,4 @@ function rcruit-stag
 end
 
 alias bb='cd ~/dotfiles; brew update; and brew upgrade; and brew bundle; cd -'
-alias rails-development-box='ssh ubuntu@54.194.162.16'
 alias redis='redis-server --daemonize yes; and redis-cli flushall'
