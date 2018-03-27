@@ -18,12 +18,13 @@
   st = status
   up = pull --rebase --autostash
 [core]
-	excludesfile = ~/.gitignore_global
-  autocrlf = input
-	editor = vim
+	excludesfile = /Users/maliciousmind/.gitignore_global
+	autocrlf = input
+	editor = nvim
+	safecrlf = true
 [init]
 [commit]
-  template = ~/.gitmessage
+	template = ~/.gitmessage
 	gpgsign = true
 [status]
   sort = 1
@@ -40,9 +41,10 @@
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path =
 [mergetool "sourcetree"]
-	cmd = /opt/homebrew-cask/Caskroom/sourcetree/2.0.5.2/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
 	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process

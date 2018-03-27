@@ -7,26 +7,31 @@ if filereadable(expand("~/.vimrc.leaders"))
 endif
 
 syntax enable
-set background=dark
 "set background=light
+set background=light
 colorscheme solarized
-set t_Co=256
 set tabstop=2
 set shiftwidth=2
 set scrolloff=3
 set backspace=2
 set expandtab
-set nocompatible
 set number
 set relativenumber
 set encoding=utf-8
 set splitbelow
 set splitright
+set regexpengine=1
+" highlight cursor position
+set cursorline
+set clipboard=unnamedplus
+set ff=unix
+
 filetype plugin indent on
 
 " Paste overriding selection
-vnoremap p "_dP
+xnoremap p "_dP
 
+autocmd BufWritePre * :set ff=unix
 " Remove trailling space on save
 autocmd BufWritePre * :%s/\s\+$//e
 
@@ -63,30 +68,14 @@ au BufRead,BufNewFile *.md set spell spelllang=en_gb
 au BufRead,BufNewFile *.markdown set spell spelllang=en_gb
 au BufRead,BufNewFile *.rabl setf ruby
 au BufRead,BufNewFile *.xlsx.axlsx setf ruby
+autocmd FileType qf setlocal wrap linebreak
+au BufRead,BufNewFile set ff=unix
 
 " Relative numbers
 :au FocusLost * :set number
 :au FocusGained * :set relativenumber
-autocmd InsertEnter * :set number
-autocmd InsertLeave * :set relativenumber
+"autocmd InsertEnter * :set number
+"autocmd InsertLeave * :set relativenumber
 
-" TagBar
-"nmap <F8> :TagbarToggle<CR>
-"let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
-"let g:tagbar_type_elixir = {
-    "\ 'ctagstype' : 'elixir',
-    "\ 'kinds' : [
-        "\ 'f:functions',
-        "\ 'functions:functions',
-        "\ 'c:callbacks',
-        "\ 'd:delegates',
-        "\ 'e:exceptions',
-        "\ 'i:implementations',
-        "\ 'a:macros',
-        "\ 'o:operators',
-        "\ 'm:modules',
-        "\ 'p:protocols',
-        "\ 'r:records',
-        "\ 't:tests'
-    "\ ]
-"\ }
+" Don't automatically continue comments after newline
+autocmd BufNewFile,BufRead * setlocal formatoptions-=cro

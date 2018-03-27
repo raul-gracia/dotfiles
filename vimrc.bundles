@@ -1,85 +1,161 @@
-set nocompatible
-
-filetype off
-set rtp+=~/.vim/bundle/vundle/
 call plug#begin()
 
-" Define bundles via Github repos
 Plug 'kien/ctrlp.vim'
-let g:ctrlp_working_path_mode = '0'
-let g:ctrlp_open_new_file = 't'
-let g:ctrlp_prompt_mappings = {
-    \ 'AcceptSelection("e")': ['<c-t>'],
-    \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
-    \ }
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|log$\|tmp$\|_build$\|node_modules$\|deps$\|android/\.gradle$\|android/app$\|flow-typed$\|ios/build$',
-  \ }
-let g:ctrlp_show_hidden = 1
+      let g:ctrlp_working_path_mode = '0'
+      let g:ctrlp_open_new_file = 't'
+      let g:ctrlp_prompt_mappings = {
+            \ 'AcceptSelection("e")': ['<c-t>'],
+            \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
+            \ }
+      let g:ctrlp_custom_ignore = {
+            \ 'dir':  '\.git$\|log$\|tmp$\|_build$\|node_modules$\|deps$\|android/\.gradle$\|android/app$\|flow-typed$\|ios/build$',
+            \ }
+      let g:ctrlp_show_hidden = 1
+      let g:ctrlp_use_caching = 0
+			let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 
-" Completion
+
+" Execute code checks, find mistakes, in the background
+Plug 'neomake/neomake'
+      " Run Neomake when I save any buffer
+      augroup localneomake
+        autocmd! BufWritePost * Neomake
+      augroup END
+      " Don't tell me to use smartquotes in markdown ok?
+      let g:neomake_markdown_enabled_makers = []
+
+      " Configure a nice credo setup, courtesy https://github.com/neomake/neomake/pull/300
+      let g:neomake_elixir_enabled_makers = ['mycredo']
+      function! NeomakeCredoErrorType(entry)
+        if a:entry.type ==# 'F'      " Refactoring opportunities
+          let l:type = 'W'
+        elseif a:entry.type ==# 'D'  " Software design suggestions
+          let l:type = 'I'
+        elseif a:entry.type ==# 'W'  " Warnings
+          let l:type = 'W'
+        elseif a:entry.type ==# 'R'  " Readability suggestions
+          let l:type = 'I'
+        elseif a:entry.type ==# 'C'  " Convention violation
+          let l:type = 'W'
+        else
+          let l:type = 'M'           " Everything else is a message
+        endif
+        let a:entry.type = l:type
+      endfunction
+
+      let g:neomake_elixir_mycredo_maker = {
+            \ 'exe': 'mix',
+            \ 'args': ['credo', 'list', '%:p', '--format=oneline'],
+            \ 'errorformat': '[%t] %. %f:%l:%c %m,[%t] %. %f:%l %m',
+            \ 'postprocess': function('NeomakeCredoErrorType')
+            \ }
+
+""""""""""""""""""""""""""" Completion
+Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-"
+      let g:UltiSnipsExpandTrigger="<c-j>"
+      let g:UltiSnipsJumpForwardTrigger="<c-b>"
+      let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+      let g:deoplete#enable_at_startup = 1
+      autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+      inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 Plug 'mattn/emmet-vim'
+
+
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-let g:airline_theme='solarized'
-let g:airline_solarized_bg='dark'
-
+      let g:airline_theme='powerlineish'
+      let g:airline#extensions#tagbar#enabled = 1
+"
 Plug 'janko-m/vim-test'
-nmap <silent> <leader>t :TestNearest<CR>
-nmap <silent> <leader>T :TestFile<CR>
-nmap <silent> <leader>a :TestSuite<CR>
-nmap <silent> <leader>l :TestLast<CR>
-nmap <silent> <leader>g :TestVisit<CR>
+      nmap <silent> <leader>t :TestNearest<CR>
+      nmap <silent> <leader>T :TestFile<CR>
+      nmap <silent> <leader>a :TestSuite<CR>
+      nmap <silent> <leader>l :TestLast<CR>
+      nmap <silent> <leader>g :TestVisit<CR>
+      let test#strategy = "dispatch"
+      let test#ruby#use_binstubs = 0
+
 
 " React
-"Plug 'pangloss/vim-javascript'
-"Plug 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
 
-Plug 'w0rp/ale'
-Plug 'tpope/vim-endwise'
-"Plug 'kchmck/vim-coffee-script'
-Plug 'tpope/vim-fugitive'
+Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
+
+Plug 'tpope/vim-rbenv'
 Plug 'tpope/vim-rails'
+Plug 'ecomba/vim-ruby-refactoring'
+Plug 'vim-utils/vim-ruby-fold'
+      let g:ruby_fold_lines_limit = 200
+
+
+Plug 'tpope/vim-dispatch'
+      let g:dispatch_quickfix_height = 20
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-fugitive'
+
+Plug 'radenling/vim-dispatch-neovim'
 Plug 'altercation/vim-colors-solarized'
 
-
 Plug 'scrooloose/nerdtree'
-" Auto open nerdtree
-map <C-d> :NERDTreeToggle<CR>
-nmap <silent> <C-D> :NERDTreeToggle<CR>
-nmap <silent> <C-E> :NERDTreeFind<CR>
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
-
-
+      " Auto open nerdtree
+      map <C-d> :NERDTreeToggle<CR>
+      nmap <silent> <C-D> :NERDTreeToggle<CR>
+      nmap <silent> <C-E> :NERDTreeFind<CR>
+      let g:NERDTreeDirArrowExpandable = '▸'
+      let g:NERDTreeDirArrowCollapsible = '▾'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ddollar/nerdcommenter'
+      let g:NERDSpaceDelims = 1
 
 Plug 'rking/ag.vim'
-"Plug 'majutsushi/tagbar'
-"Plug 'ternjs/tern_for_vim'
+" Plug 'majutsushi/tagbar'
+"       nmap <F8> :TagbarToggle<CR>
+"       let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
+"       let g:tagbar_compact = 1
+"       let g:tagbar_type_elixir = {
+"             \ 'ctagstype' : 'elixir',
+"             \ 'kinds' : [
+"             \ 'f:functions',
+"             \ 'functions:functions',
+"             \ 'c:callbacks',
+"             \ 'd:delegates',
+"             \ 'e:exceptions',
+"             \ 'i:implementations',
+"             \ 'a:macros',
+"             \ 'o:operators',
+"             \ 'm:modules',
+"             \ 'p:protocols',
+"             \ 'r:records',
+"             \ 't:tests'
+"             \ ]
+"             \ }
+"       let g:tagbar_type_ruby = {
+"         \ 'kinds' : [
+"           \ 'm:modules',
+"           \ 'c:classes',
+"           \ 'd:describes',
+"           \ 'C:contexts',
+"           \ 'f:methods',
+"           \ 'i:it',
+"           \ 'F:singleton methods'
+"         \ ]
+"       \ }
+
+"Plug 'fntlnz/atags.vim'
+      "autocmd BufWritePost * call atags#generate()
+
 
 Plug 'junegunn/vim-easy-align'
-Plug 'dag/vim-fish'
-"Plug 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
-"Plug 'tpope/vim-projectionist'
-"Plug 'slim-template/vim-slim'
+" Plug 'tpope/vim-projectionist'
 Plug 'christoomey/vim-tmux-navigator'
+" Polyglot loads language support on demand!
+Plug 'sheerun/vim-polyglot'
+Plug 'airblade/vim-gitgutter'
+Plug 'amadeus/vim-mjml'
+    au BufRead,BufNewFile *.mjml.erb set filetype mjml
 
-"Plug 'burnettk/vim-angular'
-"Plug 'amadeus/vim-mjml'
-
-" Elixir/phoenix/elm
-"Plug 'slashmili/alchemist.vim'
-Plug 'elixir-lang/vim-elixir'
-"Plug 'avdgaag/vim-phoenix'
-"Plug 'ElmCast/elm-vim'
 call plug#end()
-
-filetype plugin indent on     " required

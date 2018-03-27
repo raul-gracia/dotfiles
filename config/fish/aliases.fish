@@ -25,9 +25,21 @@ alias dcew='dce web'
 alias kt='dc run -e MIX_ENV=test web mix test'
 alias add-ssh-keys='ssh-add -K ~/.ssh/github; and ssh-add -K ~/.ssh/raulgracialario'
 
-alias time_in_london='cd ~/Dropbox/time_in_london/; bundle check; or bundle install; bundle exec ruby time_in_london.rb; cd -'
+function time_in_london
+  cd ~/Dropbox/time_in_london/; bundle check > /dev/null 2>&1; or bundle install > /dev/null 2>&1; bundle exec ruby time_in_london.rb $argv; cd -
+end
+alias time_in_salsa='cd ~/Dropbox/time_in_london/; bundle check > /dev/null 2>&1; or bundle install > /dev/null 2>&1; bundle exec ruby time_in_salsa.rb; cd -'
 function time_until
-  cd ~/Dropbox/time_in_london/; bundle check; or bundle install; bundle exec ruby time_until.rb $argv; and cd -
+  cd ~/Dropbox/time_in_london/; bundle check > /dev/null 2>&1; or bundle install > /dev/null 2>&1; bundle exec ruby time_until.rb $argv; cd -
+end
+
+function time_till_end
+  time_until '(date +"%Y-%m-%d") 18:00:00' --sort
+end
+alias tte='time_till_end'
+
+function time_since
+  cd ~/Dropbox/time_in_london/; bundle check > /dev/null 2>&1; or bundle install > /dev/null 2>&1; bundle exec ruby time_since.rb $argv; and cd -
 end
 
 alias docs='cd ~/Documents'
@@ -64,6 +76,7 @@ alias gb='g branch'
 alias gbd='g branch -d'
 alias gc='g c -S'
 alias gca='gc --amend'
+alias gcn='gc --no-verify'
 alias gco='g co'
 alias gcob='gco -b'
 alias gst='g st -s'
@@ -72,14 +85,24 @@ alias gap='g add -p'
 alias ga='g add'
 alias gup='g up'
 alias glg='g lg'
-alias gdfc='g diff --cached --color-words --patience'
-alias gdf='g diff --color-words --patience'
+alias gdfc='g diff --cached --color-words'
+alias gdf='g diff --color-words'
+alias gdfcp='gdfc --patience'
+alias gdfp='gdf --patience'
 alias gp='g push -u origin (current_branch)'
 alias gpf='gp --force'
+alias gpt='gp --tags'
 alias gtags='g ctags'
 alias gsl='g stash list'
-alias gss='g stash save -u'
+alias gsts='g stash save -u'
+alias gstl='g stash list'
+alias gstp='g stash pop'
 alias current_branch='g rev-parse --abbrev-ref HEAD'
+alias hbb='hub browse (git_remote_owner)/(git_remote_repo_name)'
+
+function hb
+  hub browse (git_remote_owner)/(git_remote_repo_name)
+end
 
 function clean_merged_branches
   if string length -q $argv[1]
@@ -94,6 +117,8 @@ function create_remote_branch
   gcob $argv
   gp
 end
+
+alias crb='create_remote_branch'
 alias hpr='gp; and hub pull-request -b'
 alias bbpr='gp; and bitbucket pull_request (current_branch) -r (git_remote_repo_name) -w (git_remote_owner)'
 alias current_branch='g rev-parse --abbrev-ref HEAD'
@@ -128,6 +153,33 @@ function circleci
   else
     open "https://circleci.com/gh/"(git_remote_owner)"/"(git_remote_repo_name)"/tree/$argv"
   end
+end
+
+function pulls
+  open "https://github.com/"(git_remote_owner)"/"(git_remote_repo_name)"/pulls"
+end
+alias prs='pulls'
+
+function issues
+  open "https://github.com/"(git_remote_owner)"/"(git_remote_repo_name)"/issues"
+end
+
+function issue
+  set issue_number (current_branch | grep -Eo "[0-9]+" | head -n 1)
+  if test $issue_number
+    open "https://github.com/"(git_remote_owner)"/"(git_remote_repo_name)"/issues/"$issue_number
+  end
+end
+
+function jissue
+  set issue_number (current_branch | grep -Eo "MD-[0-9]+" | head -n 1)
+  if test $issue_number
+    open "https://motivii.atlassian.net/browse/"$issue_number
+  end
+end
+
+function releasing_tickets
+  glg master..develop | grep -o 'MD-\d\+' | sort | uniq | sed -E 's/(.*)/https:\/\/motivii\.atlassian\.net\/browse\/\1/'
 end
 
 # heroku
@@ -173,8 +225,13 @@ alias mas='cd ~/Dropbox/development/motivii/Maslow'
 function mot-stag
   eval $argv --app motivii-maslow-staging
 end
+
 function mot-prod
   eval $argv --app motivii-maslow-production
+end
+
+function mot-prod-console
+  mot-prod hk run rails c
 end
 
 function mot-prod-deploy
@@ -187,6 +244,18 @@ function mot-prod-deploy-light
   g push production master $argv
 end
 
+function mot-prod-ssh-analysis
+  ssh ubuntu@ec2-52-30-80-71.eu-west-1.compute.amazonaws.com
+end
+
+function mot-stag-ssh-analysis
+  ssh ubuntu@ec2-34-240-244-168.eu-west-1.compute.amazonaws.com
+end
+
+function mot-wordpress-ssh
+  ssh bitnami@ec2-52-48-225-67.eu-west-1.compute.amazonaws.com
+end
+
 function mot-stag-deploy
   g push staging (current_branch):master -f
   mot-stag hk run rails db:migrate
@@ -195,3 +264,17 @@ end
 function mot-stag-deploy-light
   g push staging (current_branch):master -f
 end
+
+alias time_vera="time_since '7/11/2017 23:30:00'"
+
+function mot-cuc
+  yarn run webpack:deploy
+  bundle exec cucumber
+end
+
+alias mot-stag-last-commit="mot-stag hk releases | grep Deploy | head -n 1 | awk '{print \$3}'"
+alias mot-prod-last-commit="mot-prod hk releases | grep Deploy | head -n 1 | awk '{print \$3}'"
+
+alias mot-stag-releasing="hub compare (mot-stag-last-commit)..develop"
+alias mot-prod-releasing="hub compare (mot-prod-last-commit)..master"
+

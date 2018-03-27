@@ -28,19 +28,20 @@ nmap <leader>gp :Git push<CR>
 nmap <leader>gaa :Git add --all<CR>
 
 " Autoload config after saving file
-if has("autocmd")
-  autocmd bufwritepost .vimrc nested source ~/.vimrc
-  autocmd bufwritepost .vimrc.leaders nested source ~/.vimrc
-  autocmd bufwritepost .vimrc.bundles nested source ~/.vimrc
-  autocmd bufwritepost vimrc nested source ~/.vimrc
-  autocmd bufwritepost vimrc.leaders nested source ~/.vimrc
-  autocmd bufwritepost vimrc.bundles nested source ~/.vimrc
-endif
+"if has("autocmd")
+  "autocmd bufwritepost .vimrc nested source ~/.vimrc
+  "autocmd bufwritepost .vimrc.leaders nested source ~/.vimrc
+  "autocmd bufwritepost .vimrc.bundles nested source ~/.vimrc
+  "autocmd bufwritepost vimrc nested source ~/.vimrc
+  "autocmd bufwritepost vimrc.leaders nested source ~/.vimrc
+  "autocmd bufwritepost vimrc.bundles nested source ~/.vimrc
+"endif
 
 nmap <leader>vr :source $MYVIMRC<CR>
 nmap <leader>ve :tabedit $MYVIMRC<CR>
 nmap <leader>vl :tabedit ~/.vimrc.leaders<CR>
 nmap <leader>vb :tabedit ~/.vimrc.bundles<CR>
+nmap <leader>jj :%!python -m json.tool<CR>
 
 " Go related
 au FileType go nmap <Leader>s <Plug>(go-implements)

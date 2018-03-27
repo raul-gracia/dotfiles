@@ -1,2 +1,8 @@
 ServerAliveInterval 60
 ForwardAgent yes
+
+Host *
+  UseKeychain yes
+
+Host github.com
+ IdentityFile ~/.ssh/raulgracialario

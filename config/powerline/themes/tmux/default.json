@@ -1,0 +1,31 @@
+{
+  "segments": {
+    "right": [
+      {
+        "function": "powerline.segments.common.players.spotify",
+        "name": "player",
+        "args": {
+          "format": "{state_symbol} {artist} - {title}"
+        }
+      },
+      {
+        "function": "powerline.segments.common.sys.uptime",
+        "priority": 50,
+        "args": {
+          "shorten_len": 2
+        }
+      },
+      {
+        "function": "powerline.segments.common.bat.battery"
+      },
+      {
+        "function": "powerline.segments.common.time.date",
+        "name": "time",
+        "args": {
+          "format": "%H:%M",
+          "istime": true
+        }
+      }
+    ]
+  }
+}

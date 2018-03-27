@@ -4,8 +4,8 @@ brew tap Homebrew/bundle
 brew bundle
 ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents
 launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
-rbenv install 2.3.1
-rbenv global 2.3.1
+rbenv install 2.5.0
+rbenv global 2.5.0
 
 echo 'Bundling...'
 gem install bundler; and bundle install; and rm Gemfile.lock
@@ -24,12 +24,9 @@ set excluded_files 'bootstrap.sh' 'Brewfile' 'Gemfile' 'install.rb' \
 echo 'Executing: rcup -fd . '(echo '-x '{$excluded_files})
 rcup -fd . '-x '{excluded_files_args}
 
-echo 'Configuring Vundle.vim...'
-if not test -d '/Users/'(whoami)'/.vim/bundle/vundle'
-  git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-end
-vim +BundleInstall +qall
-vim +BundleUpdate +qall
+vim +PlugUpgrade +qall
+vim +PlugInstall +qall
+vim +PlugUpdate +qall
 
 echo 'Installing tmux plugins...'
 if not test -d '/Users/'(whoami)'/.tmux/plugins/tpm'
