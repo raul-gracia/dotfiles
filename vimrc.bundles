@@ -50,6 +50,7 @@ Plug 'neomake/neomake'
             \ 'postprocess': function('NeomakeCredoErrorType')
             \ }
 
+
 """"""""""""""""""""""""""" Completion
 Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
@@ -159,3 +160,5 @@ Plug 'amadeus/vim-mjml'
     au BufRead,BufNewFile *.mjml.erb set filetype mjml
 
 call plug#end()
+
+call neomake#configure#automake('rw', 1000)

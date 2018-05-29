@@ -43,7 +43,7 @@ function time_since
 end
 
 alias docs='cd ~/Documents'
-alias upgradeall='brew update; and brew upgrade; and omf update'
+alias upgradeall="brew update; and brew upgrade; and omf update; and nvim --headless +':PlugUpdate' +':PlugUpgrade' +':qall'"
 
 # Rails
 alias be='bundle exec'
@@ -115,6 +115,11 @@ end
 
 function create_remote_branch
   gcob $argv
+  gp
+end
+
+function gcp
+  gc $argv
   gp
 end
 
@@ -233,6 +238,14 @@ end
 function mot-prod-console
   mot-prod hk run rails c
 end
+alias mpc="mot-prod-console"
+alias mpl='mot-prod hk logs -t'
+
+function mot-stag-console
+  mot-stag hk run rails c
+end
+alias msc="mot-stag-console"
+alias msl='mot-stag hk logs -t'
 
 function mot-prod-deploy
   mot-prod hk pg:backups capture
