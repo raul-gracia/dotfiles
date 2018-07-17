@@ -24,7 +24,7 @@ function fish_title;end
 function fish_greeting;end
 
 # Exports for PATH
-set -xg default_path ./node_modules/.bin /usr/bin /usr/sbin /bin /sbin
+set -xg default_path ./node_modules/.bin /usr/bin /usr/sbin /bin /sbin /usr/local/mysql/bin/
 set -xg homebrew /usr/local/bin
 set -xg tmux_gen $HOME/.tmuxgen/bin $HOME/.tmuxgen
 set -xg rust_path $HOME/.cargo/bin
