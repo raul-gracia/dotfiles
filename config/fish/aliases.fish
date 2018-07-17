@@ -14,6 +14,7 @@ alias dofiles='dotfiles'
 # Shortcuts
 alias drop='cd ~/Dropbox'
 alias dev='cd ~/Dropbox/development'
+alias sq='cd ~/Dropbox/Development/storiq/storiq'
 alias dotfiles='cd ~/dotfiles; and vim .; and cd -'
 alias serve_dir='ruby -run -e httpd . -p 5055'
 alias tat='tmux attach -t'
