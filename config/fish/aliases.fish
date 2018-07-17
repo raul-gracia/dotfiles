@@ -278,6 +278,12 @@ function mot-stag-deploy-light
   g push staging (current_branch):master -f
 end
 
+#### Motivii
+
+
+
+alias sq='cd ~/Dropbox/Development/storiq/storiq'
+
 alias time_vera="time_since '7/11/2017 23:30:00'"
 
 function mot-cuc
