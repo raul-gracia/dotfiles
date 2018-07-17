@@ -297,3 +297,6 @@ alias mot-prod-last-commit="mot-prod hk releases | grep Deploy | head -n 1 | awk
 alias mot-stag-releasing="hub compare (mot-stag-last-commit)..develop"
 alias mot-prod-releasing="hub compare (mot-prod-last-commit)..master"
 
+
+
+alias update_alchemist="cd /Users/maliciousmind/Dropbox/Training/Alchemist.Camp; and youtube-dl 'https://www.youtube.com/channel/UCp5Nix6mJCoLkH_GqcRRp1A/videos'; cd -"
