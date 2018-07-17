@@ -282,8 +282,40 @@ end
 #### Motivii
 
 
+###### TRELLO #############
+function trello-title
+  ruby -rtrello -e "Trello.configure do |config|;config.developer_public_key = ENV['TRELLO_KEY'];config.member_token = ENV['TRELLO_TOKEN'];end;t=Trello::Card.find(ARGV[0]);puts t.name.gsub(' ', '-').downcase;" $argv
+end
 
-alias sq='cd ~/Dropbox/Development/storiq/storiq'
+function trello-id
+  ruby -rtrello -e "Trello.configure do |config|;config.developer_public_key = ENV['TRELLO_KEY'];config.member_token = ENV['TRELLO_TOKEN'];end;t=Trello::Card.find(ARGV[0]);puts t.short_id;" $argv
+end
+
+function trello-move-to-list
+  set id $argv[1]
+  set list $argv[2]
+  ruby -rtrello -e "Trello.configure do |config|;config.developer_public_key = ENV['TRELLO_KEY'];config.member_token = ENV['TRELLO_TOKEN'];end;c=Trello::Card.find(ARGV[0]);list_id=c.board.lists.find{|l| l.name == ARGV[1]}.id;begin;c.move_to_list(list_id);rescue;end;" $id $list
+end
+
+function trello-add-member
+  set id $argv[1]
+  set username $argv[2]
+  ruby -rtrello -e "Trello.configure do |config|;config.developer_public_key = ENV['TRELLO_KEY'];config.member_token = ENV['TRELLO_TOKEN'];end;c=Trello::Card.find(ARGV[0]);begin;m=c.board.members.find{|m| m.username == ARGV[1]};c.add_member(m);rescue;end;" $id $username
+end
+
+function branch-from-trello
+  set title (trello-title $argv)
+  set id (trello-id $argv)
+  gco master
+  gup
+  gcob feature/$id/$title
+  trello-move-to-list $argv 'In Progress'
+  trello-add-member $argv 'raulgracialario'
+  cl
+end
+###### TRELLO #############
+
+
 
 alias time_vera="time_since '7/11/2017 23:30:00'"
 
