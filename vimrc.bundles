@@ -80,25 +80,15 @@ Plug 'janko-m/vim-test'
       let test#ruby#use_binstubs = 0
 
 
-" React
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
 
-Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
-
-Plug 'tpope/vim-rbenv'
 Plug 'tpope/vim-rails'
-Plug 'ecomba/vim-ruby-refactoring'
-Plug 'vim-utils/vim-ruby-fold'
-      let g:ruby_fold_lines_limit = 200
-
-
 Plug 'tpope/vim-dispatch'
       let g:dispatch_quickfix_height = 20
+Plug 'radenling/vim-dispatch-neovim'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 
-Plug 'radenling/vim-dispatch-neovim'
+" Plug 'radenling/vim-dispatch-neovim'
 Plug 'altercation/vim-colors-solarized'
 
 Plug 'scrooloose/nerdtree'

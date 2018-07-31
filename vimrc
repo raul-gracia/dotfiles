@@ -31,7 +31,7 @@ filetype plugin indent on
 " Paste overriding selection
 xnoremap p "_dP
 
-autocmd BufRead,BufNewFile,BufWritePre * :set ff=unix
+" autocmd BufRead,BufNewFile,BufWritePre * :set ff=unix
 " Remove trailling space on save
 autocmd BufWritePre * :%s/\s\+$//e
 
