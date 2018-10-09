@@ -58,3 +58,6 @@ function ggi --description 'Globally install a gem ie: for all ruby versions'
 end
 
 test -e {$HOME}/.iterm2_shell_integration.fish ; and source {$HOME}/.iterm2_shell_integration.fish
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/maliciousmind/Downloads/google-cloud-sdk/path.fish.inc' ]; . '/Users/maliciousmind/Downloads/google-cloud-sdk/path.fish.inc'; end
