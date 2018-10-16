@@ -33,6 +33,13 @@ Plug 'sbdchd/neoformat'
 
       let g:neoformat_enabled_ruby = ['rubocop']
 
+      function! RubocopAutocorrect()
+        execute "!rubocop -a -R " . bufname("%")
+        e
+      endfunction
+
+      map <silent> <Leader>cop :call RubocopAutocorrect()<cr>
+
 """"""""""""""""""""""""""" Completion
 Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'

@@ -71,6 +71,7 @@ alias berr='bundle exec rake routes'
 alias berrg='bundle exec rake routes | grep '
 alias berg='bundle exec rails g'
 alias bergg='bundle exec rails g | grep'
+alias bersp='bundle exec rspec'
 alias latest_ruby2="brew upgrade; clear; ruby-build --definitions | grep '^2.\d.\d\$' | tail -n 1"
 
 # Javascript
@@ -103,8 +104,8 @@ alias gap='g add -p'
 alias ga='g add'
 alias gup='g up'
 alias glg='g lg'
-alias gdfc='g diff --cached --color-words'
-alias gdf='g diff --color-words'
+alias gdfc='g dsf --cached'
+alias gdf='g dsf'
 alias gdfcp='gdfc --patience'
 alias gdfp='gdf --patience'
 alias gp='g push -u origin (current_branch)'
@@ -226,7 +227,6 @@ end
 
 alias bb='cd ~/dotfiles; brew update; and brew upgrade; and brew bundle; cd -'
 alias redis='redis-server --daemonize yes; and redis-cli flushall'
-
 
 function dark_theme
     echo -e "\033]50;SetProfile=Dark\a"
