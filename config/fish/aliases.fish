@@ -2,9 +2,9 @@ alias vim='nvim'
 
 # Fish
 alias fr='source ~/.config/fish/config.fish > /dev/null 2>&1'
-alias fe='vim ~/.config/fish/config.fish'
-alias fexports='vim ~/.config/fish/exports.fish'
-alias faliases='vim ~/.config/fish/aliases.fish'
+alias fe='nvim ~/.config/fish/config.fish'
+alias fexports='nvim ~/.config/fish/exports.fish'
+alias faliases='nvim ~/.config/fish/aliases.fish'
 
 # Typos
 alias cl='clear'
@@ -15,8 +15,7 @@ alias gs='gst'
 # Shortcuts
 alias drop='cd ~/Dropbox'
 alias dev='cd ~/Dropbox/development'
-alias sq='cd ~/Dropbox/Development/storiq/storiq'
-alias dotfiles='cd ~/dotfiles; and vim .; and cd -'
+alias dotfiles='cd ~/dotfiles; and nvim .; and cd -'
 alias serve_dir='ruby -run -e httpd . -p 5055'
 alias tat='tmux attach -t'
 alias tls='tmux ls'
@@ -57,7 +56,7 @@ function time_since
 end
 
 alias docs='cd ~/Documents'
-alias upgradeall="brew update; and brew upgrade; and omf update; and nvim --headless +':PlugUpdate' +':PlugUpgrade' +':qall'"
+alias upgradeall="brew update; and brew upgrade; and omf update; and nvim --headless +':PlugUpdate' +':PlugUpgrade' +':qall'; and pip2 install neovim --upgrade; and pip3 install neovim --upgrade"
 
 # Rails
 alias be='bundle exec'
