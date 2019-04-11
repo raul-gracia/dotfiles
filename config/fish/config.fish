@@ -27,25 +27,12 @@ function fish_greeting;end
 set -xg default_path ./node_modules/.bin /usr/bin /usr/sbin /bin /sbin /usr/local/mysql/bin/
 set -xg homebrew /usr/local/bin
 set -xg tmux_gen $HOME/.tmuxgen/bin $HOME/.tmuxgen
-set -xg rust_path $HOME/.cargo/bin
 set -xg RUBYOPT "-W0"
 
-# Exports for go
-set -xg GOPATH $HOME/go
-set -xg GOBIN $GOPATH/bin
-set -xg go_root /usr/local/opt/go/libexec/bin
+set -gx PATH $homebrew $default_path $tmux_gen
 
-set -gx PATH $go_root $homebrew \
-$default_path $tmux_gen $GOBIN $rust_path
-
-# Android
-set -xg ANDROID_HOME $HOME/Library/Android/sdk
-set -xg PATH $PATH $ANDROID_HOME/tools
-set -xg PATH $PATH $ANDROID_HOME/tools/bin
-set -xg PATH $PATH $ANDROID_HOME/platform-tools
-set -xg PATH $PATH $ANDROID_HOME/build-tools/25.0.2
-
-status --is-interactive; and source (rbenv init -|psub)
+status --is-interactive
+and source (rbenv init -|psub)
 set -gx PATH '/Users/maliciousmind/.rbenv/shims' $PATH
 
 function ggi --description 'Globally install a gem ie: for all ruby versions'
@@ -57,7 +44,8 @@ function ggi --description 'Globally install a gem ie: for all ruby versions'
   end
 end
 
-test -e {$HOME}/.iterm2_shell_integration.fish ; and source {$HOME}/.iterm2_shell_integration.fish
+test -e {$HOME}/.iterm2_shell_integration.fish
+and source {$HOME}/.iterm2_shell_integration.fish
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/maliciousmind/Downloads/google-cloud-sdk/path.fish.inc' ]; . '/Users/maliciousmind/Downloads/google-cloud-sdk/path.fish.inc'; end

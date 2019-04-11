@@ -15,7 +15,9 @@ alias gs='gst'
 # Shortcuts
 alias drop='cd ~/Dropbox'
 alias dev='cd ~/Dropbox/development'
-alias dotfiles='cd ~/dotfiles; and nvim .; and cd -'
+alias ws='cd ~/workspace'
+alias docs='cd ~/Documents'
+alias dotfiles='cd ~/dotfiles; and vim .; and cd -'
 alias serve_dir='ruby -run -e httpd . -p 5055'
 alias tat='tmux attach -t'
 alias tls='tmux ls'
@@ -55,7 +57,6 @@ function time_since
     and cd -
 end
 
-alias docs='cd ~/Documents'
 alias upgradeall="brew update; and brew upgrade; and omf update; and nvim --headless +':PlugUpdate' +':PlugUpgrade' +':qall'; and pip2 install neovim --upgrade; and pip3 install neovim --upgrade"
 
 # Rails
@@ -128,7 +129,7 @@ function clean_merged_branches
     else
         set branch develop
     end
-    g branch --merged $branch | grep -v master | grep -v develop | xargs git branch -d
+    g branch --merged $branch | grep -v master | grep -v develop | grep -v staging | grep -v qa | grep -v production | tr -cd "[:print:]" | sed "s/\[m//g" | xargs git branch -d
 end
 
 function create_remote_branch
@@ -178,6 +179,14 @@ function circleci
     end
 end
 
+function semaphore
+    if test (count $argv) = 0
+        open "https://semaphoreci.com/"(git_remote_owner)"/"(git_remote_repo_name)"/branches/"(current_branch)
+    else
+        open "https://semaphoreci.com/"(git_remote_owner)"/"(git_remote_repo_name)"/branches/$argv"
+    end
+end
+
 function pulls
     open "https://github.com/"(git_remote_owner)"/"(git_remote_repo_name)"/pulls"
 end
@@ -203,6 +212,24 @@ end
 
 function releasing_tickets
     glg master..develop | grep -o 'MD-\d\+' | sort | uniq | sed -E 's/(.*)/https:\/\/motivii\.atlassian\.net\/browse\/\1/'
+end
+
+function master-to-qa
+    gco master
+    gup
+    hpr qa
+end
+
+function qa-to-staging
+    gco qa
+    gup
+    hpr staging
+end
+
+function staging-to-prod
+    gco staging
+    gup
+    hpr production
 end
 
 # heroku
@@ -241,61 +268,15 @@ alias localip="ifconfig | grep 'inet ' | grep -Fv 127.0.0.1 | awk '{print \$2}'"
 
 
 
-# Motivii
-alias mot='cd ~/Dropbox/development/motivii'
-alias mas='cd ~/Dropbox/development/motivii/Maslow'
-function mot-stag
-    eval $argv --app motivii-maslow-staging
+# Tablecrowd
+
+function tablecrowd_prod
+    ssh admin@52.30.31.72 -i ~/.ssh/raulgracialario
 end
 
-function mot-prod
-    eval $argv --app motivii-maslow-production
+function tablecrowd_stag
+    ssh deploy@52.49.81.235 -i ~/.ssh/raulgracialario
 end
-
-function mot-prod-console
-    mot-prod hk run rails c
-end
-alias mpc="mot-prod-console"
-alias mpl='mot-prod hk logs -t'
-
-function mot-stag-console
-    mot-stag hk run rails c
-end
-alias msc="mot-stag-console"
-alias msl='mot-stag hk logs -t'
-
-function mot-prod-deploy
-    mot-prod hk pg:backups capture
-    g push production master
-    mot-prod hk run rails db:migrate
-end
-
-function mot-prod-deploy-light
-    g push production master $argv
-end
-
-function mot-prod-ssh-analysis
-    ssh ubuntu@ec2-52-30-80-71.eu-west-1.compute.amazonaws.com
-end
-
-function mot-stag-ssh-analysis
-    ssh ubuntu@ec2-34-240-244-168.eu-west-1.compute.amazonaws.com
-end
-
-function mot-wordpress-ssh
-    ssh bitnami@ec2-52-48-225-67.eu-west-1.compute.amazonaws.com
-end
-
-function mot-stag-deploy
-    g push staging (current_branch):master -f
-    mot-stag hk run rails db:migrate
-end
-
-function mot-stag-deploy-light
-    g push staging (current_branch):master -f
-end
-
-#### Motivii
 
 
 ###### TRELLO #############
@@ -344,12 +325,4 @@ end
 
 alias time_vera="time_since '7/11/2017 23:30:00'"
 
-alias mot-stag-last-commit="mot-stag hk releases | grep Deploy | head -n 1 | awk '{print \$3}'"
-alias mot-prod-last-commit="mot-prod hk releases | grep Deploy | head -n 1 | awk '{print \$3}'"
-
-alias mot-stag-releasing="hub compare (mot-stag-last-commit)..develop"
-alias mot-prod-releasing="hub compare (mot-prod-last-commit)..master"
-
-
-
-alias update_alchemist="cd /Users/maliciousmind/Dropbox/Training/Alchemist.Camp; and youtube-dl 'https://www.youtube.com/channel/UCp5Nix6mJCoLkH_GqcRRp1A/videos'; cd -"
+alias update_alchemist="cd /Users/maliciousmind/Dropbox/Training/Alchemist.Camp; and youtube-dl 'https://www.youtube.com/channel/UCp6Nix6mJCoLkH_GqcRRp1A/videos'; cd -"

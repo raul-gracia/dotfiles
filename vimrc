@@ -7,6 +7,7 @@ if filereadable(expand("~/.vimrc.leaders"))
 endif
 
 syntax enable
+"set background=light
 set background=dark
 colorscheme solarized
 set tabstop=2
@@ -24,6 +25,14 @@ set regexpengine=1
 set cursorline
 set clipboard=unnamedplus
 set ff=unix
+set shell=bash
+set noshelltemp
+
+
+set foldmethod=syntax
+set foldnestmax=10
+set foldlevel=2
+
 
 filetype plugin indent on
 
@@ -38,8 +47,8 @@ autocmd BufWritePre * :%s/\s\+$//e
 vnoremap <silent> <Enter> :EasyAlign<cr>
 
 " Hightlihg the 79 column, as maximun line lenght
-:highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
-:set colorcolumn=80
+highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
+set colorcolumn=80
 
 " Disable arrow keys
 map <up> <nop>
@@ -71,8 +80,8 @@ autocmd FileType qf setlocal wrap linebreak
 au BufRead,BufNewFile set ff=unix
 
 " Relative numbers
-:au FocusLost * :set number
-:au FocusGained * :set relativenumber
+au FocusLost * :set number
+au FocusGained * :set relativenumber
 "autocmd InsertEnter * :set number
 "autocmd InsertLeave * :set relativenumber
 
