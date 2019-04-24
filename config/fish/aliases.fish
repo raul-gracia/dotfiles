@@ -181,7 +181,8 @@ end
 
 function semaphore
     if test (count $argv) = 0
-        open "https://semaphoreci.com/"(git_remote_owner)"/"(git_remote_repo_name)"/branches/"(current_branch)
+        set branch_name (current_branch | sed 's/\//-/g' | tr '[:upper:]' '[:lower:]')
+        open "https://semaphoreci.com/"(git_remote_owner)"/"(git_remote_repo_name)"/branches/"$branch_name
     else
         open "https://semaphoreci.com/"(git_remote_owner)"/"(git_remote_repo_name)"/branches/$argv"
     end

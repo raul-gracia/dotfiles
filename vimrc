@@ -25,6 +25,7 @@ set regexpengine=1
 set cursorline
 set clipboard=unnamedplus
 set ff=unix
+set fileformat=unix
 set shell=bash
 set noshelltemp
 

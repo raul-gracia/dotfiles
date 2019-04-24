@@ -38,7 +38,7 @@ nmap <leader>gaa :Git add --all<CR>
 "endif
 
 nmap <leader>vr :source $MYVIMRC<CR>
-nmap <leader>ve :tabedit $MYVIMRC<CR>
+nmap <leader>ve :tabedit ~/.vimrc<CR>
 nmap <leader>vl :tabedit ~/.vimrc.leaders<CR>
 nmap <leader>vb :tabedit ~/.vimrc.bundles<CR>
 nmap <leader>jj :%!python -m json.tool<CR>
