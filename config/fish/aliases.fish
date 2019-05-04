@@ -82,6 +82,7 @@ alias mps='iex -S mix phx.server'
 alias mpr='mix phoenix.routes'
 alias mdp='mix deps.get'
 alias mpc='iex -S mix'
+alias mt='mix test'
 
 # Docker
 alias dc='docker-compose'
@@ -267,27 +268,7 @@ end
 
 alias localip="ifconfig | grep 'inet ' | grep -Fv 127.0.0.1 | awk '{print \$2}'"
 
-
-
-# Tablecrowd
-
-function tablecrowd_prod
-    ssh admin@52.30.31.72 -i ~/.ssh/raulgracialario
-end
-
-function tablecrowd_stag
-    ssh deploy@52.49.81.235 -i ~/.ssh/raulgracialario
-end
-
-
 ###### TRELLO #############
-function sq-trello
-    set board "StorIQ Web App"
-    set short_id (current_branch | grep -Eo "[0-9]+" | head -n 1)
-    set url (ruby -rtrello -e "Trello.configure do |config|;config.developer_public_key = ENV['TRELLO_KEY'];config.member_token = ENV['TRELLO_TOKEN'];end;b=Trello::Board.all.find{|b| b.name == ARGV[0]};puts b.cards.find{|c| c.short_id == ARGV[1].to_i}.short_url" $board $short_id )
-    open $url
-end
-
 function trello-title
     ruby -rtrello -e "Trello.configure do |config|;config.developer_public_key = ENV['TRELLO_KEY'];config.member_token = ENV['TRELLO_TOKEN'];end;t=Trello::Card.find(ARGV[0]);puts t.name.gsub(/[^\w ]/, ' ').gsub(/ +/, '-').downcase[0..35];" $argv
 end
