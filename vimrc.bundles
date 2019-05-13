@@ -40,6 +40,13 @@ Plug 'sbdchd/neoformat'
 
       map <silent> <Leader>cop :call RubocopAutocorrect()<cr>
 
+
+
+" Elixir
+Plug 'elixir-editors/vim-elixir'
+Plug 'slashmili/alchemist.vim'
+
+
 """"""""""""""""""""""""""" Completion
 Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
