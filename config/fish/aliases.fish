@@ -30,17 +30,17 @@ alias add-ssh-keys='ssh-add -K ~/.ssh/github; and ssh-add -K ~/.ssh/raulgraciala
 
 function time_in_london
     cd ~/Dropbox/time_in_london/
-    bundle check >/dev/null 2>&1
-    or bundle install >/dev/null 2>&1
-    bundle exec ruby time_in_london.rb $argv
+    ruby time_in_london.rb $argv
     cd -
 end
-alias time_in_salsa='cd ~/Dropbox/time_in_london/; bundle check > /dev/null 2>&1; or bundle install > /dev/null 2>&1; bundle exec ruby time_in_salsa.rb; cd -'
+function time_in_salsa
+    cd ~/Dropbox/time_in_london/
+    ruby time_in_salsa.rb $argv
+    cd -
+end
 function time_until
     cd ~/Dropbox/time_in_london/
-    bundle check >/dev/null 2>&1
-    or bundle install >/dev/null 2>&1
-    bundle exec ruby time_until.rb $argv
+    ruby time_until.rb $argv
     cd -
 end
 
@@ -51,11 +51,10 @@ alias tte='time_till_end'
 
 function time_since
     cd ~/Dropbox/time_in_london/
-    bundle check >/dev/null 2>&1
-    or bundle install >/dev/null 2>&1
-    bundle exec ruby time_since.rb $argv
+    ruby time_since.rb $argv
     and cd -
 end
+alias time_vera="time_since '7/11/2017 23:30:00'"
 
 alias upgradeall="brew update; and brew upgrade; and omf update; and nvim --headless +':PlugUpdate' +':PlugUpgrade' +':qall'; and pip2 install neovim --upgrade; and pip3 install neovim --upgrade"
 
@@ -79,7 +78,7 @@ alias yarn='yarn --prefer-offline'
 
 # Phoenix
 alias mps='iex -S mix phx.server'
-alias mpr='mix phoenix.routes'
+alias mpr='mix phx.routes'
 alias mdp='mix deps.get'
 alias mpc='iex -S mix'
 alias mt='mix test'
@@ -306,5 +305,3 @@ function is_number
 end
 
 alias time_vera="time_since '7/11/2017 23:30:00'"
-
-alias update_alchemist="cd /Users/maliciousmind/Dropbox/Training/Alchemist.Camp; and youtube-dl 'https://www.youtube.com/channel/UCp6Nix6mJCoLkH_GqcRRp1A/videos'; cd -"
