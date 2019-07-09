@@ -63,7 +63,7 @@ alias be='bundle exec'
 alias rdb='bundle exec rake db:migrate'
 alias rdbt='bundle exec rake db:migrate db:test:prepare'
 alias beg='bundle exec guard -c'
-alias rs='./bin/rails s --binding 127.0.0.1; or be rails s --binding 127.0.0.1'
+alias rs='./bin/rails s --binding 127.0.0.1 $argv; or be rails s --binding 127.0.0.1 $argv'
 alias berc='bundle exec rails console'
 alias bec='bundle exec cucumber'
 alias berr='bundle exec rake routes'
@@ -164,11 +164,11 @@ function git_remote
 end
 
 function git_remote_owner
-    git_remote | sed -n 's/git@.*\..*:\(.*\)\/.*\.git/\1/p'
+    git_remote | sed -nE 's/git@.*\..*:(.*)\/.*/\1/p'
 end
 
 function git_remote_repo_name
-    git_remote | sed -n 's/git@.*\..*:.*\/\(.*\)\.git/\1/p'
+    git_remote | sed -nE 's/git@.*\..*:.*\/(.*)/\1/p'
 end
 
 function circleci
@@ -219,6 +219,12 @@ function master-to-qa
     gco master
     gup
     hpr qa
+end
+
+function master-to-staging
+    gco master
+    gup
+    hpr staging
 end
 
 function qa-to-staging
