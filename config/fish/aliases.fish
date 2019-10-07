@@ -54,7 +54,6 @@ function time_since
     ruby time_since.rb $argv
     and cd -
 end
-alias time_vera="time_since '7/11/2017 23:30:00'"
 
 alias upgradeall="brew update; and brew upgrade; and omf update; and nvim --headless +':PlugUpdate' +':PlugUpgrade' +':qall'; and pip2 install neovim --upgrade; and pip3 install neovim --upgrade"
 
@@ -264,11 +263,13 @@ alias redis='redis-server --daemonize yes; and redis-cli flushall'
 function dark_theme
     echo -e "\033]50;SetProfile=Dark\a"
     vim -c '%s/\(set background=\)\w*/\1dark/g' +wq ~/.vimrc
+    clear
 end
 
 function light_theme
     echo -e "\033]50;SetProfile=Light\a"
     vim -c '%s/\(set background=\)\w*/\1light' +wq ~/.vimrc
+    clear
 end
 
 alias localip="ifconfig | grep 'inet ' | grep -Fv 127.0.0.1 | awk '{print \$2}'"
@@ -310,4 +311,4 @@ function is_number
     test (math 0 + $argv[1]) -eq 0
 end
 
-alias time_vera="time_since '7/11/2017 23:30:00'"
+alias ctags="echo ctags"

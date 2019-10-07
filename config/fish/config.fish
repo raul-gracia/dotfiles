@@ -13,11 +13,12 @@ end
 
 # Exports for PATH
 set -xg default_path ./node_modules/.bin /usr/bin /usr/sbin /bin /sbin /usr/local/mysql/bin/
-set -xg homebrew /usr/local/bin
+set -xg homebrew /usr/local/bin /usr/local/sbin
 set -xg tmux_gen $HOME/.tmuxgen/bin $HOME/.tmuxgen
 set -xg RUBYOPT "-W0"
+set -xg python_path /usr/local/opt/python/libexec/bin
 
-set -gx PATH $homebrew $default_path $tmux_gen
+set -gx PATH $python_path $homebrew $default_path $tmux_gen
 
 status --is-interactive
 and source (rbenv init -|psub)
