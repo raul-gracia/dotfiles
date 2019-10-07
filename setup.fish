@@ -4,8 +4,8 @@ brew tap Homebrew/bundle
 brew bundle
 
 echo 'Installing Ruby...'
-rbenv install 2.5.0
-rbenv global 2.5.0
+rbenv install 2.6.4
+rbenv global 2.6.4
 
 echo 'Bundling...'
 gem install bundler

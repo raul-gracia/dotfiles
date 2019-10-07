@@ -20,6 +20,8 @@ set -xg python_path /usr/local/opt/python/libexec/bin
 
 set -gx PATH $python_path $homebrew $default_path $tmux_gen
 
+set -xg OBJC_DISABLE_INITIALIZE_FORK_SAFETY YES
+
 status --is-interactive
 and source (rbenv init -|psub)
 set -gx PATH '/Users/maliciousmind/.rbenv/shims' $PATH

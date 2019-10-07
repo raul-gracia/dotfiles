@@ -2,7 +2,12 @@ ServerAliveInterval 60
 ForwardAgent yes
 
 Host *
-  UseKeychain yes
+UseKeychain yes
 
 Host github.com
- IdentityFile ~/.ssh/raulgracialario
+IdentityFile ~/.ssh/raulgracialario
+
+
+Host git-codecommit.*.amazonaws.com
+User APKA2UWJWHNCZIUWD2FX
+IdentityFile ~/.ssh/mic

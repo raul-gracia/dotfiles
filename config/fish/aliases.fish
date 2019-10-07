@@ -21,6 +21,7 @@ alias dotfiles='cd ~/dotfiles; and vim .; and cd -'
 alias serve_dir='ruby -run -e httpd . -p 5055'
 alias tat='tmux attach -t'
 alias tls='tmux ls'
+alias tmuxgen_list='ll ~/.tmuxgen/'
 alias chr='cd ~/Dropbox/development/digital-chronos'
 alias dc='docker-compose'
 alias dce='dc exec'
@@ -55,7 +56,13 @@ function time_since
     and cd -
 end
 
-alias upgradeall="brew update; and brew upgrade; and omf update; and nvim --headless +':PlugUpdate' +':PlugUpgrade' +':qall'; and pip2 install neovim --upgrade; and pip3 install neovim --upgrade"
+function upgradeall
+    brew update
+    brew upgrade
+    and omf update
+    and nvim --headless +':PlugUpdate' +':PlugUpgrade' +':qall'
+    and pip3 install neovim --upgrade
+end
 
 # Rails
 alias be='bundle exec'
@@ -188,7 +195,7 @@ function semaphore
 end
 
 function pulls
-    open "https://github.com/"(git_remote_owner)"/"(git_remote_repo_name)"/pulls"
+    hub browse -- pulls
 end
 alias prs='pulls'
 
