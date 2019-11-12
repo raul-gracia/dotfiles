@@ -1,5 +1,5 @@
 tap 'thoughtbot/formulae'
-tap 'caskroom/cask'
+tap 'homebrew/cask-cask'
 
 brew 'gpg2'
 brew 'rcm'
