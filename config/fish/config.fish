@@ -17,8 +17,9 @@ set -xg homebrew /usr/local/bin /usr/local/sbin
 set -xg tmux_gen $HOME/.tmuxgen/bin $HOME/.tmuxgen
 set -xg RUBYOPT "-W0"
 set -xg python_path /usr/local/opt/python/libexec/bin
+set -xg rust $HOME/.cargo/bin
 
-set -gx PATH $python_path $homebrew $default_path $tmux_gen
+set -gx PATH $python_path $homebrew $default_path $tmux_gen $rust
 
 set -xg OBJC_DISABLE_INITIALIZE_FORK_SAFETY YES
 

@@ -7,20 +7,18 @@ UseKeychain yes
 Host github.com
 IdentityFile ~/.ssh/raulgracialario
 
-
-Host git-codecommit.*.amazonaws.com
-User APKA2UWJWHNCZIUWD2FX
-IdentityFile ~/.ssh/mic
-
-
 # Babylon Bastions
 Host dev-uk-bastion
   Hostname bastion1-uk.dev.babylontech.co.uk
   User ${BABYLON_NAME}
   IdentityFile ~/.ssh/id_babylon
   IdentitiesOnly yes
+
 Host dev-global-bastion
   HostName bastion1-global1.dev.babylontech.co.uk
   User ${BABYLON_NAME}
   IdentityFile ~/.ssh/id_babylon
   IdentitiesOnly yes
+
+Host heroku.com
+  IdentityFile ~/.ssh/raulgracialario
