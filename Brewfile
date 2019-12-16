@@ -1,5 +1,7 @@
 tap 'thoughtbot/formulae'
 tap 'homebrew/cask-fonts'
+tap 'heroku/brew'
+
 
 brew 'gpg2'
 brew 'rcm'
@@ -16,6 +18,7 @@ brew 'youtube-dl'
 brew 'go'
 brew 'ctags'
 brew 'diff-so-fancy'
+brew 'heroku'
 
 brew 'rbenv', args: ['HEAD']
 brew 'ruby-build', args: ['HEAD']
@@ -43,4 +46,4 @@ cask 'brave-browser'
 cask 'visual-studio-code'
 cask 'docker'
 cask 'font-fira-code'
-cask 'postgres'
+cask 'postman'

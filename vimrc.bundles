@@ -32,6 +32,7 @@ Plug 'sbdchd/neoformat'
             \ }
 
       let g:neoformat_enabled_ruby = ['rubocop']
+      let g:neoformat_enabled_yaml = []
 
       function! RubocopAutocorrect()
         execute "!rubocop -a -R " . bufname("%")
@@ -108,11 +109,11 @@ Plug 'ddollar/nerdcommenter'
       let g:NERDSpaceDelims = 1
 
 Plug 'rking/ag.vim'
-Plug 'majutsushi/tagbar'
-      nmap <F8> :TagbarToggle<CR>
-      let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
-      let g:tagbar_compact = 1
-"       let g:tagbar_type_elixir = {
+" Plug 'majutsushi/tagbar'
+      " nmap <F8> :TagbarToggle<CR>
+      " let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
+      " let g:tagbar_compact = 1
+      " let g:tagbar_type_elixir = {
 "             \ 'ctagstype' : 'elixir',
 "             \ 'kinds' : [
 "             \ 'f:functions',
@@ -129,17 +130,17 @@ Plug 'majutsushi/tagbar'
 "             \ 't:tests'
 "             \ ]
 "             \ }
-      let g:tagbar_type_ruby = {
-        \ 'kinds' : [
-          \ 'm:modules',
-          \ 'c:classes',
-          \ 'd:describes',
-          \ 'C:contexts',
-          \ 'f:methods',
-          \ 'i:it',
-          \ 'F:singleton methods'
-        \ ]
-      \ }
+      " let g:tagbar_type_ruby = {
+        " \ 'kinds' : [
+          " \ 'm:modules',
+          " \ 'c:classes',
+          " \ 'd:describes',
+          " \ 'C:contexts',
+          " \ 'f:methods',
+          " \ 'i:it',
+          " \ 'F:singleton methods'
+        " \ ]
+      " \ }
 
 "Plug 'fntlnz/atags.vim'
       "autocmd BufWritePost * call atags#generate()
