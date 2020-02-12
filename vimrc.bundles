@@ -88,9 +88,7 @@ Plug 'radenling/vim-dispatch-neovim'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 
-" Plug 'radenling/vim-dispatch-neovim'
 Plug 'altercation/vim-colors-solarized'
-" let g:solarized_termcolors=256
 
 Plug 'scrooloose/nerdtree'
       " Auto open nerdtree

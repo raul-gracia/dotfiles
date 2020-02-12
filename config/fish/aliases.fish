@@ -319,3 +319,15 @@ function is_number
 end
 
 alias ctags="echo ctags"
+
+##### Babylon K8s ####
+
+function find_pod_name
+    set pod_name_argv $argv[1]
+    kubectl get pods | awk '{print $1}' | grep -E "^$pod_name_argv-\w{9,10}-\w{5}\$" | head -n1
+end
+
+function ssh-pod
+    set pod_name (find_pod_name $argv[1])
+    kubectl exec -it $pod_name bash
+end
