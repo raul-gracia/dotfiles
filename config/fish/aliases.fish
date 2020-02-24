@@ -94,6 +94,17 @@ alias dc='docker-compose'
 alias dce='dc exec'
 alias dcew='dce web'
 
+# Kubernetes ( k8s )
+alias kbl='kubectl'
+alias kblg='kbl get'
+alias kbld='kbl describe'
+alias mk='minikube'
+alias mkkbl='mk kubectl'
+alias pods='kblg pods'
+alias deploys='kblg deployments'
+alias dpods='kbld pods'
+alias ddeploy='kbld deployments'
+
 # Git
 alias g='git'
 alias gb='g branch'
@@ -324,7 +335,7 @@ alias ctags="echo ctags"
 
 function find_pod_name
     set pod_name_argv $argv[1]
-    kubectl get pods | awk '{print $1}' | grep -E "^$pod_name_argv-\w{9,10}-\w{5}\$" | head -n1
+    kubectl get pods | grep Running | awk '{print $1}' | grep -E "^$pod_name_argv-\w{8,10}-\w{5}\$" | head -n1
 end
 
 function ssh-pod
