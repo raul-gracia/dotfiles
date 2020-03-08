@@ -1,5 +1,4 @@
 ServerAliveInterval 60
-ForwardAgent yes
 
 Host *
 UseKeychain yes
@@ -22,3 +21,6 @@ Host dev-global-bastion
 
 Host heroku.com
   IdentityFile ~/.ssh/raulgracialario
+
+Host gitlab.com
+IdentityFile ~/.ssh/raulgracialario

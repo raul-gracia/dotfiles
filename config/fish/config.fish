@@ -19,27 +19,33 @@ set -xg RUBYOPT "-W0"
 set -xg python_path /usr/local/opt/python/libexec/bin
 set -xg rust $HOME/.cargo/bin
 
+set -xg ANDROID_HOME /Users/maliciousmind/Library/Android/sdk
+set -xg JAVA_HOME /Library/Java/Home
+
 set -gx PATH $python_path $homebrew $default_path $tmux_gen $rust
 
 set -xg OBJC_DISABLE_INITIALIZE_FORK_SAFETY YES
 
-status --is-interactive
-and source (rbenv init -|psub)
-set -gx PATH '/Users/maliciousmind/.rbenv/shims' $PATH
+function ggi
+    ggdo install $argv[1]
+end
+function ggiu
+    ggdo uninstall $argv[1]
+end
 
-function ggi --description 'Globally install a gem ie: for all ruby versions'
+function ggdo --description 'Globally install/uninstall a gem for all ruby versions'
     set -l versions (rbenv versions | ruby -e '$stdin.read.split("\n").each { |l| version = l.match(/(\d\.\d\.\d-?p?\d{3}?)/); puts version[0] if version;}')
-    for version in $versions
-        echo Installing $argv[1] for $version
-        rbenv local $version
-        gem install $argv[1] >/dev/null
+    echo 1 $argv[1]
+    echo 2 $argv[2]
+    for i in $versions
+        echo $argv[1] $argv[2] for $i
+        rbenv local $i
+        gem $argv[1] $argv[2] >/dev/null
     end
 end
 
 test -e {$HOME}/.iterm2_shell_integration.fish
 and source {$HOME}/.iterm2_shell_integration.fish
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/maliciousmind/Downloads/google-cloud-sdk/path.fish.inc' ]
-    . '/Users/maliciousmind/Downloads/google-cloud-sdk/path.fish.inc'
-end
+
+status --is-interactive; and source (rbenv init -|psub)
