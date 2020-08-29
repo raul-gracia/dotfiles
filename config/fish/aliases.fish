@@ -6,6 +6,9 @@ alias fe='nvim ~/.config/fish/config.fish'
 alias fexports='nvim ~/.config/fish/exports.fish'
 alias faliases='nvim ~/.config/fish/aliases.fish'
 
+alias ls='exa --icons'
+alias cat='bat'
+
 # Typos
 alias cl='clear'
 alias clar='clear'
@@ -82,12 +85,15 @@ alias latest_ruby2="brew upgrade; clear; ruby-build --definitions | grep '^2.\d.
 # Javascript
 alias yarn='yarn --prefer-offline'
 
-# Phoenix
+# Elixir/Phoenix
+alias iex='iex --erl "-kernel shell_history enabled"'
 alias mps='iex -S mix phx.server'
 alias mpr='mix phx.routes'
+alias mem='mix ecto.migrate'
 alias mdp='mix deps.get'
-alias mpc='iex -S mix'
+alias ism='iex -S mix'
 alias mt='mix test'
+alias gg='gigalixir'
 
 # Docker
 alias dc='docker-compose'
@@ -110,7 +116,9 @@ alias g='git'
 alias gb='g branch'
 alias gbd='g branch -d'
 alias gc='g c -S'
+alias gcm='g c -S -m'
 alias gca='gc --amend'
+alias gcam='gc --ammend -m'
 alias gcn='gc --no-verify'
 alias gco='g co'
 alias gcob='gco -b'
@@ -342,3 +350,6 @@ function ssh-pod
     set pod_name (find_pod_name $argv[1])
     kubectl exec -it $pod_name bash
 end
+
+
+alias weather="curl http://wttr.in/London"

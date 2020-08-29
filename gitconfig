@@ -22,7 +22,7 @@
   program = /usr/local/bin/gpg
 [core]
 	excludesfile = /Users/maliciousmind/.gitignore_global
-	autocrlf = input
+	autocrlf = false
 	editor = nvim
 	safecrlf = true
 	pager = diff-so-fancy | less --tabs=4 -RFX
