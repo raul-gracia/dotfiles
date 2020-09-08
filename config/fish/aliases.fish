@@ -6,7 +6,7 @@ alias fe='nvim ~/.config/fish/config.fish'
 alias fexports='nvim ~/.config/fish/exports.fish'
 alias faliases='nvim ~/.config/fish/aliases.fish'
 
-alias ls='exa --icons'
+alias ls='exa'
 alias cat='bat'
 
 # Typos
