@@ -18,11 +18,12 @@ set -xg tmux_gen $HOME/.tmuxgen/bin $HOME/.tmuxgen
 set -xg RUBYOPT "-W0"
 set -xg python_path /usr/local/opt/python/libexec/bin
 set -xg rust $HOME/.cargo/bin
+set -xg composer $HOME/.composer/vendor/bin
 
 set -xg ANDROID_HOME /Users/maliciousmind/Library/Android/sdk
 set -xg JAVA_HOME /Library/Java/Home
 
-set -gx PATH $python_path $homebrew $default_path $tmux_gen $rust
+set -gx PATH $python_path $homebrew $default_path $tmux_gen $rust $composer
 
 set -xg OBJC_DISABLE_INITIALIZE_FORK_SAFETY YES
 
@@ -34,7 +35,7 @@ function ggiu
 end
 
 function ggdo --description 'Globally install/uninstall a gem for all ruby versions'
-    set -l versions (rbenv versions | ruby -e '$stdin.read.split("\n").each { |l| version = l.match(/(\d\.\d\.\d-?p?\d{3}?)/); puts version[0] if version;}')
+    set -l versions (rbenv versions | ruby -e 'puts $stdin.read.split("\n").map { |l| l.scan(/(\d\.\d\.\d-?p?\d{3}?)/)}')
     echo 1 $argv[1]
     echo 2 $argv[2]
     for i in $versions
@@ -49,3 +50,9 @@ and source {$HOME}/.iterm2_shell_integration.fish
 
 
 status --is-interactive; and source (rbenv init -|psub)
+set -g fish_user_paths "/usr/local/opt/openjdk/bin" $fish_user_paths
+
+set uptime_days (string trim (uptime | grep -oEi '\\d+ days?'))
+if test -n uptime_days
+    echo "Days without restart:" $uptime_days
+end

@@ -21,11 +21,14 @@ alias dev='cd ~/Dropbox/development'
 alias ws='cd ~/workspace'
 alias docs='cd ~/Documents'
 alias dotfiles='cd ~/dotfiles; and vim .; and cd -'
+alias chr='cd ~/Dropbox/development/digital-chronos'
+alias interview="cd ~/Dropbox/development/interview-exercises"
+
+
 alias serve_dir='ruby -run -e httpd . -p 5055'
 alias tat='tmux attach -t'
 alias tls='tmux ls'
 alias tmuxgen_list='ll ~/.tmuxgen/'
-alias chr='cd ~/Dropbox/development/digital-chronos'
 alias dc='docker-compose'
 alias dce='dc exec'
 alias dcew='dce web'
@@ -69,6 +72,7 @@ end
 
 # Rails
 alias be='bundle exec'
+alias ber='bundle exec rails'
 alias rdb='bundle exec rake db:migrate'
 alias rdbt='bundle exec rake db:migrate db:test:prepare'
 alias beg='bundle exec guard -c'
@@ -353,3 +357,4 @@ end
 
 
 alias weather="curl http://wttr.in/London"
+alias yd="youtube-dl"
