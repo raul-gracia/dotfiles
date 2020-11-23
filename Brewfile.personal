@@ -1,0 +1,6 @@
+cask 'dropbox'
+cask 'tableplus'
+cask 'graphiql'
+cask 'skype'
+cask 'flux'
+cask 'tor-browser'

@@ -3,7 +3,7 @@
 echo 'Installing a new machine? Nice!'
 if ! command -v brew > /dev/null 2>&1; then
   echo 'Okay, lets do this. First things first, we need to install homebrew in order to get all the stuff you need'
-  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 else
   echo 'Homebrew was already available... skipping the installation'
   echo "Let's update it instead! (you know you haven't updated in a while)"
@@ -22,13 +22,14 @@ else
   brew upgrade fish
 fi
 curl -L https://get.oh-my.fish | fish
+omf theme install bira
 
 # HERE WE WILL START WITH THE ACTUALL INSTALLATION
 if [ -d ~/dotfiles ]; then
   cd ~/dotfiles
   git pull
 else
-  git clone git@github.com:maliciousmind/dotfiles.git ~/dotfiles
+  git clone https://github.com/raul-gracia/dotfiles.git ~/dotfiles
   cd ~/dotfiles
 fi
 fish setup.fish

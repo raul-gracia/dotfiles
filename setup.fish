@@ -1,11 +1,11 @@
 fish_update_completions
 echo 'Brewing...'
 brew tap Homebrew/bundle
-brew bundle
+brew bundle --file Brewfile.standard
 
 echo 'Installing Ruby...'
-rbenv install 2.6.4
-rbenv global 2.6.4
+rbenv install 2.7.2
+rbenv global 2.7.2
 
 echo 'Bundling...'
 gem install bundler
