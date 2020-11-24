@@ -343,8 +343,6 @@ end
 
 alias ctags="echo ctags"
 
-##### Babylon K8s ####
-
 function find_pod_name
     set pod_name_argv $argv[1]
     kubectl get pods | grep Running | awk '{print $1}' | grep -E "^$pod_name_argv-\w{8,10}-\w{5}\$" | head -n1
@@ -355,6 +353,23 @@ function ssh-pod
     kubectl exec -it $pod_name bash
 end
 
-
 alias weather="curl http://wttr.in/London"
 alias yd="youtube-dl"
+
+function dotpush --description 'pushes dotfiles and encrypt exports and update dotfiles'
+    cd ~/dotfiles
+    gp
+    gpg -aseo /tmp/exports -r '<raulgracialario@gmail.com>' ~/.config/fish/exports.fish
+    gist /tmp/exports --private -u 4c6216ef0cd3a8c80d8e74decc36a6b3 >/dev/null
+    rm -rf /tmp/exports
+    cd -
+end
+
+function dotpull --description 'pulls dotfiles and decrypt exports'
+    cd ~/dotfiles
+    gup
+    gist -r 4c6216ef0cd3a8c80d8e74decc36a6b3 >/tmp/exports
+    gpg --decrypt /tmp/exports >~/.config/fish/exports.fish
+    rm -rf /tmp/exports
+    cd -
+end

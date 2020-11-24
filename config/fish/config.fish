@@ -22,6 +22,10 @@ set -xg composer $HOME/.composer/vendor/bin
 
 set -xg ANDROID_HOME /Users/maliciousmind/Library/Android/sdk
 set -xg JAVA_HOME /Library/Java/Home
+set -xg JAVA_HOME (/usr/libexec/java_home)
+set -gx CPPFLAGS "-I/usr/local/opt/openjdk/include"
+
+
 
 set -gx PATH $python_path $homebrew $default_path $tmux_gen $rust $composer
 
