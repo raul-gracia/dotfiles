@@ -52,7 +52,7 @@ function time_until
 end
 
 function time_till_end
-    time_until '(date +"%Y-%m-%d") 17:30:00' --sort
+    time_until '(date +"%Y-%m-%d") 18:00:00' --sort
 end
 alias tte='time_till_end'
 
