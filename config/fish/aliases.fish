@@ -2,9 +2,9 @@ alias vim='nvim'
 
 # Fish
 alias fr='source ~/.config/fish/config.fish > /dev/null 2>&1'
-alias fe='nvim ~/.config/fish/config.fish'
-alias fexports='nvim ~/.config/fish/exports.fish'
-alias faliases='nvim ~/.config/fish/aliases.fish'
+alias fe='code --wait ~/.config/fish/config.fish'
+alias fexports='code --wait ~/.config/fish/exports.fish'
+alias faliases='code --wait ~/.config/fish/aliases.fish'
 
 alias ls='exa'
 alias cat='bat'
