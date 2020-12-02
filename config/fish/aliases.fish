@@ -85,6 +85,10 @@ alias berg='bundle exec rails g'
 alias bergg='bundle exec rails g | grep'
 alias bersp='bundle exec rspec'
 alias latest_ruby2="brew upgrade; clear; ruby-build --definitions | grep '^2.\d.\d\$' | tail -n 1"
+alias rubo='bundle exec rubocop --display-style-guide --display-cop-names --extra-details'
+alias rubo_fix='rubo --auto-correct'
+alias rubo_fix_all='rubo --auto-correct-all'
+alias rubo_todo='rubo --regenerate-todo'
 
 # Javascript
 alias yarn='yarn --prefer-offline'
