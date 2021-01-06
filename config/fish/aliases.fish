@@ -20,7 +20,7 @@ alias drop='cd ~/Dropbox'
 alias dev='cd ~/Dropbox/development'
 alias ws='cd ~/workspace'
 alias docs='cd ~/Documents'
-alias dotfiles='cd ~/dotfiles; and vim .; and cd -'
+alias dotfiles='code ~/dotfiles'
 alias chr='cd ~/Dropbox/development/digital-chronos'
 alias interview="cd ~/Dropbox/development/interview-exercises"
 
@@ -84,11 +84,17 @@ alias berrg='bundle exec rake routes | grep '
 alias berg='bundle exec rails g'
 alias bergg='bundle exec rails g | grep'
 alias bersp='bundle exec rspec'
-alias latest_ruby2="brew upgrade; clear; ruby-build --definitions | grep '^2.\d.\d\$' | tail -n 1"
 alias rubo='bundle exec rubocop --display-style-guide --display-cop-names --extra-details'
 alias rubo_fix='rubo --auto-correct'
 alias rubo_fix_all='rubo --auto-correct-all'
 alias rubo_todo='rubo --regenerate-todo'
+function latest_ruby
+    brew upgrade
+    clear
+    ruby-build --definitions | grep "^"$argv[1]".\d.\d\$" | tail -n 1
+end
+alias latest_ruby2="latest_ruby 2"
+alias latest_ruby3="latest_ruby 3"
 
 # Javascript
 alias yarn='yarn --prefer-offline'
@@ -146,7 +152,7 @@ alias gpf='gp --force-with-lease'
 alias gpt='gp --tags'
 alias gtags='g ctags'
 alias gsl='g stash list'
-alias gsts='g stash save -u'
+alias gstsu='g stash save -u'
 alias gstl='g stash list'
 alias gstp='g stash pop'
 alias current_branch='g rev-parse --abbrev-ref HEAD'
