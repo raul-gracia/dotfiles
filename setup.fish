@@ -3,32 +3,41 @@ echo 'Brewing...'
 brew tap Homebrew/bundle
 brew bundle --file Brewfile.standard
 
+echo 'Installing dotfiles...'
+set excluded_files 'bootstrap.sh' 'Brewfile.personal' 'Brewfile.standard' 'install.rb' 'README.md' 'setup.fish' 'others'
+echo 'Executing: rcup -fd . '(echo '-x '{$excluded_files})
+rcup -fd . '-x '{excluded_files_args}
+
 echo 'Installing Ruby...'
-rbenv install 2.7.2
-rbenv global 2.7.2
+asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git
+asdf install ruby latest
+asdf global ruby (asdf list ruby | head | string trim)
 
-echo 'Bundling...'
-gem install bundler
-and bundle install
-and rm Gemfile.lock
+echo 'Installing Python...'
+asdf plugin-add python
+asdf install python latest
+asdf global python (asdf list python | head | string trim)
 
-echo 'Installing pip tools...'
-set pip_tools 'pip' 'httpie' 'psutil' 'git+git://github.com/powerline/powerline' 'awscli' 'ansible'
+echo 'Installing Erlang...'
+asdf plugin add erlang https://github.com/asdf-vm/asdf-erlang.git
+asdf install erlang latest
+asdf global erlang (asdf list erlang | head | string trim)
 
-for pip_tool in $pip_tools
-    pip3 install --upgrade $pip_tool
-end
+echo 'Installing Elixir...'
+asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
+asdf install elixir latest
+asdf global elixir (asdf list elixir | head | string trim)
+
+echo 'Installing Rust...'
+asdf plugin-add rust https://github.com/code-lever/asdf-rust.git
+asdf install rust latest
+asdf global rust (asdf list rust | head | string trim)
 
 echo 'Getting the encrypted exports'
 echo 'Please log into github first to download Gist'
 gist --login
 gist -r 4c6216ef0cd3a8c80d8e74decc36a6b3 >/tmp/exports.gpg
 gpg -d /tmp/exports.gpg >~/dotfiles/config/fish/exports.fish
-
-echo 'Installing dotfiles...'
-set excluded_files 'bootstrap.sh' 'Brewfile' 'Gemfile' 'install.rb' 'README.md' 'setup.fish' 'others'
-echo 'Executing: rcup -fd . '(echo '-x '{$excluded_files})
-rcup -fd . '-x '{excluded_files_args}
 
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim

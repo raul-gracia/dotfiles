@@ -1,0 +1,10 @@
+bundler
+pry
+colorize
+time_diff
+rails
+foreman
+rubocop
+solargraph
+ruby-debug-ide
+debase

@@ -1,0 +1,6 @@
+pip
+httpie
+psutil
+git+git://github.com/powerline/powerline
+awscli
+ansible
