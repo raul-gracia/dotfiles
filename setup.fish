@@ -1,7 +1,7 @@
 fish_update_completions
 echo 'Brewing...'
 brew tap Homebrew/bundle
-brew bundle --file Brewfile.standard
+brew bundle --file Brewfile.standard --no-lock
 
 echo 'Installing dotfiles...'
 set excluded_files 'bootstrap.sh' 'Brewfile.personal' 'Brewfile.standard' 'install.rb' 'README.md' 'setup.fish' 'others'
