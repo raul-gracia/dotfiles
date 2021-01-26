@@ -22,8 +22,9 @@ brew 'bat'
 brew 'procs'
 brew 'sd'
 
-brew 'rbenv', args: ['HEAD']
-brew 'ruby-build', args: ['HEAD']
+brew 'coreutils'
+brew 'curl'
+brew 'asdf'
 
 brew 'node'
 brew 'psutils'
