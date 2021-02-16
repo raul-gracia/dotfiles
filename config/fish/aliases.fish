@@ -298,7 +298,7 @@ function rcruit-stag
     eval $argv --app rcruit-staging
 end
 
-alias bb='cd ~/dotfiles; brew update; and brew upgrade; and brew bundle; cd -'
+alias bbp='brew bundle --file Brewfile.personal --no-lock'
 alias redis='redis-server --daemonize yes; and redis-cli flushall'
 
 function dark_theme

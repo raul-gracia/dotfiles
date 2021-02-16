@@ -21,39 +21,18 @@ set -xg rust $HOME/.cargo/bin
 set -xg composer $HOME/.composer/vendor/bin
 
 set -xg ANDROID_HOME /Users/maliciousmind/Library/Android/sdk
-set -xg JAVA_HOME /Library/Java/Home
-set -xg JAVA_HOME (/usr/libexec/java_home)
+set -xg JAVA_HOME /usr/local/opt/openjdk/bin
 set -gx CPPFLAGS "-I/usr/local/opt/openjdk/include"
 
-
-
 set -gx PATH $python_path $homebrew $default_path $tmux_gen $rust $composer
+set -g fish_user_paths "/usr/local/opt/openjdk/bin" $fish_user_paths
 
 set -xg OBJC_DISABLE_INITIALIZE_FORK_SAFETY YES
-
-function ggi
-    ggdo install $argv[1]
-end
-function ggiu
-    ggdo uninstall $argv[1]
-end
-
-function ggdo --description 'Globally install/uninstall a gem for all ruby versions'
-    set -l versions (rbenv versions | ruby -e 'puts $stdin.read.split("\n").map { |l| l.scan(/(\d\.\d\.\d-?p?\d{3}?)/)}')
-    echo 1 $argv[1]
-    echo 2 $argv[2]
-    for i in $versions
-        echo $argv[1] $argv[2] for $i
-        rbenv local $i
-        gem $argv[1] $argv[2] >/dev/null
-    end
-end
 
 test -e {$HOME}/.iterm2_shell_integration.fish
 and source {$HOME}/.iterm2_shell_integration.fish
 
 source (brew --prefix asdf)/asdf.fish
-set -g fish_user_paths "/usr/local/opt/openjdk/bin" $fish_user_paths
 
 set uptime_days (string trim (uptime | grep -oEi '\\d+ days?'))
 if test -n uptime_days

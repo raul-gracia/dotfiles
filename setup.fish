@@ -33,6 +33,17 @@ asdf plugin-add rust https://github.com/code-lever/asdf-rust.git
 asdf install rust latest
 asdf global rust (asdf list rust | head | string trim)
 
+echo 'Installing Golang...'
+asdf plugin-add golang https://github.com/kennyp/asdf-golang.git
+asdf install golang latest
+asdf global golang (asdf list golang | head | string trim)
+
+echo 'Installing Nodejs...'
+asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+asdf install nodejs latest
+asdf global nodejs (asdf list nodejs | head | string trim)
+
+
 echo 'Getting the encrypted exports'
 echo 'Please log into github first to download Gist'
 gist --login
