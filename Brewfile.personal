@@ -9,3 +9,6 @@ cask 'transmission'
 cask 'iina'
 cask 'responsively'
 cask 'discord'
+cask 'bartender'
+cask 'responsively'
+
