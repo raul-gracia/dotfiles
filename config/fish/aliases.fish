@@ -343,7 +343,7 @@ function branch-from-trello
     gup
     gcob feature/$id/$title
     trello-move-to-list $argv 'In Progress'
-    trello-add-member $argv 'raulgracialario'
+    trello-add-member $argv raulgracialario
     cl
 end
 ###### TRELLO #############
@@ -383,4 +383,38 @@ function dotpull --description 'pulls dotfiles and decrypt exports'
     gpg --decrypt /tmp/exports >~/.config/fish/exports.fish
     rm -rf /tmp/exports
     cd -
+end
+
+# Deliveroo
+function get_access_role
+    saiyan-cli new-role --role-name $argv[1] --duration "2 hours" --reason "SSM access to staging" --save-profile saml
+end
+
+function saiyan-rails-console
+    ssm-saiyan $argv[1] web hopper-runner bundle exec rails c
+end
+
+function staging-access
+    gsts --idp-id C01jnk96c --sp-id 461132902683 --aws-profile saml
+    saiyan-rails-console $argv[1]
+    if test $status != 0
+        get_access_role apps-testing-admin-production-engineer
+        saiyan-rails-console $argv[1]
+    end
+end
+
+function rider-api-staging
+    staging-access rider-api
+end
+
+function rider-orders-staging
+    staging-access rider-orders
+end
+
+function rider-domain-staging
+    staging-access rider-domain
+end
+
+function order-status-staging
+    staging-access order-status
 end
