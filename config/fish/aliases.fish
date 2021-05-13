@@ -366,6 +366,7 @@ end
 
 alias weather="curl http://wttr.in/London"
 alias yd="youtube-dl"
+alias fix_gpg="brew link --overwrite gnupg"
 
 function dotpush --description 'pushes dotfiles and encrypt exports and update dotfiles'
     cd ~/dotfiles
@@ -392,7 +393,7 @@ function get_access_role
 end
 
 function saiyan-rails-console
-    ssm-saiyan $argv[1] web hopper-runner bundle exec rails c
+    ssm-saiyan $argv[1] internal-web hopper-runner bundle exec rails c
 end
 
 function staging-access
@@ -419,4 +420,7 @@ end
 function order-status-staging
     staging-access order-status
 end
-alias fix_gpg="brew link --overwrite gnupg"
+
+function self-help-service
+    staging-access self-help-service
+end
