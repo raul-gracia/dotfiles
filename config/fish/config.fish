@@ -23,6 +23,7 @@ set -xg composer $HOME/.composer/vendor/bin
 set -xg ANDROID_HOME /Users/maliciousmind/Library/Android/sdk
 set -xg JAVA_HOME /usr/local/opt/openjdk/bin
 set -gx CPPFLAGS "-I/usr/local/opt/openjdk/include"
+set -gx KERL_BUILD_DOCS "yes"
 
 set -gx PATH $python_path $homebrew $default_path $tmux_gen $rust $composer
 set -g fish_user_paths "/usr/local/opt/openjdk/bin" $fish_user_paths

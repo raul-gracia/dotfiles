@@ -386,6 +386,7 @@ function dotpull --description 'pulls dotfiles and decrypt exports'
 end
 
 # Deliveroo
+
 function get_access_role
     saiyan-cli new-role --role-name $argv[1] --duration "2 hours" --reason "SSM access to staging" --save-profile saml
 end
@@ -418,3 +419,4 @@ end
 function order-status-staging
     staging-access order-status
 end
+alias fix_gpg="brew link --overwrite gnupg"
