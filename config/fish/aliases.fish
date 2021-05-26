@@ -68,6 +68,7 @@ function upgradeall
     and omf update
     and nvim --headless +':PlugUpdate' +':PlugUpgrade' +':qall'
     and pip3 install neovim --upgrade
+    and asdf plugin update --all
 end
 
 # Rails

@@ -21,7 +21,7 @@
 [gpg]
   program = /usr/local/bin/gpg
 [core]
-	excludesfile = /Users/maliciousmind/.gitignore_global
+	excludesfile = ~/.gitignore
 	autocrlf = false
 	editor = code --wait
 	safecrlf = true

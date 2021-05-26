@@ -1,3 +1,5 @@
+brew 'exercism'
+
 cask 'dropbox'
 cask 'tableplus'
 cask 'graphiql'
