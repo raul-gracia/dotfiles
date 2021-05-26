@@ -9,11 +9,10 @@ cask 'transmission'
 cask 'iina'
 cask 'responsively'
 cask 'discord'
-cask 'bartender'
 cask 'responsively'
-cask 'trello'
 cask 'virtualbox'
+cask 'dozer'
 
-repo = 'popcorn-official/popcorn-desktop'
-tap repo, "https://github.com/#{repo}.git"
-cask 'popcorn-time'
+#repo = 'popcorn-official/popcorn-desktop'
+#tap repo, "https://github.com/#{repo}.git"
+#cask 'popcorn-time'
