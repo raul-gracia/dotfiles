@@ -76,6 +76,7 @@ function upgradeall
     and asdf_install_latest_version_of 'erlang'
     and asdf_install_latest_version_of 'nodejs'
     and pip3 install neovim --upgrade
+    and pip3 install --upgrade pip
 end
 
 # Rails
