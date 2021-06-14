@@ -10,38 +10,31 @@ rcup -fd . '-x '{excluded_files_args}
 
 echo 'Installing Ruby...'
 asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git
-asdf install ruby latest
-asdf global ruby (asdf list ruby | head -n 1 | string trim)
+asdf_install_latest_version_of 'ruby'
 
 echo 'Installing Python...'
 asdf plugin-add python
-asdf install python latest
-asdf global python (asdf list python | head -n 1 | string trim)
+asdf_install_latest_version_of 'python'
 
 echo 'Installing Erlang...'
 asdf plugin add erlang https://github.com/asdf-vm/asdf-erlang.git
-asdf install erlang latest
-asdf global erlang (asdf list erlang | head -n 1 | string trim)
+asdf_install_latest_version_of 'erlang'
 
 echo 'Installing Elixir...'
 asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
-asdf install elixir latest
-asdf global elixir (asdf list elixir | head -n 1 | string trim)
+asdf_install_latest_version_of 'elixir'
 
 echo 'Installing Rust...'
 asdf plugin-add rust https://github.com/code-lever/asdf-rust.git
-asdf install rust latest
-asdf global rust (asdf list rust | head -n 1 | string trim)
+asdf_install_latest_version_of 'rust'
 
 echo 'Installing Golang...'
 asdf plugin-add golang https://github.com/kennyp/asdf-golang.git
-asdf install golang latest
-asdf global golang (asdf list golang | head -n 1 | string trim)
+asdf_install_latest_version_of 'golang'
 
 echo 'Installing Nodejs...'
 asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
-asdf install nodejs latest
-asdf global nodejs (asdf list nodejs | head -n 1 | string trim)
+asdf_install_latest_version_of 'nodejs'
 
 
 echo 'Getting the encrypted exports'

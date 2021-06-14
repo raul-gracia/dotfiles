@@ -67,8 +67,15 @@ function upgradeall
     brew upgrade
     and omf update
     and nvim --headless +':PlugUpdate' +':PlugUpgrade' +':qall'
-    and pip3 install neovim --upgrade
     and asdf plugin update --all
+    and asdf_install_latest_version_of 'ruby'
+    and asdf_install_latest_version_of 'python'
+    and asdf_install_latest_version_of 'rust'
+    and asdf_install_latest_version_of 'golang'
+    and asdf_install_latest_version_of 'elixir'
+    and asdf_install_latest_version_of 'erlang'
+    and asdf_install_latest_version_of 'nodejs'
+    and pip3 install neovim --upgrade
 end
 
 # Rails
@@ -424,4 +431,39 @@ end
 
 function self-help-service
     staging-access self-help-service
+end
+
+##### Asdf install latest versions globally ########
+function asdf_install_latest_version_of
+    asdf install $argv[1] latest
+    asdf global $argv[1]  (asdf list $argv[1] | sort -nr | head -n 1 | string trim)
+end
+
+function install_latest_nodejs
+    asdf_install_latest_version_of 'nodejs'
+    npm install -g npm@latest
+end
+
+function install_latest_ruby
+    asdf_install_latest_version_of 'ruby'
+end
+
+function install_latest_python
+    asdf_install_latest_version_of 'python'
+end
+
+function install_latest_erlang
+    asdf_install_latest_version_of 'erlang'
+end
+
+function install_latest_elixir
+    asdf_install_latest_version_of 'elixir'
+end
+
+function install_latest_rust
+    asdf_install_latest_version_of 'rust'
+end
+
+function install_latest_golang
+    asdf_install_latest_version_of 'golang'
 end
