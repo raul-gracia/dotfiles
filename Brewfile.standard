@@ -21,6 +21,7 @@ brew 'exa'
 brew 'bat'
 brew 'procs'
 brew 'sd'
+brew 'gh'
 
 brew 'coreutils'
 brew 'curl'
