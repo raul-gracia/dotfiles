@@ -65,18 +65,18 @@ end
 function upgradeall
     brew update
     brew upgrade
-    and omf update
-    and nvim --headless +':PlugUpdate' +':PlugUpgrade' +':qall'
-    and asdf plugin update --all
-    and asdf_install_latest_version_of ruby
-    and asdf_install_latest_version_of python
-    and asdf_install_latest_version_of rust
-    and asdf_install_latest_version_of golang
-    and asdf_install_latest_version_of elixir
-    and asdf_install_latest_version_of erlang
-    and asdf_install_latest_version_of nodejs
-    and pip3 install neovim --upgrade
-    and pip3 install --upgrade pip
+    omf update
+    nvim --headless +':PlugUpdate' +':PlugUpgrade' +':qall'
+    asdf plugin update --all
+    asdf_install_latest_version_of ruby
+    asdf_install_latest_version_of python
+    asdf_install_latest_version_of rust
+    asdf_install_latest_version_of golang
+    asdf_install_latest_version_of elixir
+    asdf_install_latest_version_of erlang
+    asdf_install_latest_version_of nodejs
+    pip3 install neovim --upgrade
+    pip3 install --upgrade pip
 end
 
 # Rails
