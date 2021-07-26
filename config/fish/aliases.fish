@@ -72,8 +72,8 @@ function upgradeall
     asdf_install_latest_version_of python
     asdf_install_latest_version_of rust
     asdf_install_latest_version_of golang
-    asdf_install_latest_version_of elixir
     asdf_install_latest_version_of erlang
+    asdf_install_latest_version_of elixir
     asdf_install_latest_version_of nodejs
     pip3 install neovim --upgrade
     pip3 install --upgrade pip
