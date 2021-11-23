@@ -463,6 +463,8 @@ end
 
 function install_latest_elixir
     asdf_install_latest_version_of elixir
+    mix local.hex --force
+    mix local.phx --force
 end
 
 function install_latest_rust
