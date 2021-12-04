@@ -18,11 +18,13 @@ set -xg tmux_gen $HOME/.tmuxgen/bin $HOME/.tmuxgen
 set -xg python_path /usr/local/opt/python/libexec/bin
 set -xg rust $HOME/.cargo/bin
 set -xg composer $HOME/.composer/vendor/bin
-set -xg ANDROID_HOME /Users/maliciousmind/Library/Android/sdk
+set -xg ANDROID_HOME /Users/(whoami)/Library/Android/sdk
 set -xg JAVA_HOME /usr/local/opt/openjdk/bin
 set -gx CPPFLAGS -I/usr/local/opt/openjdk/include
-set -gx PATH $python_path $homebrew $default_path $tmux_gen $rust $composer
+set -xg rover_path /Users/(whoami)/.rover/bin
+set -gx PATH $python_path $homebrew $default_path $tmux_gen $rust $composer $rover_path
 set -g fish_user_paths /usr/local/opt/openjdk/bin $fish_user_paths
+
 
 set -gx KERL_BUILD_DOCS yes
 set -xg RUBYOPT -W0
