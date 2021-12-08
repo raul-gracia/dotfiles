@@ -7,6 +7,7 @@ alias fexports='code --wait ~/.config/fish/exports.fish'
 alias faliases='code --wait ~/.config/fish/aliases.fish'
 
 alias ls='exa'
+alias lsi='ls --icons'
 alias cat='bat'
 
 # Typos
@@ -34,6 +35,20 @@ alias dce='dc exec'
 alias dcew='dce web'
 alias kt='dc run -e MIX_ENV=test web mix test'
 alias add-ssh-keys='ssh-add -K ~/.ssh/github; and ssh-add -K ~/.ssh/raulgracialario'
+
+function dropignore
+    cd $argv[1]
+    set current_dir (pwd)
+    if test -d node_modules
+        echo "Ignoring " $current_dir/node_modules
+        xattr -w com.dropbox.ignored 1 $current_dir/node_modules
+    else
+        set folders (ls -al --no-user --no-time --no-filesize | grep '^d' | awk '{print $2}' | grep -v '^\.' | grep -v 'tmp' | grep -v 'vendor' | grep -v 'log')
+        for folder in $folders
+            dropignore $current_dir/$folder
+        end
+    end
+end
 
 function time_in_london
     cd ~/Dropbox/time_in_london/
@@ -85,7 +100,7 @@ alias ber='bundle exec rails'
 alias rdb='bundle exec rake db:migrate'
 alias rdbt='bundle exec rake db:migrate db:test:prepare'
 alias beg='bundle exec guard -c'
-alias rs='./bin/rails s --binding 127.0.0.1 $argv; or be rails s --binding 127.0.0.1 $argv'
+alias rs='./bin/rails s --binding 127.0.0.1 $argv 2>/dev/null; or be rails s --binding 127.0.0.1 $argv'
 alias berc='bundle exec rails console'
 alias bec='bundle exec cucumber'
 alias berr='bundle exec rake routes'
@@ -406,7 +421,7 @@ function get_access_role
 end
 
 function saiyan-rails-console
-    ssm-saiyan $argv[1] internal-web hopper-runner bundle exec rails c
+    ssm-saiyan $argv[1] web hopper-runner bundle exec rails c
 end
 
 function staging-access
