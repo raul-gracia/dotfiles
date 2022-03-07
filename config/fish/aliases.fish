@@ -20,6 +20,8 @@ alias gs='gst'
 alias drop='cd ~/Dropbox'
 alias dev='cd ~/Dropbox/development'
 alias ws='cd ~/workspace'
+alias wk='cd ~/Dropbox/development/work'
+alias kajima="cd ~/Dropbox/development/work/kajima"
 alias docs='cd ~/Documents'
 alias dotfiles='code ~/dotfiles'
 alias chr='cd ~/Dropbox/development/digital-chronos'
@@ -30,10 +32,6 @@ alias serve_dir='ruby -run -e httpd . -p 5055'
 alias tat='tmux attach -t'
 alias tls='tmux ls'
 alias tmuxgen_list='ll ~/.tmuxgen/'
-alias dc='docker-compose'
-alias dce='dc exec'
-alias dcew='dce web'
-alias kt='dc run -e MIX_ENV=test web mix test'
 alias add-ssh-keys='ssh-add -K ~/.ssh/github; and ssh-add -K ~/.ssh/raulgracialario'
 
 function dropignore
@@ -43,11 +41,12 @@ function dropignore
         echo "Ignoring " $current_dir/node_modules
         xattr -w com.dropbox.ignored 1 $current_dir/node_modules
     else
-        set folders (ls -al --no-user --no-time --no-filesize | grep '^d' | awk '{print $2}' | grep -v '^\.' | grep -v 'tmp' | grep -v 'vendor' | grep -v 'log')
+        set folders (ls -al --no-user --no-time --no-filesize | grep '^d' | cut -f 2- -d ' ' | grep -v '^\.' | grep -v 'tmp' | grep -v 'vendor' | grep -v 'log')
         for folder in $folders
             dropignore $current_dir/$folder
         end
     end
+    cd $argv[1]
 end
 
 function time_in_london
@@ -96,18 +95,18 @@ end
 
 # Rails
 alias be='bundle exec'
-alias ber='bundle exec rails'
-alias rdb='bundle exec rake db:migrate'
-alias rdbt='bundle exec rake db:migrate db:test:prepare'
+alias ber='bin/rails'
+alias rdb='bin/rails db:migrate'
+alias rdbt='bin/rails db:migrate db:test:prepare'
 alias beg='bundle exec guard -c'
 alias rs='./bin/rails s --binding 127.0.0.1 $argv 2>/dev/null; or be rails s --binding 127.0.0.1 $argv'
-alias berc='bundle exec rails console'
+alias berc='bin/rails console'
 alias bec='bundle exec cucumber'
-alias berr='bundle exec rake routes'
-alias berrg='bundle exec rake routes | grep '
-alias berrp='bundle exec rails runner "puts Rails.application.routes.recognize_path(\"$argv\")"'
-alias berg='bundle exec rails g'
-alias bergg='bundle exec rails g | grep'
+alias berr='bin/rails routes'
+alias berrg='bin/rails routes | grep '
+alias berrp='bin/rails runner "puts Rails.application.routes.recognize_path(\"$argv\")"'
+alias berg='bin/rails g'
+alias bergg='bin/rails g | grep'
 alias bersp='bundle exec rspec'
 alias rubo='bundle exec rubocop --display-style-guide --display-cop-names --extra-details'
 alias rubo_fix='rubo --auto-correct'
@@ -116,7 +115,7 @@ alias rubo_todo='rubo --regenerate-todo'
 function latest_ruby
     brew upgrade
     clear
-    ruby-build --definitions | grep "^"$argv[1]".\d.\d\$" | tail -n 1
+    asdf list all ruby | grep "^"$argv[1]".\d.\d\$" | tail -n 1
 end
 alias latest_ruby2="latest_ruby 2"
 alias latest_ruby3="latest_ruby 3"
@@ -138,6 +137,8 @@ alias gg='gigalixir'
 alias dc='docker-compose'
 alias dce='dc exec'
 alias dcew='dce web'
+alias dcew='dce web'
+alias kt='dc run -e MIX_ENV=test web mix test'
 
 # Kubernetes ( k8s )
 alias kbl='kubectl'
@@ -304,15 +305,11 @@ function staging-to-prod
 end
 
 # heroku
-alias hk='/usr/local/bin/heroku'
+alias hk="/opt/homebrew/bin/heroku"
 alias hlog='hk logs -t -a'
 alias hlg='hk logs -t'
 alias hconf='hk config -a'
 alias hp='g push heroku (current_branch):master'
-
-function railsgirls
-    eval $argv --app desolate-coast-9056
-end
 
 function rcruit
     eval $argv --app rcruit
@@ -412,45 +409,6 @@ function dotpull --description 'pulls dotfiles and decrypt exports'
     gpg --decrypt /tmp/exports >~/.config/fish/exports.fish
     rm -rf /tmp/exports
     cd -
-end
-
-# Deliveroo
-
-function get_access_role
-    saiyan-cli new-role --role-name $argv[1] --duration "2 hours" --reason "SSM access to staging" --save-profile saml
-end
-
-function saiyan-rails-console
-    ssm-saiyan $argv[1] web hopper-runner bundle exec rails c
-end
-
-function staging-access
-    gsts --idp-id C01jnk96c --sp-id 461132902683 --aws-profile saml
-    saiyan-rails-console $argv[1]
-    if test $status != 0
-        get_access_role apps-testing-admin-production-engineer
-        saiyan-rails-console $argv[1]
-    end
-end
-
-function rider-api-staging
-    staging-access rider-api
-end
-
-function rider-orders-staging
-    staging-access rider-orders
-end
-
-function rider-domain-staging
-    staging-access rider-domain
-end
-
-function order-status-staging
-    staging-access order-status
-end
-
-function self-help-service
-    staging-access self-help-service
 end
 
 ##### Asdf install latest versions globally ########

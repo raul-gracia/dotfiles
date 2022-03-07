@@ -12,10 +12,13 @@ cask 'iina'
 cask 'responsively'
 cask 'discord'
 cask 'responsively'
-cask 'virtualbox'
 cask 'dozer'
 cask 'blisk'
+cask 'paw'
+cask 'vivaldi'
 
-#repo = 'popcorn-official/popcorn-desktop'
-#tap repo, "https://github.com/#{repo}.git"
-#cask 'popcorn-time'
+
+
+repo = 'popcorn-official/popcorn-desktop'
+tap repo, "https://github.com/#{repo}.git"
+cask 'popcorn-time'

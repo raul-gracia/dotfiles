@@ -1,3 +1,5 @@
+IdentityFile ~/.ssh/raulgracialario
+
 ServerAliveInterval 60
 
 Host *
@@ -6,11 +8,8 @@ UseKeychain yes
 Host github.com
 IdentityFile ~/.ssh/raulgracialario
 
-Host europe-west1.gcp.ssh.gigalixir.com
-IdentityFile ~/.ssh/gigalixir
-
 Host heroku.com
-  IdentityFile ~/.ssh/raulgracialario
+IdentityFile ~/.ssh/raulgracialario
 
 Host gitlab.com
 IdentityFile ~/.ssh/raulgracialario

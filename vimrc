@@ -5,6 +5,7 @@ endif
 if filereadable(expand("~/.vimrc.leaders"))
   source ~/.vimrc.leaders
 endif
+set pyxversion=3
 
 syntax enable
 set background=dark
