@@ -1,7 +1,6 @@
 pip
 httpie
 psutil
-git+git://github.com/powerline/powerline
-awscli
+powerline-status
 ansible
 neovim

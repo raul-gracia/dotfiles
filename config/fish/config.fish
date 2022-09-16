@@ -17,9 +17,10 @@ set -xg homebrew /opt/homebrew/bin opt/homebrew/sbin
 set -xg rust $HOME/.cargo/bin
 set -xg composer $HOME/.composer/vendor/bin
 set -xg ANDROID_HOME /Users/(whoami)/Library/Android/sdk
+set -xg ANDROID_SDK_ROOT /Users/(whoami)/Library/Android/sdk
 set -xg JAVA_HOME (java -XshowSettings:properties -version 2>&1 >/dev/null | grep 'java.home' | sed -E 's/^\ +java\.home = //')
 set -xg rover_path /Users/(whoami)/.rover/bin
-set -gx PATH $homebrew $default_path $rust $composer $rover_path $ANDROID_HOME/platform-tools $ANDROID_HOME/tools/bin
+set -gx PATH $ANDROID_HOME/platform-tools $ANDROID_HOME/emulator $ANDROID_HOME/tools/bin $homebrew $default_path $rust $composer $rover_path 
 set -g fish_user_paths $JAVA_HOME $fish_user_paths
 
 
@@ -29,6 +30,7 @@ set -xg RUBY_CFLAGS -w
 set -xg HOMEBREW_NO_ANALYTICS 1
 set -xg FISH_CLIPBOARD_CMD pbcopy
 set -xg EDITOR code --wait
+set -xg EDITOR nvim
 set -xg MYSQL_USERNAME root
 set -xg COVERAGE true
 set -xg GPG_TTY (tty)
@@ -50,11 +52,10 @@ end
 source (brew --prefix asdf)/libexec/asdf.fish
 starship init fish | source
 
-set uptime_days (string trim (uptime | ruby -e 'puts readlines.first.strip.match(/\d+:\d+  up (.*), \d users?,/)&.captures&.first&.strip'))
-if test -n uptime_days
-    echo "Days without restart: "$uptime_days
-end
+ruby ~/dotfiles/uptime.rb
 fish_add_path /opt/homebrew/sbin
+
+set -xg PATH $homebrew $PATH
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!

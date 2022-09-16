@@ -11,11 +11,12 @@ cask 'transmission'
 cask 'iina'
 cask 'responsively'
 cask 'discord'
-cask 'responsively'
 cask 'dozer'
 cask 'blisk'
 cask 'paw'
 cask 'vivaldi'
+cask 'ngrok'
+cask 'cyberduck'
 
 
 

@@ -56,3 +56,7 @@
 	whitespace = red reverse
 [credential]
 	helper = osxkeychain
+[sendpack]
+	sideband = false
+[http]
+	postBuffer = 157286400

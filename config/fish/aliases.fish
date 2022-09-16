@@ -1,4 +1,5 @@
 alias vim='nvim'
+alias pihole='ssh pi@192.168.1.37'
 
 # Fish
 alias fr='source ~/.config/fish/config.fish > /dev/null 2>&1'
@@ -26,6 +27,7 @@ alias docs='cd ~/Documents'
 alias dotfiles='code ~/dotfiles'
 alias chr='cd ~/Dropbox/development/digital-chronos'
 alias interview="cd ~/Dropbox/development/interview-exercises"
+alias salsa="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/Salsa\ Music/"
 
 
 alias serve_dir='ruby -run -e httpd . -p 5055'
@@ -105,6 +107,7 @@ alias bec='bundle exec cucumber'
 alias berr='bin/rails routes'
 alias berrg='bin/rails routes | grep '
 alias berrp='bin/rails runner "puts Rails.application.routes.recognize_path(\"$argv\")"'
+alias berrpp='bin/rails runner "puts Rails.application.routes.recognize_path(\"$argv[1]\", method: :$argv[2])"'
 alias berg='bin/rails g'
 alias bergg='bin/rails g | grep'
 alias bersp='bundle exec rspec'
@@ -173,7 +176,7 @@ alias gdfc='g dsf --cached'
 alias gdf='g dsf'
 alias gdfcp='gdfc --patience'
 alias gdfp='gdf --patience'
-alias gp='g push -u origin (current_branch)'
+alias gp='g branch --set-upstream-to=origin/(current_branch) (current_branch); g push'
 alias gpf='gp --force-with-lease'
 alias gpt='gp --tags'
 alias gtags='g ctags'
@@ -183,6 +186,7 @@ alias gstl='g stash list'
 alias gstp='g stash pop'
 alias current_branch='g rev-parse --abbrev-ref HEAD'
 alias hbb='hub browse (git_remote_owner)/(git_remote_repo_name)'
+alias tldr='tldr --theme base16'
 
 function hb
     hub browse (git_remote_owner)/(git_remote_repo_name)
@@ -194,7 +198,7 @@ function clean_merged_branches
     else
         set branch develop
     end
-    g branch --merged $branch | grep -v master | grep -v develop | grep -v staging | grep -v qa | grep -v production | tr -cd "[:print:]" | sed "s/\[m//g" | xargs git branch -d
+    g branch --merged $branch | grep -v main | grep -v master | grep -v develop | grep -v staging | grep -v qa | grep -v production | tr -cd "[:print:]" | sed "s/\[m//g" | xargs git branch -d
 end
 
 function create_remote_branch
@@ -208,7 +212,7 @@ function gcp
 end
 
 alias crb='create_remote_branch'
-alias hpr='gp; and hub pull-request -b'
+alias hpr='gp; and gh pr create --base'
 alias bbpr='gp; and bitbucket pull_request (current_branch) -r (git_remote_repo_name) -w (git_remote_owner)'
 alias current_branch='g rev-parse --abbrev-ref HEAD'
 alias last_commit_message_long='g --no-pager log -1 --pretty=%B'
@@ -387,6 +391,8 @@ end
 
 alias weather="curl http://wttr.in/London"
 alias yd="youtube-dl"
+alias yd-playlist="yd -x -k --embed-thumbnail --audio-format flac --add-metadata --yes-playlist -i"
+alias yd-audio="yd -x --audio-format flac --audio-quality 0"
 
 function fix_gpg
     brew link --overwrite gnupg
