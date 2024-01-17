@@ -1,52 +1,62 @@
 #!/usr/bin/env ruby
-# encoding: utf-8
+
+# frozen_string_literal: true
 
 require 'erb'
 require 'fileutils'
 
 TMUX_SCRIPTS_FOLDER = File.expand_path('~/.tmuxgen')
 
-PROJECT_PATH = File.expand_path(ARGV[0])
-PROJECT_NAME = File.basename(PROJECT_PATH).gsub('.', '-')
-
-def print_help
-  options = '--'
-  options << template_list[0..-2].join(', --')
-  options << " or --"
-  options << template_list.last
-
-  puts """
-  tmuxgen A tmux script generator
-
-  Usage:
-    tmuxgen folder_path --flag
-
-    --flag: the type of template to render, options are: #{options}
-  """
+def template_list
+  template_files = Dir["#{TMUX_SCRIPTS_FOLDER}/templates/*.erb"].sort
+  template_files.map { |p| p.match(%r{.*/(.*)\.erb})[1] }.sort
 end
 
-def render_template(argument)
-  puts "Project path: #{PROJECT_PATH}"
-  puts "Project name: #{PROJECT_NAME}"
+def print_help(template_list)
+  options = template_list.join(', --')
+  puts <<-HELP
+  tmuxgen: A tmux script generator
 
-  template_name = argument.gsub('--', '')
-  path = File.expand_path("#{TMUX_SCRIPTS_FOLDER}/templates/#{template_name}.erb")
+  Usage:
+    tmuxgen folder_path --template
 
-  if File.exist?(path)
-    template = File.read(path)
-    renderer = ERB.new(template)
-    filename = "#{TMUX_SCRIPTS_FOLDER}/#{PROJECT_NAME}-tmux"
-    File.write(filename, renderer.result)
-    FileUtils.chmod('+x', filename)
+    --template: the type of template to render, options are: --#{options}
+  Example:
+    tmuxgen . --rails
+  HELP
+  exit
+end
+
+def render_template(project_path, template_name)
+  print_help(template_list) unless project_path && template_name
+
+  expanded_project_path = File.expand_path(project_path)
+  project_name = File.basename(expanded_project_path).tr('.', '-')
+  puts "Project path: #{expanded_project_path}"
+  puts "Project name: #{project_name}"
+  puts "Template name: #{template_name}"
+
+  template_file_name = template_name.gsub('--', '')
+  template_path = "#{TMUX_SCRIPTS_FOLDER}/templates/#{template_file_name}.erb"
+
+  if File.exist?(template_path)
+    render_and_write_template(expanded_project_path, project_name, template_file_name)
   else
-    print_help
+    print_help(template_list)
   end
 end
 
-def template_list
-  template_files = Dir["#{TMUX_SCRIPTS_FOLDER}/templates/*.erb"]
-  template_files.map{|p| p.match(/.*\/(.*)\.erb/)[1]}.sort
+def render_and_write_template(project_path, project_name, template_name)
+  template_path = "#{TMUX_SCRIPTS_FOLDER}/templates/#{template_name}.erb"
+  template = File.read(template_path)
+  renderer = ERB.new(template)
+  filename = "#{TMUX_SCRIPTS_FOLDER}/#{project_name}-tmux"
+  File.write(filename, renderer.result(binding))
+  FileUtils.chmod('+x', filename)
 end
 
-
-render_template(ARGV[1])
+if ARGV.length != 2
+  print_help(template_list)
+else
+  render_template(ARGV[0], ARGV[1])
+end

@@ -17,6 +17,7 @@ cask 'paw'
 cask 'vivaldi'
 cask 'ngrok'
 cask 'cyberduck'
+cask 'obs'
 
 
 

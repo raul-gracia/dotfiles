@@ -33,7 +33,6 @@ brew 'curl'
 brew 'asdf'
 brew 'starship'
 
-brew 'node'
 brew 'psutils'
 brew 'postgresql'
 brew 'redis'
@@ -55,3 +54,9 @@ cask 'font-fira-code-nerd-font'
 cask 'insomnia'
 cask 'grammarly'
 cask 'fig'
+
+brew 'tfsec'
+brew 'tflint'
+brew 'inframap'
+
+

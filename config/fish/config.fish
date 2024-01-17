@@ -12,7 +12,8 @@ function fish_greeting
 end
 
 # Exports for PATHs
-set -xg default_path ./node_modules/.bin /usr/bin /usr/sbin /bin /sbin /usr/local/mysql/bin/ /usr/local/bin
+set -xg default_path ./node_modules/.bin /usr/bin /usr/sbin /bin /sbin /usr/local/mysql/bin/ /usr/local/bin /usr/local/texlive/2023basic/bin/universal-darwin/
+
 set -xg homebrew /opt/homebrew/bin opt/homebrew/sbin
 set -xg rust $HOME/.cargo/bin
 set -xg composer $HOME/.composer/vendor/bin
@@ -30,7 +31,6 @@ set -xg RUBY_CFLAGS -w
 set -xg HOMEBREW_NO_ANALYTICS 1
 set -xg FISH_CLIPBOARD_CMD pbcopy
 set -xg EDITOR code --wait
-set -xg EDITOR nvim
 set -xg MYSQL_USERNAME root
 set -xg COVERAGE true
 set -xg GPG_TTY (tty)
@@ -52,13 +52,11 @@ end
 source (brew --prefix asdf)/libexec/asdf.fish
 starship init fish | source
 
-ruby ~/dotfiles/uptime.rb
 fish_add_path /opt/homebrew/sbin
 
 set -xg PATH $homebrew $PATH
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-eval /opt/homebrew/Caskroom/miniconda/base/bin/conda "shell.fish" "hook" $argv | source
-# <<< conda initialize <<<
 thefuck --alias | source
+# bun
+set --export BUN_INSTALL "$HOME/.bun"
+set --export PATH $BUN_INSTALL/bin $PATH

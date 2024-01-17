@@ -1,6 +1,6 @@
-#!/usr/bin/env zsh
-SESSION=<%= PROJECT_NAME %>
-FOLDER=<%= PROJECT_PATH %>
+#!/usr/bin/env fish
+set SESSION <%= project_name %>-tmux
+set FOLDER <%= project_path %>
 
 tmux -2 new-session -d -s $SESSION
 
@@ -12,33 +12,36 @@ tmux split-window -v
 
 # Provision the splits
 tmux select-pane -t 1
-tmux send-keys "cd $FOLDER" C-m
-tmux send-keys "vim ." C-m
-if [ -f Guardfile ]; then
+tmux send-keys "cd $FOLDER" \r
+tmux send-keys "vim ." \r
+
+if test -f Guardfile
   tmux split-window -h
   tmux select-pane -t 2
-  tmux send-keys "cd $FOLDER" C-m
-  tmux send-keys "beg" C-m
+  tmux send-keys "cd $FOLDER" \r
+  tmux send-keys beg \r
   tmux resize-pane -x 80
   tmux select-pane -t 3
 else
   tmux select-pane -t 2
-fi
-tmux send-keys "cd $FOLDER" C-m
-tmux send-keys "clear" C-m
+  tmux send-keys "bersp" \r
+end
+
+tmux send-keys "cd $FOLDER" \r
+tmux send-keys clear \r
 tmux resize-pane -y 10
 
 # Setup a window for Background Tasks
-tmux new-window -t $SESSION:2 -n 'BT'
+tmux new-window -t $SESSION:2 -n BT
 
 # Provision the BT Window
 tmux split-window -h
 tmux select-pane -t 1
-tmux send-keys "cd $FOLDER" C-m
-tmux send-keys "rs" C-m
+tmux send-keys "cd $FOLDER" \r
+tmux send-keys rs \r
 tmux select-pane -t 2
-tmux send-keys "cd $FOLDER" C-m
-tmux send-keys "be rails c" C-m
+tmux send-keys "cd $FOLDER" \r
+tmux send-keys "be rails c" \r
 
 # Move to IDE window
 tmux select-window -t $SESSION:1

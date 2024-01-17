@@ -1,0 +1,39 @@
+
+/* Class = "NSTextFieldCell"; title = "Display:"; ObjectID = "5Tm-5K-8n1"; */
+"5Tm-5K-8n1.title" = "顯示:";
+
+/* Class = "NSButtonCell"; title = "OK"; ObjectID = "8Cs-Gi-cQo"; */
+"8Cs-Gi-cQo.title" = "確定";
+
+/* Class = "NSMenuItem"; title = "12-Hour"; ObjectID = "AY3-Gf-m9k"; */
+"AY3-Gf-m9k.title" = "1-12 AM/PM";
+
+/* Class = "NSTextFieldCell"; title = "Scale:"; ObjectID = "EUa-1q-qM4"; */
+"EUa-1q-qM4.title" = "縮放:";
+
+/* Class = "NSWindow"; title = "Window"; ObjectID = "F0z-JX-Cv5"; */
+"F0z-JX-Cv5.title" = "Window";
+
+/* Class = "NSTextFieldCell"; title = "fliqlo.com"; ObjectID = "FbJ-M9-W9Z"; */
+"FbJ-M9-W9Z.title" = "fliqlo.com";
+
+/* Class = "NSTextFieldCell"; title = "Brightness:"; ObjectID = "XN1-7Z-W7f"; */
+"XN1-7Z-W7f.title" = "亮度:";
+
+/* Class = "NSButtonCell"; title = "Show Background"; ObjectID = "bGr-eU-zoU"; */
+"bGr-eU-zoU.title" = "背景";
+
+/* Class = "NSButtonCell"; title = "Show on Multiple Displays"; ObjectID = "bXZ-ZI-OCR"; */
+"bXZ-ZI-OCR.title" = "在多個顯示器上";
+
+/* Class = "NSTextField"; ibShadowedToolTip = "Open Site in Browser"; ObjectID = "gmP-du-xwf"; */
+"gmP-du-xwf.ibShadowedToolTip" = "在瀏覽器中打開網站";
+
+/* Class = "NSMenuItem"; title = "24-Hour"; ObjectID = "nBu-Sv-fbM"; */
+"nBu-Sv-fbM.title" = "0-23";
+
+/* Class = "NSTextFieldCell"; title = "Time Format:"; ObjectID = "vZB-wb-HPq"; */
+"vZB-wb-HPq.title" = "時間格式:";
+
+/* Class = "NSMenuItem"; title = "24-Hour (No Zero Padding)"; ObjectID = "wJq-ji-25Z"; */
+"wJq-ji-25Z.title" = "00-23";

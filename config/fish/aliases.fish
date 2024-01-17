@@ -1,11 +1,18 @@
 alias vim='nvim'
 alias pihole='ssh pi@192.168.1.37'
 
+
+alias tall-crop="mogrify -crop +16+41 -crop -12-124 *.jpg"
+
 # Fish
 alias fr='source ~/.config/fish/config.fish > /dev/null 2>&1'
 alias fe='code --wait ~/.config/fish/config.fish'
 alias fexports='code --wait ~/.config/fish/exports.fish'
 alias faliases='code --wait ~/.config/fish/aliases.fish'
+
+function who-port
+    lsof -n -i4TCP:(string trim $argv[1]) | grep LISTEN
+end
 
 alias ls='exa'
 alias lsi='ls --icons'
@@ -18,15 +25,16 @@ alias dofiles='dotfiles'
 alias gs='gst'
 
 # Shortcuts
-alias drop='cd ~/Dropbox'
-alias dev='cd ~/Dropbox/development'
+alias drop='cd ~/Library/CloudStorage/Dropbox'
+alias dev='cd ~/Library/CloudStorage/Dropbox/development'
 alias ws='cd ~/workspace'
-alias wk='cd ~/Dropbox/development/work'
-alias kajima="cd ~/Dropbox/development/work/kajima"
+alias wk='cd ~/Library/CloudStorage/Dropbox/development/work'
+alias dfe="cd ~/Library/CloudStorage/Dropbox/development/work/dfe"
+alias itrp="cd ~/Library/CloudStorage/Dropbox/development/work/dfe/international-teacher-relocation-payment"
 alias docs='cd ~/Documents'
 alias dotfiles='code ~/dotfiles'
-alias chr='cd ~/Dropbox/development/digital-chronos'
-alias interview="cd ~/Dropbox/development/interview-exercises"
+alias chr='cd ~/Library/CloudStorage/Dropbox/development/digital-chronos'
+alias interview="cd ~/Library/CloudStorage/Dropbox/development/interview-exercises"
 alias salsa="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/Salsa\ Music/"
 
 
@@ -52,17 +60,17 @@ function dropignore
 end
 
 function time_in_london
-    cd ~/Dropbox/time_in_london/
+    cd ~/Library/CloudStorage/Dropbox/time_in_london/
     ruby time_in_london.rb $argv
     cd -
 end
 function time_in_salsa
-    cd ~/Dropbox/time_in_london/
+    cd ~/Library/CloudStorage/Dropbox/time_in_london/
     ruby time_in_salsa.rb $argv
     cd -
 end
 function time_until
-    cd ~/Dropbox/time_in_london/
+    cd ~/Library/CloudStorage/Dropbox/time_in_london/
     ruby time_until.rb $argv
     cd -
 end
@@ -73,14 +81,17 @@ end
 alias tte='time_till_end'
 
 function time_since
-    cd ~/Dropbox/time_in_london/
+    cd ~/Library/CloudStorage/Dropbox/time_in_london/
     ruby time_since.rb $argv
     and cd -
 end
 
+alias uptime-me='ruby ~/dotfiles/uptime.rb'
+
 function upgradeall
     brew update
     brew upgrade
+    brew uninstall --ignore-dependencies nodejs
     omf update
     nvim --headless +':PlugUpdate' +':PlugUpgrade' +':qall'
     asdf plugin update --all
@@ -91,11 +102,23 @@ function upgradeall
     asdf_install_latest_version_of erlang
     asdf_install_latest_version_of elixir
     asdf_install_latest_version_of nodejs
+    asdf_install_latest_version_of bundler
     pip3 install neovim --upgrade
     pip3 install --upgrade pip
 end
 
 # Rails
+# alias docked='docker run --rm -it -v (pwd):/rails -v ruby-bundle-cache:/bundle -p 3000:3000 ghcr.io/rails/cli'
+# alias rails='docked rails'
+# alias rails-dev='docked bin/dev'
+# alias bundle='docked bundle'
+# alias yarn='docked yarn'
+# alias rake='docked rake'
+# alias gem='docked gem'
+
+
+
+
 alias be='bundle exec'
 alias ber='bin/rails'
 alias rdb='bin/rails db:migrate'
@@ -172,10 +195,7 @@ alias gap='g add -p'
 alias ga='g add'
 alias gup='g up'
 alias glg='g lg'
-alias gdfc='g dsf --cached'
-alias gdf='g dsf'
-alias gdfcp='gdfc --patience'
-alias gdfp='gdf --patience'
+alias gdf='g diff'
 alias gp='g branch --set-upstream-to=origin/(current_branch) (current_branch); g push'
 alias gpf='gp --force-with-lease'
 alias gpt='gp --tags'
@@ -187,6 +207,7 @@ alias gstp='g stash pop'
 alias current_branch='g rev-parse --abbrev-ref HEAD'
 alias hbb='hub browse (git_remote_owner)/(git_remote_repo_name)'
 alias tldr='tldr --theme base16'
+alias set-upstream='git branch --set-upstream-to=origin/(current_branch) (current_branch)'
 
 function hb
     hub browse (git_remote_owner)/(git_remote_repo_name)
@@ -240,6 +261,10 @@ function git_remote_repo_name
     git_remote | sed -nE 's/git@.*\..*:.*\/(.*)/\1/p'
 end
 
+function delete_squashed_branches
+    ~/dotfiles/scripts/delete_squashed_branches.rb $argv
+end
+
 function circleci
     if test (count $argv) = 0
         open "https://circleci.com/gh/"(git_remote_owner)"/"(git_remote_repo_name)"/tree/"(current_branch)
@@ -276,12 +301,12 @@ end
 function jissue
     set issue_number (current_branch | grep -Eo "MD-[0-9]+" | head -n 1)
     if test $issue_number
-        open "https://motivii.atlassian.net/browse/"$issue_number
+        open "https://.atlassian.net/browse/"$issue_number
     end
 end
 
 function releasing_tickets
-    glg master..develop | grep -o 'MD-\d\+' | sort | uniq | sed -E 's/(.*)/https:\/\/motivii\.atlassian\.net\/browse\/\1/'
+    glg master..develop | grep -o 'MD-\d\+' | sort | uniq | sed -E 's/(.*)/https:\/\/\.atlassian\.net\/browse\/\1/'
 end
 
 function master-to-qa
@@ -390,9 +415,10 @@ function ssh-pod
 end
 
 alias weather="curl http://wttr.in/London"
-alias yd="youtube-dl"
+alias yd="/usr/local/bin/youtube-dl"
 alias yd-playlist="yd -x -k --embed-thumbnail --audio-format flac --add-metadata --yes-playlist -i"
 alias yd-audio="yd -x --audio-format flac --audio-quality 0"
+alias yd-mp3="yd -x --audio-format mp3 --audio-quality 0"
 
 function fix_gpg
     brew link --overwrite gnupg
@@ -444,6 +470,7 @@ function install_latest_elixir
     asdf_install_latest_version_of elixir
     mix local.hex --force
     mix local.phx --force
+    mix archive.install hex phx_new --force
 end
 
 function install_latest_rust
@@ -452,4 +479,92 @@ end
 
 function install_latest_golang
     asdf_install_latest_version_of golang
+end
+
+
+function generate_xassets
+    set input $argv[1]
+    set file_name (string split -r -m1 "." (basename $input))[1]
+    set file_ext (string split -r -m1 "." (basename $input))[2]
+    convert -resize 512x512 $input $file_name"-512x512."$file_ext
+    convert -resize 1024x1024 $input $file_name"-1024x1024."$file_ext
+    convert -resize 256x256 $input $file_name"-256x256."$file_ext
+    convert -resize 128x128 $input $file_name"-128x128."$file_ext
+    convert -resize 64x64 $input $file_name"-64x64."$file_ext
+    convert -resize 32x32 $input $file_name"-32x32."$file_ext
+    convert -resize 16x16 $input $file_name"-16x16."$file_ext
+end
+
+
+function create_windows_instance
+    set instance_name windows-vlc
+    echo "Creating key pair..."
+    # Generate new keypair
+    aws lightsail create-key-pair --key-pair-name $instance_name-key-pair --output json > keypair.json
+    jq -r '.publicKeyBase64' keypair.json > ~/.ssh/$instance_name-publickey.pem
+    jq -r '.privateKeyBase64' keypair.json > ~/.ssh/$instance_name-privatekey.pem
+    chmod 600 ~/.ssh/$instance_name-privatekey.pem
+    rm keypair.json
+
+    echo "Creating instance..."
+    # Create a new Instance
+    aws lightsail create-instances --instance-names $instance_name --availability-zone eu-west-2b --blueprint-id windows_server_2022 --bundle-id medium_win_3_0 --key-pair-name $instance_name-key-pair > /dev/null
+
+    echo "Waiting..."
+    # Wait for instance state until it's running
+    while true
+        set instance_state (aws lightsail get-instance-state --instance-name $instance_name --query 'state.name' --output text)
+        if test $instance_state = "running"
+            break
+        end
+        sleep 1 
+    end
+    # Wait for RDP to be ready
+    while true
+        set access_details (aws lightsail get-instance-access-details --instance-name $instance_name --query 'accessDetails.passwordData.ciphertext' --output text)
+        if test -n "$access_details"
+            break
+        end
+        sleep 1
+    end
+
+    fetch_instance_password
+    echo "Done. Password has been copied to clipboard"
+end
+
+function destroy_windows_instance
+    set instance_name windows-vlc
+    aws lightsail delete-instance --instance-name $instance_name
+    aws lightsail delete-key-pair --key-pair-name $instance_name-key-pair
+end
+
+function fetch_instance_password
+    set instance_name windows-vlc
+    # Fetch RDP Password and Details
+    set access_json (aws lightsail get-instance-access-details --instance-name $instance_name --output json)
+
+    # Decrypt the ciphertext using the PEM key
+    set encrypted_password (echo $access_json | jq -r '.accessDetails.passwordData.ciphertext')
+    set pem_key_path ~/.ssh/$instance_name-privatekey.pem
+    set decrypted_password (echo $encrypted_password | base64 --decode | openssl pkeyutl -decrypt -inkey $pem_key_path)
+
+    echo $decrypted_password | pbcopy
+end
+
+
+function fetch_github_trello_info
+  set git_remote (git config --get remote.origin.url)
+
+  if test -z "$git_remote"
+    echo "This directory is not a Git repository."
+    return 1
+  end
+# Use regex to match owner and repo
+  set matches (string match -r 'https:\/\/github.com\/(.*)\/(.*).git' $git_remote)
+
+  # Extract owner and repo from regex captures
+  set owner $matches[2]
+  set repo $matches[3]
+
+  ruby ~/fetch-monthly-work.rb $owner $repo
 end

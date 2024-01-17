@@ -1,0 +1,39 @@
+
+/* Class = "NSTextFieldCell"; title = "Display:"; ObjectID = "5Tm-5K-8n1"; */
+"5Tm-5K-8n1.title" = "Vis:";
+
+/* Class = "NSButtonCell"; title = "OK"; ObjectID = "8Cs-Gi-cQo"; */
+"8Cs-Gi-cQo.title" = "OK";
+
+/* Class = "NSMenuItem"; title = "12-Hour"; ObjectID = "AY3-Gf-m9k"; */
+"AY3-Gf-m9k.title" = "1-12 AM/PM";
+
+/* Class = "NSTextFieldCell"; title = "Scale:"; ObjectID = "EUa-1q-qM4"; */
+"EUa-1q-qM4.title" = "Skala:";
+
+/* Class = "NSWindow"; title = "Window"; ObjectID = "F0z-JX-Cv5"; */
+"F0z-JX-Cv5.title" = "Window";
+
+/* Class = "NSTextFieldCell"; title = "fliqlo.com"; ObjectID = "FbJ-M9-W9Z"; */
+"FbJ-M9-W9Z.title" = "fliqlo.com";
+
+/* Class = "NSTextFieldCell"; title = "Brightness:"; ObjectID = "XN1-7Z-W7f"; */
+"XN1-7Z-W7f.title" = "Lysstyrke:";
+
+/* Class = "NSButtonCell"; title = "Show Background"; ObjectID = "bGr-eU-zoU"; */
+"bGr-eU-zoU.title" = "Bakgrunn";
+
+/* Class = "NSButtonCell"; title = "Show on Multiple Displays"; ObjectID = "bXZ-ZI-OCR"; */
+"bXZ-ZI-OCR.title" = "På flere skjermer";
+
+/* Class = "NSTextField"; ibShadowedToolTip = "Open Site in Browser"; ObjectID = "gmP-du-xwf"; */
+"gmP-du-xwf.ibShadowedToolTip" = "Åpne nettstedet i nettleseren";
+
+/* Class = "NSMenuItem"; title = "24-Hour"; ObjectID = "nBu-Sv-fbM"; */
+"nBu-Sv-fbM.title" = "0-23";
+
+/* Class = "NSTextFieldCell"; title = "Time Format:"; ObjectID = "vZB-wb-HPq"; */
+"vZB-wb-HPq.title" = "Tidsformat:";
+
+/* Class = "NSMenuItem"; title = "24-Hour (No Zero Padding)"; ObjectID = "wJq-ji-25Z"; */
+"wJq-ji-25Z.title" = "00-23";

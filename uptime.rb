@@ -7,7 +7,7 @@ gemfile do
   gem 'colorize'
 end
 
-uptime_days = `w -hi`.chomp.match(/.* (\d+)days .*/)&.first&.to_i
+uptime_days = `w -hi`.chomp.match(/.* (\d+)days .*/)&.captures&.first&.to_i
 return if uptime_days.nil?
 
 def message(days)
