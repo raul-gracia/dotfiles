@@ -64,7 +64,6 @@ else
 fi
 
 check_command "curl -L https://get.oh-my.fish | fish"
-check_command "fish omf theme install bira"
 
 # ACTUAL INSTALLATION
 if [ -d ~/dotfiles ]; then
