@@ -20,15 +20,15 @@ if ! command -v fish > /dev/null 2>&1 ; then
   echo "Now that we can brew, let's install fish (your friendly shell)"
   brew install fish
   echo "Now that we have fish let's make it our default shell"
-  sudo bash -c "echo '/usr/local/bin/fish' >> /etc/shells"
-  chpass -s /usr/local/bin/fish `whoami`
+  sudo bash -c "echo '/opt/homebrew/bin/fish' >> /etc/shells"
+  chpass -s /opt/homebrew/bin/fish `whoami`
 else
   echo 'Fish already installed! Nice one!'
   echo 'Upgrading (just in case)'
   brew upgrade fish
 fi
 curl -L https://get.oh-my.fish | fish
-omf theme install bira
+fish omf theme install bira
 
 # HERE WE WILL START WITH THE ACTUALL INSTALLATION
 if [ -d ~/dotfiles ]; then
