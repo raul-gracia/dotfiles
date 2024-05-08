@@ -1,6 +1,4 @@
 fish_update_completions
-curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
-omf theme install bira
 
 echo 'Brewing...'
 brew tap Homebrew/bundle
@@ -49,6 +47,11 @@ gpg -d /tmp/exports.gpg >~/dotfiles/config/fish/exports.fish
 echo 'Installing Neovim plugins...'
 nvim --headless +':Lazy update' +':Lazy sync' +':qall'
 
+echo 'Installing zellij...'
 cargo install --locked zellij
+
+echo 'Installing oh-my-fish...'
+curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
+omf theme install bira
 
 echo 'Everything installed corectly!'
