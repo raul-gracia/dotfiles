@@ -34,7 +34,7 @@
 [core]
 	excludesfile = ~/.gitignore
 	autocrlf = false
-	editor = code --wait
+	editor = nvim
 	safecrlf = true
 	pager = diff-so-fancy | less --tabs=4 -RFX
 [init]
@@ -71,3 +71,9 @@
 	sideband = false
 [http]
 	postBuffer = 157286400
+[credential "https://github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential

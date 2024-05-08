@@ -1,14 +1,9 @@
-alias vim='nvim'
-alias pihole='ssh pi@192.168.1.37'
-
-
-alias tall-crop="mogrify -crop +16+41 -crop -12-124 *.jpg"
 
 # Fish
 alias fr='source ~/.config/fish/config.fish > /dev/null 2>&1'
-alias fe='code --wait ~/.config/fish/config.fish'
-alias fexports='code --wait ~/.config/fish/exports.fish'
-alias faliases='code --wait ~/.config/fish/aliases.fish'
+alias fe='nvim ~/.config/fish/config.fish'
+alias fexports='nvim ~/.config/fish/exports.fish'
+alias faliases='nvim ~/.config/fish/aliases.fish'
 
 function who-port
     lsof -n -i4TCP:(string trim $argv[1]) | grep LISTEN
@@ -18,6 +13,13 @@ alias ls='exa'
 alias lsi='ls --icons'
 alias cat='bat'
 
+
+
+# Goa shorcuts
+alias goa_rails_console='docker-compose exec web rails c'
+alias goa_sh='docker-compose exec web fish'
+alias goa='cd ~/Code/goa'
+
 # Typos
 alias cl='clear'
 alias clar='clear'
@@ -25,63 +27,58 @@ alias dofiles='dotfiles'
 alias gs='gst'
 
 # Shortcuts
-alias drop='cd ~/Library/CloudStorage/Dropbox'
-alias dev='cd ~/Library/CloudStorage/Dropbox/development'
+alias dev='cd ~/Code'
 alias ws='cd ~/workspace'
-alias wk='cd ~/Library/CloudStorage/Dropbox/development/work'
-alias dfe="cd ~/Library/CloudStorage/Dropbox/development/work/dfe"
-alias itrp="cd ~/Library/CloudStorage/Dropbox/development/work/dfe/international-teacher-relocation-payment"
+alias wk='cd ~/Code/work'
 alias docs='cd ~/Documents'
-alias dotfiles='code ~/dotfiles'
-alias chr='cd ~/Library/CloudStorage/Dropbox/development/digital-chronos'
-alias interview="cd ~/Library/CloudStorage/Dropbox/development/interview-exercises"
+alias dotfiles='nvim ~/dotfiles'
+alias chr='cd ~/Code/digital-chronos'
+alias interview="cd ~/Code/interview-exercises"
 alias salsa="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/Salsa\ Music/"
+
+alias vim='nvim'
+alias pihole='ssh pi@192.168.1.37'
+alias z='zellij'
+alias zkada='z ka -y; z da -fy'
+alias ve='nvim ~/.config/nvim/'
+
+
+alias livebook="/Users/raulgracia/.mix/escripts/livebook"
+
+alias tall-crop="mogrify -crop +16+41 -crop -12-124 *.jpg"
 
 
 alias serve_dir='ruby -run -e httpd . -p 5055'
+
 alias tat='tmux attach -t'
 alias tls='tmux ls'
 alias tmuxgen_list='ll ~/.tmuxgen/'
+
 alias add-ssh-keys='ssh-add -K ~/.ssh/github; and ssh-add -K ~/.ssh/raulgracialario'
 
-function dropignore
-    cd $argv[1]
-    set current_dir (pwd)
-    if test -d node_modules
-        echo "Ignoring " $current_dir/node_modules
-        xattr -w com.dropbox.ignored 1 $current_dir/node_modules
-    else
-        set folders (ls -al --no-user --no-time --no-filesize | grep '^d' | cut -f 2- -d ' ' | grep -v '^\.' | grep -v 'tmp' | grep -v 'vendor' | grep -v 'log')
-        for folder in $folders
-            dropignore $current_dir/$folder
-        end
-    end
-    cd $argv[1]
-end
-
 function time_in_london
-    cd ~/Library/CloudStorage/Dropbox/time_in_london/
+    cd ~/Code/time_in_london/
     ruby time_in_london.rb $argv
     cd -
 end
 function time_in_salsa
-    cd ~/Library/CloudStorage/Dropbox/time_in_london/
+    cd ~/Code/time_in_london/
     ruby time_in_salsa.rb $argv
     cd -
 end
 function time_until
-    cd ~/Library/CloudStorage/Dropbox/time_in_london/
+    cd ~/Code/time_in_london/
     ruby time_until.rb $argv
     cd -
 end
 
 function time_till_end
-    time_until '(date +"%Y-%m-%d") 18:00:00' --sort
+    time_until '(date +"%Y-%m-%d") 17:00:00' --sort
 end
 alias tte='time_till_end'
 
 function time_since
-    cd ~/Library/CloudStorage/Dropbox/time_in_london/
+    cd ~/Code/time_in_london/
     ruby time_since.rb $argv
     and cd -
 end
@@ -93,16 +90,16 @@ function upgradeall
     brew upgrade
     brew uninstall --ignore-dependencies nodejs
     omf update
-    nvim --headless +':PlugUpdate' +':PlugUpgrade' +':qall'
+    nvim --headless +':Lazy update' +':Lazy sync' +':qall'
     asdf plugin update --all
-    asdf_install_latest_version_of ruby
-    asdf_install_latest_version_of python
-    asdf_install_latest_version_of rust
-    asdf_install_latest_version_of golang
-    asdf_install_latest_version_of erlang
-    asdf_install_latest_version_of elixir
-    asdf_install_latest_version_of nodejs
-    asdf_install_latest_version_of bundler
+    install_latest_ruby
+    install_latest_python
+    install_latest_rust
+    install_latest_golang
+    install_latest_erlang
+    install_latest_elixir
+    install_latest_nodejs
+    install_latest_bundler
     pip3 install neovim --upgrade
     pip3 install --upgrade pip
 end
@@ -160,9 +157,10 @@ alias mt='mix test'
 alias gg='gigalixir'
 
 # Docker
-alias dc='docker-compose'
+alias dc='docker compose'
+alias dcd='docker compose down'
+alias dcuw='docker compose up web'
 alias dce='dc exec'
-alias dcew='dce web'
 alias dcew='dce web'
 alias kt='dc run -e MIX_ENV=test web mix test'
 
@@ -208,6 +206,10 @@ alias current_branch='g rev-parse --abbrev-ref HEAD'
 alias hbb='hub browse (git_remote_owner)/(git_remote_repo_name)'
 alias tldr='tldr --theme base16'
 alias set-upstream='git branch --set-upstream-to=origin/(current_branch) (current_branch)'
+
+
+alias ghce='gh copilot explain'
+alias ghcs='gh copilot suggest'
 
 function hb
     hub browse (git_remote_owner)/(git_remote_repo_name)
@@ -481,6 +483,10 @@ function install_latest_golang
     asdf_install_latest_version_of golang
 end
 
+function install_latest_bundler
+    asdf_install_latest_version_of bundler
+end
+
 
 function generate_xassets
     set input $argv[1]
@@ -500,24 +506,24 @@ function create_windows_instance
     set instance_name windows-vlc
     echo "Creating key pair..."
     # Generate new keypair
-    aws lightsail create-key-pair --key-pair-name $instance_name-key-pair --output json > keypair.json
-    jq -r '.publicKeyBase64' keypair.json > ~/.ssh/$instance_name-publickey.pem
-    jq -r '.privateKeyBase64' keypair.json > ~/.ssh/$instance_name-privatekey.pem
+    aws lightsail create-key-pair --key-pair-name $instance_name-key-pair --output json >keypair.json
+    jq -r '.publicKeyBase64' keypair.json >~/.ssh/$instance_name-publickey.pem
+    jq -r '.privateKeyBase64' keypair.json >~/.ssh/$instance_name-privatekey.pem
     chmod 600 ~/.ssh/$instance_name-privatekey.pem
     rm keypair.json
 
     echo "Creating instance..."
     # Create a new Instance
-    aws lightsail create-instances --instance-names $instance_name --availability-zone eu-west-2b --blueprint-id windows_server_2022 --bundle-id medium_win_3_0 --key-pair-name $instance_name-key-pair > /dev/null
+    aws lightsail create-instances --instance-names $instance_name --availability-zone eu-west-2b --blueprint-id windows_server_2022 --bundle-id medium_win_3_0 --key-pair-name $instance_name-key-pair >/dev/null
 
     echo "Waiting..."
     # Wait for instance state until it's running
     while true
         set instance_state (aws lightsail get-instance-state --instance-name $instance_name --query 'state.name' --output text)
-        if test $instance_state = "running"
+        if test $instance_state = running
             break
         end
-        sleep 1 
+        sleep 1
     end
     # Wait for RDP to be ready
     while true
@@ -553,18 +559,18 @@ end
 
 
 function fetch_github_trello_info
-  set git_remote (git config --get remote.origin.url)
+    set git_remote (git config --get remote.origin.url)
 
-  if test -z "$git_remote"
-    echo "This directory is not a Git repository."
-    return 1
-  end
-# Use regex to match owner and repo
-  set matches (string match -r 'https:\/\/github.com\/(.*)\/(.*).git' $git_remote)
+    if test -z "$git_remote"
+        echo "This directory is not a Git repository."
+        return 1
+    end
+    # Use regex to match owner and repo
+    set matches (string match -r 'https:\/\/github.com\/(.*)\/(.*).git' $git_remote)
 
-  # Extract owner and repo from regex captures
-  set owner $matches[2]
-  set repo $matches[3]
+    # Extract owner and repo from regex captures
+    set owner $matches[2]
+    set repo $matches[3]
 
-  ruby ~/fetch-monthly-work.rb $owner $repo
+    ruby ~/fetch-monthly-work.rb $owner $repo
 end

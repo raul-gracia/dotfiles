@@ -30,7 +30,7 @@ set -xg RUBYOPT -W0
 set -xg RUBY_CFLAGS -w
 set -xg HOMEBREW_NO_ANALYTICS 1
 set -xg FISH_CLIPBOARD_CMD pbcopy
-set -xg EDITOR code --wait
+set -xg EDITOR nvim
 set -xg MYSQL_USERNAME root
 set -xg COVERAGE true
 set -xg GPG_TTY (tty)
@@ -60,3 +60,5 @@ thefuck --alias | source
 # bun
 set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
+
+zellij setup --generate-completion fish | source
