@@ -65,10 +65,13 @@ fi
 
 # ACTUAL INSTALLATION
 if [ -d ~/dotfiles ]; then
+  log_info 'Already have dotfiles, just pulling changes'
   cd ~/dotfiles
   check_command "git pull"
 else
+  log_info 'Clonning dotfiles repo....'
   check_command "git clone https://github.com/raul-gracia/dotfiles.git ~/dotfiles"
   cd ~/dotfiles
 fi
+log_info 'Execute setup.fish...'
 check_command "fish setup.fish"
