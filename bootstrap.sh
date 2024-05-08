@@ -8,6 +8,8 @@ fi
 if ! command -v brew > /dev/null 2>&1; then
   echo 'Okay, lets do this. First things first, we need to install homebrew in order to get all the stuff you need'
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+  eval "$(/opt/homebrew/bin/brew shellenv)"
 else
   echo 'Homebrew was already available... skipping the installation'
   echo "Let's update it instead! (you know you haven't updated in a while)"
