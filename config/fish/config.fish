@@ -61,4 +61,6 @@ thefuck --alias | source
 set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
 
-zellij setup --generate-completion fish | source
+if command -s zellij >/dev/null
+  zellij setup --generate-completion fish | source
+end

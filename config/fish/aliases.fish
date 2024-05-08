@@ -474,6 +474,7 @@ end
 
 function install_latest_rust
     asdf_install_latest_version_of rust
+    asdf reshim rust
 end
 
 function install_latest_golang
