@@ -436,7 +436,7 @@ end
 function dotpull --description 'pulls dotfiles and decrypt exports'
     cd ~/dotfiles
     gup
-    gist -r 4c6216ef0cd3a8c80d8e74decc36a6b3 >/tmp/exports
+    gh gist view 4c6216ef0cd3a8c80d8e74decc36a6b3 > /tmp/exports
     gpg --decrypt /tmp/exports >~/.config/fish/exports.fish
     rm -rf /tmp/exports
     cd -
