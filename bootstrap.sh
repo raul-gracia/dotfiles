@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 
-# Enable the script to exit on any error
+# Enable the script to continue even if some commands fail
 set -e
 
 # ANSI Colors
 RED='\033[0;31m'
 GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
 NC='\033[0m' # No Color
 
 # Print messages in color
@@ -13,22 +14,30 @@ log_info() {
   echo -e "${GREEN}$1${NC}"
 }
 
+log_warning() {
+  echo -e "${YELLOW}$1${NC}"
+}
+
 log_error() {
   echo -e "${RED}$1${NC}"
 }
 
-# Check command success
+# Check command success with an optional fail continuation
 check_command() {
   if ! eval "$1"; then
-    log_error "Failed to execute: $1"
-    exit 1
+    if [ "$2" = "ignore_fail" ]; then
+      log_warning "Failed to execute, but continuing: $1"
+    else
+      log_error "Critical failure on required command: $1"
+      exit 1
+    fi
   fi
 }
 
 log_info 'Installing a new machine? Nice!'
 
 if [ "$(uname -s)" = "Darwin" ]; then
-    check_command "xcode-select --install"
+    check_command "xcode-select --install" "ignore_fail"
 fi
 
 if ! command -v brew > /dev/null 2>&1; then
