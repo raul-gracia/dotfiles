@@ -43,17 +43,9 @@ gist --login
 gist -r 4c6216ef0cd3a8c80d8e74decc36a6b3 >/tmp/exports.gpg
 gpg -d /tmp/exports.gpg >~/dotfiles/config/fish/exports.fish
 
-curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+echo 'Installing Neovim plugins...'
+nvim --headless +':Lazy update' +':Lazy sync' +':qall'
 
-vim +PlugUpgrade +qall
-vim +PlugInstall +qall
-vim +PlugUpdate +qall
-
-echo 'Installing tmux plugins...'
-if not test -d '/Users/'(whoami)'/.tmux/plugins/tpm'
-    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-    ~/.tmux/plugins/tpm/bin/./install_plugins
-end
+cargo install --locked zellij
 
 echo 'Everything installed corectly!'
