@@ -9,11 +9,8 @@ function who-port
     lsof -n -i4TCP:(string trim $argv[1]) | grep LISTEN
 end
 
-alias ls='exa'
-alias lsi='ls --icons'
+alias ls='eza -l --git --icons'
 alias cat='bat'
-
-
 
 # Goa shorcuts
 alias goa_rails_console='docker-compose exec web rails c'
