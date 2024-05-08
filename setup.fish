@@ -1,4 +1,6 @@
 fish_update_completions
+omf theme install bira
+
 echo 'Brewing...'
 brew tap Homebrew/bundle
 brew bundle --file Brewfile.standard --no-lock
