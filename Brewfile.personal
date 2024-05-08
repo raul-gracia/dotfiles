@@ -19,8 +19,6 @@ cask 'ngrok'
 cask 'cyberduck'
 cask 'obs'
 
-
-
 repo = 'popcorn-official/popcorn-desktop'
 tap repo, "https://github.com/#{repo}.git"
 cask 'popcorn-time'
