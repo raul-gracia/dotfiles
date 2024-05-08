@@ -1,6 +1,10 @@
 #!/usr/bin/env sh
 
 echo 'Installing a new machine? Nice!'
+if [ "$(uname -s)" = "Darwin" ]; then
+    xcode-select --install
+fi
+
 if ! command -v brew > /dev/null 2>&1; then
   echo 'Okay, lets do this. First things first, we need to install homebrew in order to get all the stuff you need'
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
