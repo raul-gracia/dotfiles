@@ -63,8 +63,6 @@ else
   check_command "brew upgrade fish"
 fi
 
-check_command "curl -L https://get.oh-my.fish | fish"
-
 # ACTUAL INSTALLATION
 if [ -d ~/dotfiles ]; then
   cd ~/dotfiles
