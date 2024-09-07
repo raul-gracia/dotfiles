@@ -4,12 +4,3 @@ ServerAliveInterval 60
 
 Host *
 UseKeychain yes
-
-Host github.com
-IdentityFile ~/.ssh/raulgracialario
-
-Host heroku.com
-IdentityFile ~/.ssh/raulgracialario
-
-Host gitlab.com
-IdentityFile ~/.ssh/raulgracialario

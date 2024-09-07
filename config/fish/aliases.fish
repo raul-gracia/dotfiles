@@ -9,13 +9,19 @@ function who-port
     lsof -n -i4TCP:(string trim $argv[1]) | grep LISTEN
 end
 
-alias ls='eza -l --git --icons'
+alias ls='eza -al --git --icons'
 alias cat='bat'
 
 # Goa shorcuts
-alias goa_rails_console='docker-compose exec web rails c'
-alias goa_sh='docker-compose exec web fish'
+function goa_rails
+    docker-compose exec web bash -c "bin/rails $argv"
+end
+alias goa_rails_console='goa_rails console'
+alias goa_sh='docker-compose exec web bash -c "apt-get install -y fish" && docker-compose exec web fish'
 alias goa='cd ~/Code/goa'
+alias goa_up='dcd && dcuw --build -d && dc exec web bash -c "bin/rails log:clear" && dc logs -f web'
+alias goa_reset_db='dcd && dc run --entrypoint="" --rm web bash -c "bin/rails db:reset"'
+alias zgoa='z a goa || z -s goa --layout ~/.config/zellij/layouts/goa.kdl'
 
 # Typos
 alias cl='clear'
@@ -83,35 +89,27 @@ end
 alias uptime-me='ruby ~/dotfiles/uptime.rb'
 
 function upgradeall
-    brew update
-    brew upgrade
-    brew uninstall --ignore-dependencies nodejs
-    omf update
-    nvim --headless +':Lazy update' +':Lazy sync' +':qall'
-    asdf plugin update --all
-    install_latest_ruby
-    install_latest_python
-    install_latest_rust
-    install_latest_golang
-    install_latest_erlang
-    install_latest_elixir
-    install_latest_nodejs
-    install_latest_bundler
-    pip3 install neovim --upgrade
-    pip3 install --upgrade pip
+    clear
+    gum style \
+	--foreground 150 --border-foreground 150 --border double \
+	--align center --width 25 'Upgrade all the things!'
+    gum spin --show-error --title "Updating homebrew..." -- brew update
+    gum spin --show-error --title "Upgrading homebrew..." -- brew upgrade
+    gum spin --show-error --title "Updating omf..." -- omf update
+    gum spin --show-error --title "Updating neovim plugins..." -- nvim --headless +':Lazy update' +':Lazy sync' +':qall'
+    gum spin --show-error --title "Updating mise plugins..." -- mise plugin update
+    gum spin --show-error --title "Updating mise..." -- mise up --yes --quiet
+    gum spin --show-error --title "Installing latest npm..." -- npm install -g npm@latest
+    gum spin --show-error --title "Updating local hex" -- mix local.hex --force
+    gum spin --show-error --title "Updating local phx_new..." -- mix local.phx --force
+    gum spin              --title "Installing latest hex and phx_new..." -- mix archive.install hex phx_new --force
+    gum spin --show-error --title "Installing latest neovim python plugin..." -- pip3 install neovim --upgrade
+    gum spin --show-error --title "Installing latest pip python plugin..." -- pip3 install --upgrade pip
+    clear
+    gum style \
+	--foreground 150 --border-foreground 150 --border double \
+	--align center --width 25 'Done!'
 end
-
-# Rails
-# alias docked='docker run --rm -it -v (pwd):/rails -v ruby-bundle-cache:/bundle -p 3000:3000 ghcr.io/rails/cli'
-# alias rails='docked rails'
-# alias rails-dev='docked bin/dev'
-# alias bundle='docked bundle'
-# alias yarn='docked yarn'
-# alias rake='docked rake'
-# alias gem='docked gem'
-
-
-
 
 alias be='bundle exec'
 alias ber='bin/rails'
@@ -132,12 +130,10 @@ alias rubo='bundle exec rubocop --display-style-guide --display-cop-names --extr
 alias rubo_fix='rubo --auto-correct'
 alias rubo_fix_all='rubo --auto-correct-all'
 alias rubo_todo='rubo --regenerate-todo'
+
 function latest_ruby
-    brew upgrade
-    clear
-    asdf list all ruby | grep "^"$argv[1]".\d.\d\$" | tail -n 1
+    mise ls-remote ruby | grep "^"$argv[1]".\d.\d\$" | tail -n 1
 end
-alias latest_ruby2="latest_ruby 2"
 alias latest_ruby3="latest_ruby 3"
 
 # Javascript
@@ -419,6 +415,10 @@ alias yd-playlist="yd -x -k --embed-thumbnail --audio-format flac --add-metadata
 alias yd-audio="yd -x --audio-format flac --audio-quality 0"
 alias yd-mp3="yd -x --audio-format mp3 --audio-quality 0"
 
+function yd-transcript
+  yt --transcript $argv[1] | fabric --stream --pattern extract_wisdom | save $argv[2]
+end
+
 function fix_gpg
     brew link --overwrite gnupg
     gpgconf --kill gpg-agent
@@ -441,50 +441,6 @@ function dotpull --description 'pulls dotfiles and decrypt exports'
     rm -rf /tmp/exports
     cd -
 end
-
-##### Asdf install latest versions globally ########
-function asdf_install_latest_version_of
-    asdf install $argv[1] latest
-    asdf global $argv[1] (asdf list $argv[1] | sort -nr | head -n 1 | string trim)
-end
-
-function install_latest_nodejs
-    asdf_install_latest_version_of nodejs
-    npm install -g npm@latest
-end
-
-function install_latest_ruby
-    asdf_install_latest_version_of ruby
-end
-
-function install_latest_python
-    asdf_install_latest_version_of python
-end
-
-function install_latest_erlang
-    asdf_install_latest_version_of erlang
-end
-
-function install_latest_elixir
-    asdf_install_latest_version_of elixir
-    mix local.hex --force
-    mix local.phx --force
-    mix archive.install hex phx_new --force
-end
-
-function install_latest_rust
-    asdf_install_latest_version_of rust
-    asdf reshim rust
-end
-
-function install_latest_golang
-    asdf_install_latest_version_of golang
-end
-
-function install_latest_bundler
-    asdf_install_latest_version_of bundler
-end
-
 
 function generate_xassets
     set input $argv[1]
@@ -572,3 +528,9 @@ function fetch_github_trello_info
 
     ruby ~/fetch-monthly-work.rb $owner $repo
 end
+
+function show_pattern
+    cat ~/Code/fabric/patterns/$argv[1]/system.md
+end
+
+alias copy-patterns="cp -a ~/.config/custom-fabric-patterns/* ~/.config/fabric/patterns/"

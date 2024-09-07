@@ -14,14 +14,14 @@ end
 # Exports for PATHs
 set -xg default_path ./node_modules/.bin /usr/bin /usr/sbin /bin /sbin /usr/local/mysql/bin/ /usr/local/bin /usr/local/texlive/2023basic/bin/universal-darwin/
 
-set -xg homebrew /opt/homebrew/bin opt/homebrew/sbin
+set -xg homebrew /opt/homebrew/bin /opt/homebrew/sbin
 set -xg rust $HOME/.cargo/bin
 set -xg composer $HOME/.composer/vendor/bin
 set -xg ANDROID_HOME /Users/(whoami)/Library/Android/sdk
 set -xg ANDROID_SDK_ROOT /Users/(whoami)/Library/Android/sdk
 set -xg JAVA_HOME (java -XshowSettings:properties -version 2>&1 >/dev/null | grep 'java.home' | sed -E 's/^\ +java\.home = //')
 set -xg rover_path /Users/(whoami)/.rover/bin
-set -gx PATH $ANDROID_HOME/platform-tools $ANDROID_HOME/emulator $ANDROID_HOME/tools/bin $homebrew $default_path $rust $composer $rover_path 
+set -xg PATH $ANDROID_HOME/platform-tools $ANDROID_HOME/emulator $ANDROID_HOME/tools/bin $homebrew $default_path $rust $composer $rover_path 
 set -g fish_user_paths $JAVA_HOME $fish_user_paths
 
 
@@ -37,6 +37,7 @@ set -xg GPG_TTY (tty)
 set -xg OBJC_DISABLE_INITIALIZE_FORK_SAFETY YES
 set -xg STARSHIP_CONFIG ~/.config/starship.toml
 
+set -xg PATH $homebrew $PATH
 
 test -e {$HOME}/.iterm2_shell_integration.fish
 and source {$HOME}/.iterm2_shell_integration.fish
@@ -49,12 +50,13 @@ if test -d (brew --prefix)"/share/fish/vendor_completions.d"
     set -gx fish_complete_path $fish_complete_path (brew --prefix)/share/fish/vendor_completions.d
 end
 
-source (brew --prefix asdf)/libexec/asdf.fish
 starship init fish | source
 
-fish_add_path /opt/homebrew/sbin
-
-set -xg PATH $homebrew $PATH
+if status is-interactive
+  mise activate fish | source
+else
+  mise activate fish --shims | source
+end
 
 thefuck --alias | source
 # bun

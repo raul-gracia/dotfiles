@@ -22,13 +22,6 @@
   dlog = "!f() { GIT_EXTERNAL_DIFF=difft git log -p --ext-diff $@; }; f"
 [gpg]
   program = /usr/local/bin/gpg
-[diff]
-  tool = difftastic
-  external = difft
-[difftool]
-  prompt = false
-[difftool "difftastic"]
-  cmd = difft "$LOCAL" "$REMOTE"
 [pager]
   difftool = true
 [core]
