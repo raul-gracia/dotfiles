@@ -1,7 +1,18 @@
 ServerAliveInterval 60
 
+# DevPod Start nexus.devpod
+Host nexus.devpod
+  ForwardAgent yes
+  LogLevel error
+  StrictHostKeyChecking no
+  UserKnownHostsFile /dev/null
+  HostKeyAlgorithms rsa-sha2-256,rsa-sha2-512,ssh-rsa
+  ProxyCommand "/Users/raulgracia/.local/bin/devpod" ssh --stdio --context default --user vscode nexus --workdir "/workspaces/nexus"
+  User vscode
+# DevPod End nexus.devpod
 Host *
-  IgnoreUnknown
+  IgnoreUnknown yes
   UseKeychain yes
   AddKeysToAgent yes
   IdentityFile ~/.ssh/raulgracialario
+  SetEnv TERM=xterm-256color

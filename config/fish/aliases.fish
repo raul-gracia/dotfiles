@@ -1,4 +1,3 @@
-
 # Fish
 alias fr='source ~/.config/fish/config.fish > /dev/null 2>&1'
 alias fe='nvim ~/.config/fish/config.fish'
@@ -11,17 +10,6 @@ end
 
 alias ls='eza -al --git --icons'
 alias cat='bat'
-
-# Goa shorcuts
-function goa_rails
-    docker-compose exec web bash -c "bin/rails $argv"
-end
-alias goa_rails_console='goa_rails console'
-alias goa_sh='docker-compose exec web bash -c "apt-get install -y fish" && docker-compose exec web fish'
-alias goa='cd ~/Code/goa'
-alias goa_up='dcd && dcuw --build -d && dc exec web bash -c "bin/rails log:clear" && dc logs -f web'
-alias goa_reset_db='dcd && dc run --entrypoint="" --rm web bash -c "bin/rails db:reset"'
-alias zgoa='z a goa || z -s goa --layout ~/.config/zellij/layouts/goa.kdl'
 
 # Typos
 alias cl='clear'
@@ -38,18 +26,17 @@ alias dotfiles='nvim ~/dotfiles'
 alias chr='cd ~/Code/digital-chronos'
 alias interview="cd ~/Code/interview-exercises"
 alias salsa="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/Salsa\ Music/"
+alias vault="cd ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Personal\ \(iCloud\)"
 
 alias vim='nvim'
 alias pihole='ssh pi@192.168.1.37'
 alias z='zellij'
 alias zkada='z ka -y; z da -fy'
-alias ve='nvim ~/.config/nvim/'
-
+alias ve='cd ~/.config/nvim/ && nvim ~/.config/nvim/ && cd -'
 
 alias livebook="/Users/raulgracia/.mix/escripts/livebook"
 
 alias tall-crop="mogrify -crop +16+41 -crop -12-124 *.jpg"
-
 
 alias serve_dir='ruby -run -e httpd . -p 5055'
 
@@ -89,26 +76,27 @@ end
 alias uptime-me='ruby ~/dotfiles/uptime.rb'
 
 function upgradeall
+    cd ~
     clear
     gum style \
-	--foreground 150 --border-foreground 150 --border double \
-	--align center --width 25 'Upgrade all the things!'
+        --foreground 150 --border-foreground 150 --border double \
+        --align center --width 25 'Upgrade all the things!'
     gum spin --show-error --title "Updating homebrew..." -- brew update
-    gum spin --show-error --title "Upgrading homebrew..." -- brew upgrade
-    gum spin --show-error --title "Updating omf..." -- omf update
+    gum spin --show-error --show-output --title "Upgrading homebrew..." -- brew upgrade
     gum spin --show-error --title "Updating neovim plugins..." -- nvim --headless +':Lazy update' +':Lazy sync' +':qall'
     gum spin --show-error --title "Updating mise plugins..." -- mise plugin update
-    gum spin --show-error --title "Updating mise..." -- mise up --yes --quiet
+    gum spin --show-error --title "Updating mise..." -- mise up --yes --quiet --bump
     gum spin --show-error --title "Installing latest npm..." -- npm install -g npm@latest
-    gum spin --show-error --title "Updating local hex" -- mix local.hex --force
-    gum spin --show-error --title "Updating local phx_new..." -- mix local.phx --force
-    gum spin              --title "Installing latest hex and phx_new..." -- mix archive.install hex phx_new --force
-    gum spin --show-error --title "Installing latest neovim python plugin..." -- pip3 install neovim --upgrade
-    gum spin --show-error --title "Installing latest pip python plugin..." -- pip3 install --upgrade pip
+    gum spin --show-error --title "Upadate pipx plugins" -- pipx upgrade-all
+    gum spin --show-error --title "Update fabric cli" -- go install github.com/danielmiessler/fabric@latest
+    gum spin --show-error --title "Update phoenix" -- mix local.phx --force
+    gum spin --show-error --title "Update igniter" -- mix local.igniter --force
+    gum spin --show-error --title "Update rails gem" -- gem update --system && gem install rails
     clear
     gum style \
-	--foreground 150 --border-foreground 150 --border double \
-	--align center --width 25 'Done!'
+        --foreground 150 --border-foreground 150 --border double \
+        --align center --width 25 'Done!'
+    cd -
 end
 
 alias be='bundle exec'
@@ -153,20 +141,28 @@ alias gg='gigalixir'
 alias dc='docker compose'
 alias dcd='docker compose down'
 alias dcuw='docker compose up web'
+alias dcu='docker compose up'
 alias dce='dc exec'
 alias dcew='dce web'
 alias kt='dc run -e MIX_ENV=test web mix test'
 
-# Kubernetes ( k8s )
-alias kbl='kubectl'
-alias kblg='kbl get'
-alias kbld='kbl describe'
+######################
+# Kubernetes ( k8s ) #
+######################
+function kubectl --wraps kubectl
+    command kubecolor $argv
+end
+function k --wraps kubectl
+    command kubecolor $argv
+end
+alias kg='k get'
+alias kd='k describe'
 alias mk='minikube'
-alias mkkbl='mk kubectl'
-alias pods='kblg pods'
-alias deploys='kblg deployments'
-alias dpods='kbld pods'
-alias ddeploy='kbld deployments'
+alias mkk='mk kubectl'
+alias pods='kg pods'
+alias deploys='kg deployments'
+alias dpods='kd pods'
+alias ddeploys='kd deployments'
 
 # Git
 alias g='git'
@@ -187,6 +183,7 @@ alias ga='g add'
 alias gup='g up'
 alias glg='g lg'
 alias gdf='g diff'
+alias gdfc='g diff --cached'
 alias gp='g branch --set-upstream-to=origin/(current_branch) (current_branch); g push'
 alias gpf='gp --force-with-lease'
 alias gpt='gp --tags'
@@ -199,7 +196,6 @@ alias current_branch='g rev-parse --abbrev-ref HEAD'
 alias hbb='hub browse (git_remote_owner)/(git_remote_repo_name)'
 alias tldr='tldr --theme base16'
 alias set-upstream='git branch --set-upstream-to=origin/(current_branch) (current_branch)'
-
 
 alias ghce='gh copilot explain'
 alias ghcs='gh copilot suggest'
@@ -257,7 +253,40 @@ function git_remote_repo_name
 end
 
 function delete_squashed_branches
-    ~/dotfiles/scripts/delete_squashed_branches.rb $argv
+    # Get the main branch name (default to 'main' if not provided)
+    set main_branch (if test (count $argv) -gt 0; echo $argv[1]; else; echo "main"; end)
+
+    # Checkout and update main branch
+    gum style --foreground blue "Checking out $main_branch..."
+    git checkout $main_branch >/dev/null 2>&1
+    gum style --foreground blue "Updating..."
+    git pull >/dev/null
+
+    # Get all local branches except main/master
+    set local_branches (git branch --no-color | string trim | grep -v -E "^\*|^$main_branch\$|^master\$")
+
+    # Check each branch
+    for branch in $local_branches
+        gum style --foreground blue "Checking local branch $branch..."
+
+        # Use gh to check if the branch has a PR and its status
+        set pr_info (gh pr list --state all --head $branch --json state,merged --limit 1 2>/dev/null)
+
+        if test -n "$pr_info"
+            # Parse the JSON response
+            set pr_state (echo $pr_info | jq -r '.[0].state' 2>/dev/null)
+            set pr_merged (echo $pr_info | jq -r '.[0].merged' 2>/dev/null)
+
+            # Delete branch if PR is closed or merged
+            if test "$pr_state" = CLOSED -o "$pr_merged" = true
+                gum style --foreground red "Deleting branch $branch..."
+                git branch -D $branch
+            end
+        end
+    end
+
+    # Return to previous branch
+    git checkout - >/dev/null
 end
 
 function circleci
@@ -416,7 +445,7 @@ alias yd-audio="yd -x --audio-format flac --audio-quality 0"
 alias yd-mp3="yd -x --audio-format mp3 --audio-quality 0"
 
 function yd-transcript
-  yt --transcript $argv[1] | fabric --stream --pattern extract_wisdom | save $argv[2]
+    fabric -y $argv[1] --transcript | fabric --stream --pattern extract_wisdom --output /Users/raulgracia/Transcripts/(string replace -a ' ' '_' $argv[2]).md
 end
 
 function fix_gpg
@@ -436,7 +465,7 @@ end
 function dotpull --description 'pulls dotfiles and decrypt exports'
     cd ~/dotfiles
     gup
-    gh gist view 4c6216ef0cd3a8c80d8e74decc36a6b3 > /tmp/exports
+    gh gist view 4c6216ef0cd3a8c80d8e74decc36a6b3 >/tmp/exports
     gpg --decrypt /tmp/exports >~/.config/fish/exports.fish
     rm -rf /tmp/exports
     cd -
@@ -454,7 +483,6 @@ function generate_xassets
     convert -resize 32x32 $input $file_name"-32x32."$file_ext
     convert -resize 16x16 $input $file_name"-16x16."$file_ext
 end
-
 
 function create_windows_instance
     set instance_name windows-vlc
@@ -511,7 +539,6 @@ function fetch_instance_password
     echo $decrypted_password | pbcopy
 end
 
-
 function fetch_github_trello_info
     set git_remote (git config --get remote.origin.url)
 
@@ -530,7 +557,221 @@ function fetch_github_trello_info
 end
 
 function show_pattern
-    cat ~/Code/fabric/patterns/$argv[1]/system.md
+    cat ~/.config/fabric/patterns/$argv[1]/system.md
 end
 
 alias copy-patterns="cp -a ~/.config/custom-fabric-patterns/* ~/.config/fabric/patterns/"
+
+function decrease_brightness
+    osascript -e "tell application \"System Events\" to key code 145"
+end
+
+function increase_brightness
+    osascript -e "tell application \"System Events\" to key code 144"
+end
+
+function set_max_brightness
+    # Assuming 16 steps for maximum brightness
+    for i in (seq 1 16)
+        increase_brightness
+    end
+end
+
+function _reduce_brightness
+    set total_steps $argv[1]
+    set interval $argv[2]
+
+    # Set brightness to maximum before starting
+    set_max_brightness
+
+    # Wait a moment for the brightness change to take effect
+    sleep 1
+
+    for i in (seq 1 $total_steps)
+        decrease_brightness
+        sleep $interval
+    end
+end
+
+function schedule_brightness_reduction
+    if test (count $argv) -eq 0
+        echo "Usage: schedule_brightness_reduction <time>"
+        echo "Time can be in the format 'Xh' (e.g., '2h') or 'HH:MM' (e.g., '01:30')"
+        return 1
+    end
+
+    set input_time $argv[1]
+
+    # Get current brightness steps (16 is assumed for macs, adjust if needed)
+    set total_steps 16
+
+    # Parse time format (either "Xh" or a specific "HH:MM")
+    if string match -q -r '^\d+h$' $input_time
+        # If input is like "2h", convert to seconds
+        set hours (string replace 'h' '' $input_time)
+        if not string match -q -r '^\d+$' $hours
+            echo "Invalid hour format. Please use a number followed by 'h', e.g., '2h'"
+            return 1
+        end
+        set duration (math "$hours * 3600")
+    else if string match -q -r '^\d\d:\d\d$' $input_time
+        # If input is like "03:00", calculate time difference to the future point
+        set current_hour (date +"%H")
+        set current_min (date +"%M")
+
+        set target_hour (string sub -l 2 $input_time)
+        set target_min (string sub -s 4 -l 2 $input_time)
+
+        # Convert both current and target time to minutes since midnight
+        set current_total_min (math "$current_hour * 60 + $current_min")
+        set target_total_min (math "$target_hour * 60 + $target_min")
+
+        # If target is earlier than current, assume it's for the next day
+        if test $target_total_min -le $current_total_min
+            set target_total_min (math "$target_total_min + 24 * 60")
+        end
+
+        # Duration is the difference in minutes, then converted to seconds
+        set duration (math "($target_total_min - $current_total_min) * 60")
+    else
+        echo "Invalid input. Use format like '2h' or '03:00'."
+        return 1
+    end
+
+    # Calculate interval (time between each brightness reduction)
+    set interval (math "$duration / $total_steps")
+
+    # Launch the background process
+    fish -c "_reduce_brightness $total_steps $interval" &
+    echo "Brightness set to maximum and will reduce to zero in $input_time (every "(printf "%.2f" $interval)" seconds)."
+
+end
+
+# Extract audio from video file
+function extract_audio
+    if test (count $argv) -ne 1
+        gum style --foreground red --bold "❌ Usage: extract_audio <file_path>"
+        return 1
+    end
+
+    set input_file $argv[1]
+    set base_name (basename $input_file | cut -d. -f1)
+    set output_file (dirname $input_file)/$base_name.wav
+
+    # Debugging information
+    gum style --foreground yellow --bold "📂 Debug: Parameters received"
+    gum style --foreground cyan "   Input file: $input_file"
+    gum style --foreground cyan "   Base name: $base_name"
+    gum style --foreground cyan "   Output file: $output_file"
+
+    # Extracting audio
+    gum spin --spinner line --title "Extracting audio from $input_file" -- ffmpeg -i $input_file -vn -acodec pcm_s16le $output_file
+
+    if test $status -eq 0
+        gum style --foreground green --bold "✅ WAV created: $output_file"
+    else
+        gum style --foreground red --bold "❌ Failed to extract audio"
+        return 1
+    end
+end
+
+# Transcribe audio and diarise speakers
+function transcribe_audio
+    if test (count $argv) -ne 1
+        gum style --foreground red --bold "❌ Usage: transcribe_audio <video_file_path>"
+        return 1
+    end
+
+    set input_file $argv[1]
+    set base_name (basename $input_file | cut -d. -f1)
+    set output_dir (dirname $input_file)
+    set original_wav $output_dir/$base_name.wav
+    set converted_wav $output_dir/$base_name-converted.wav
+    set json_output $output_dir/$base_name.json
+    set diarisation_output $output_dir/$base_name_diarisation.json
+
+    # Step 1: Extract audio from video file
+    gum style --foreground cyan --bold "🔊 Extracting audio from video..."
+    extract_audio $input_file
+    if test $status -ne 0
+        gum style --foreground red --bold "❌ Failed to extract audio."
+        return 1
+    end
+
+    # Step 2: Convert audio to required format
+    gum style --foreground cyan --bold "🎛️ Converting audio to 16 kHz mono..."
+    gum spin --spinner line --title "Converting $original_wav to $converted_wav" -- \
+        ffmpeg -i $original_wav -ar 16000 -ac 1 $converted_wav
+
+    if test $status -ne 0
+        gum style --foreground red --bold "❌ Failed to convert audio."
+        return 1
+    end
+
+    # Step 3: Transcribe audio using Whisper CLI
+    gum style --foreground cyan --bold "📝 Transcribing audio using Whisper..."
+    gum spin --spinner line --title "Transcribing $converted_wav" -- \
+        whisper $converted_wav --model medium --output_format json --output_dir $output_dir
+
+    if test $status -eq 0
+        gum style --foreground green --bold "✅ Transcription saved: $json_output"
+    else
+        gum style --foreground red --bold "❌ Transcription failed."
+        return 1
+    end
+
+    # Step 4: Speaker diarisation using pyannote.audio
+    gum style --foreground cyan --bold "🗣️ Performing speaker diarisation..."
+    gum spin --spinner line --title "Diarising speakers in $converted_wav" -- \
+        pyannote-audio dia --input $converted_wav >$diarisation_output
+
+    if test $status -eq 0
+        gum style --foreground green --bold "✅ Speaker diarisation saved: $diarisation_output"
+    else
+        gum style --foreground red --bold "❌ Speaker diarisation failed."
+        return 1
+    end
+end
+
+function inspiration_quote
+    # If the file exists, read its content into a variable. Otherwise, set it to empty.
+    if test -f ~/quotes.txt
+        set existing_quotes (cat ~/quotes.txt)
+    else
+        set existing_quotes ""
+    end
+
+    # Generate a new quote, making sure to include the existing quotes in the prompt 
+    # so we don’t repeat the same output.
+    set new_quote (claude -p "
+      You are a quote generator.
+      You have already generated these quotes:
+      \"$existing_quotes\"
+
+      Please generate an original inspirational quote for daily motivation. 
+      The quote should embody perseverance, hard work, and determination, 
+      and it should be similar in style to:
+        \"I never dreamed about success. I work for it.\" by Estée Lauder.
+      Ensure the quote is crafted in British English and includes its author.
+      Do not repeat any quote that appears in the list above.
+    ")
+
+    # Append the new quote to the file
+    echo $new_quote >>~/quotes.txt
+
+    # Display the new quote in green and bold
+    gum style --foreground green --bold $new_quote
+end
+
+alias setup-cursor-rules 'mkdir -p .cursor/rules && cp ~/.cursor/rules/* .cursor/rules/'
+alias setup-claude-rules 'mkdir -p .claude/ && cp ~/.claude/settings.local.json .claude/'
+
+function review_apps_console
+    if test (count $argv) -eq 0
+        echo "Error: Please provide a PR number as an argument"
+        echo "Usage: review_apps_console <PR_NUMBER>"
+        return 1
+    end
+    set pr_number $argv[1]
+    az login --tenant 9c7d9dd3-840c-4b3f-818e-552865082e16 && make test get-cluster-credentials && kubectl -n srtl-development exec -it deployment/claim-additional-payments-for-teaching-review-$pr_number-worker -- rails console
+end

@@ -24,7 +24,6 @@ brew 'gum'
 brew 'btop'
 
 brew 'gh'
-brew 'awscli'
 
 brew 'coreutils'
 brew 'curl'

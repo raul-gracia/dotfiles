@@ -1,14 +1,151 @@
-# Inserts a blank line between shell prompts
-add_newline = true
-command_timeout = 5000
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
 
-# Replace the "❯" symbol in the prompt with "➜"
-[character]                            # The name of the module we are configuring is "character"
-success_symbol = "[➜](bold green)"     # The "success_symbol" segment is being set to "➜" with the color "bold green"
+format = """
+[░▒▓](#a3aed2)\
+[  ](bg:#a3aed2 fg:#090c0c)\
+[](bg:#769ff0 fg:#a3aed2)\
+$directory\
+[](fg:#769ff0 bg:#394260)\
+$git_branch\
+$git_status\
+[](fg:#394260 bg:#212736)\
+$nodejs\
+$rust\
+$golang\
+$php\
+$ruby\
+$elixir\
+$erlang\
+$bun\
+$helm\
+$terraform\
+$aws\
+[](fg:#212736 bg:#1d2230)\
+$time\
+$battery\
+[ ](fg:#1d2230)\
+$line_break\
+$character"""
 
-# Disable the package module, hiding it from the prompt completely
-[package]
-disabled = true
+[fill]
+symbol = ' '
+style = "bg:#212736"
+
+[directory]
+style = "fg:#e3e5e5 bg:#769ff0"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = " "
+"Pictures" = " "
+
+[git_branch]
+symbol = ""
+style = "bg:#394260"
+format = '[[ $symbol $branch ](fg:#769ff0 bg:#394260)]($style)'
+
+[git_status]
+style = "bg:#394260"
+format = '[[($all_status$ahead_behind )](fg:#769ff0 bg:#394260)]($style)'
+
+[nodejs]
+symbol = ""
+style = "bg:#212736"
+format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+
+[rust]
+symbol = ""
+style = "bg:#212736"
+format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+
+[golang]
+symbol = ""
+style = "bg:#212736"
+format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+
+[php]
+symbol = ""
+style = "bg:#212736"
+format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+
+[time]
+disabled = false
+time_format = "%R" # Hour:Minute Format
+style = "bg:#1d2230"
+format = '[[  $time ](fg:#a0a9cb bg:#1d2230)]($style)'
 
 [aws]
-disabled = true
+style = "bg:#212736"
+format = '[[ $symbol ($profile) (\($region\))](fg:#769ff0 bg:#212736)]($style)'
+symbol = ''
+[aws.region_aliases]
+ap-southeast-2 = 'au'
+us-east-1 = 'va'
+
+[battery]
+full_symbol = '🔋 '
+charging_symbol = '⚡️ '
+discharging_symbol = '💀 '
+
+[[battery.display]]
+threshold = 20
+style = "italic bold red"
+
+[[battery.display]]
+threshold = 60
+style = "italic dimmed bright-purple"
+
+[[battery.display]]
+threshold = 70
+style = "italic dimmed yellow"
+
+[bun]
+symbol = ''
+style = "bg:#212736"
+format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+disabled = false
+
+[deno]
+symbol = ''
+style = "bg:#212736"
+format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+disabled = false
+
+[elixir]
+symbol =''
+style = "bg:#212736"
+format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+disabled = false
+
+[erlang]
+symbol = ''
+style = "bg:#212736"
+format = '[[$symbol($version)](fg:#769ff0 bg:#212736)]($style)'
+disabled = false
+
+[helm]
+symbol = ''
+style = "bg:#212736"
+format = '[[$symbol($version)](fg:#769ff0 bg:#212736)]($style)'
+disabled = false
+
+[kubernetes]
+symbol = ''
+style = "bg:#212736"
+format = '[[ $symbol ($user on )($cluster in )$context \($namespace\)](fg:#769ff0 bg:#212736)]($style)'
+disabled = false
+
+[ruby]
+symbol =''
+style = "bg:#212736"
+format = '[[$symbol($version)](fg:#769ff0 bg:#212736)]($style)'
+
+[terraform]
+symbol =''
+style = "bg:#212736"
+format = '[[$symbol($version$workspace)](fg:#769ff0 bg:#212736)]($style)'

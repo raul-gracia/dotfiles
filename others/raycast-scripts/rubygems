@@ -1,0 +1,43 @@
+#!/usr/bin/env mise exec ruby@latest -- ruby
+
+# Required parameters:
+# @raycast.schemaVersion 1
+# @raycast.title Ruby Gem Dependency
+# @raycast.mode fullOutput
+
+# Optional parameters:
+# @raycast.icon 💎
+# @raycast.argument1 { "type": "text", "placeholder": "gem", "optional": false}
+
+# Documentation:
+# @raycast.description Fetch latest ruby gem dependency
+# @raycast.author Raul Gracia
+# @raycast.authorURL https://github.com/raul-gracia
+
+require 'bundler/inline'
+
+gemfile do
+  source 'https://rubygems.org'
+  gem 'json'
+  gem 'httparty'
+  gem 'oga'
+end
+
+require 'httparty'
+require 'json'
+require 'oga'
+
+
+gem_name = ARGV[0]
+
+if gem_name
+  page = HTTParty.get("https://rubygems.org/gems/#{gem_name}")
+
+  if page.success?
+    content = Oga.parse_html(page.body)
+
+    gemfile = content.at_css('#gemfile_text').get('value')
+
+    puts gemfile
+  end
+end

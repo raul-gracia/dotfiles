@@ -1,0 +1,44 @@
+#!/usr/bin/env mise exec ruby@latest -- ruby
+
+# Required parameters:
+# @raycast.schemaVersion 1
+# @raycast.title NPM Dependency
+# @raycast.mode fullOutput
+
+# Optional parameters:
+# @raycast.icon 🧑🏻‍💻
+# @raycast.argument1 { "type": "text", "placeholder": "package", "optional": false}
+
+# Documentation:
+# @raycast.description Fetch latest NPM dependency
+# @raycast.author Raul Gracia
+# @raycast.authorURL https://github.com/raul-gracia
+
+require 'bundler/inline'
+
+gemfile do
+  source 'https://rubygems.org'
+  gem 'json'
+  gem 'httparty'
+  gem 'oga'
+  gem 'pry'
+end
+
+require 'httparty'
+require 'json'
+require 'oga'
+
+npm_name = ARGV[0]
+
+if npm_name
+  page = HTTParty.get("https://www.npmjs.com/package/#{npm_name}")
+
+  if page.success?
+    content = Oga.parse_html(page.body)
+
+    version = content.at_css('p.f2874b88.fw6.mb3.mt2.truncate.black-80.f4').text
+    package = "\"#{npm_name}\": \"#{version}\","
+
+    puts package
+  end
+end

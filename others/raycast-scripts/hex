@@ -1,0 +1,43 @@
+#!/usr/bin/env mise exec ruby@latest -- ruby
+
+# Required parameters:
+# @raycast.schemaVersion 1
+# @raycast.title HEX.pm Dependency
+# @raycast.mode fullOutput
+
+# Optional parameters:
+# @raycast.icon 🟣
+# @raycast.argument1 { "type": "text", "placeholder": "hex", "optional": false}
+
+# Documentation:
+# @raycast.description Fetch latest HEX dependency
+# @raycast.author Raul Gracia
+# @raycast.authorURL https://github.com/raul-gracia
+
+require 'bundler/inline'
+
+gemfile do
+  source 'https://rubygems.org'
+  gem 'json'
+  gem 'httparty'
+  gem 'oga'
+end
+
+require 'httparty'
+require 'json'
+require 'oga'
+
+
+hex_name = ARGV[0].strip
+
+if hex_name
+  page = HTTParty.get("https://hex.pm/packages/#{hex_name}")
+
+  if page.success?
+    content = Oga.parse_html(page.body)
+
+    mixfile = content.at_css('#mix-snippet').get('value')
+
+    puts mixfile
+  end
+end
