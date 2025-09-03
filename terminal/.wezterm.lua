@@ -1,37 +1,37 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
--- Tokyo Night color scheme
+-- Tokyo Night Storm color scheme (high contrast version)
 config.colors = {
 	foreground = "#c0caf5",
-	background = "#1a1b26",
+	background = "#1a1b26", -- Darker background for better contrast
 	cursor_bg = "#c0caf5",
 	cursor_fg = "#1a1b26",
 	cursor_border = "#c0caf5",
 	selection_fg = "#c0caf5",
-	selection_bg = "#33467c",
+	selection_bg = "#364a82",
 	scrollbar_thumb = "#292e42",
 	split = "#7aa2f7",
 
 	ansi = {
-		"#15161e", -- black
+		"#15161e", -- black (true black for better contrast)
 		"#f7768e", -- red
 		"#9ece6a", -- green
 		"#e0af68", -- yellow
-		"#7aa2f7", -- blue
+		"#7dcfff", -- blue (brighter cyan-blue for better visibility)
 		"#bb9af7", -- magenta
 		"#7dcfff", -- cyan
-		"#a9b1d6", -- white
+		"#c0caf5", -- white (brighter)
 	},
 	brights = {
-		"#414868", -- bright black
-		"#f7768e", -- bright red
-		"#9ece6a", -- bright green
-		"#e0af68", -- bright yellow
-		"#7aa2f7", -- bright blue
-		"#bb9af7", -- bright magenta
-		"#7dcfff", -- bright cyan
-		"#c0caf5", -- bright white
+		"#414868", -- bright black (more visible gray)
+		"#ff9e64", -- bright red (more vibrant)
+		"#73daca", -- bright green (more vibrant)
+		"#ffc777", -- bright yellow (more vibrant)
+		"#89ddff", -- bright blue (much brighter)
+		"#c792ea", -- bright magenta (more vibrant)
+		"#89ddff", -- bright cyan (brighter)
+		"#ffffff", -- bright white (pure white)
 	},
 
 	-- Tab bar colors
@@ -62,31 +62,27 @@ config.colors = {
 
 -- Background image configuration
 config.background = {
-	-- First layer: Solid color background matching Tokyo Night Storm
-	{
-		source = {
-			Color = "#24283b",
-		},
-		width = "100%",
-		height = "100%",
-		opacity = 1,
-	},
-	-- Second layer: Background image with low opacity to blend with the color
+	-- First layer: Background image with low opacity to blend with the color
 	{
 		source = {
 			File = "/Users/raulgracia/dotfiles/others/iterm-wallpaper-2.jpg",
 		},
-		opacity = 0.1, -- Similar to Warp's opacity: 10
-		hsb = {
-			brightness = 0.3, -- Further darken the image
-			saturation = 0.6, -- Reduce saturation for better blending
-		},
+		opacity = 1,
 		horizontal_align = "Center",
 		vertical_align = "Middle",
 
 		-- Stretch to fill the window
 		width = "Cover",
 		height = "Cover",
+	},
+	-- Second layer: Solid color background matching Tokyo Night Storm
+	{
+		source = {
+			Color = "#24283b",
+		},
+		width = "100%",
+		height = "100%",
+		opacity = 0.9,
 	},
 }
 
@@ -100,6 +96,10 @@ config.window_padding = {
 	top = 15,
 	bottom = 15,
 }
+
+-- Start with a reasonable window size
+config.initial_rows = 40
+config.initial_cols = 120
 
 -- Font configuration
 config.font = wezterm.font_with_fallback({
