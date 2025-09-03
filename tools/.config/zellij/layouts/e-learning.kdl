@@ -1,0 +1,42 @@
+layout {
+    default_tab_template {
+        pane size=1 borderless=true {
+            plugin location="zellij:tab-bar"
+        }
+
+        children
+
+        pane size=1 split_direction="vertical" {
+          pane size="75%" borderless=true {
+            plugin location="zellij:status-bar"
+          }
+          pane size="25%" borderless=true {
+            plugin location="file:/Users/raulgracia/.config/zellij/plugins/zellij-datetime.wasm" {
+              timezone1 "London/+1"
+                timezone2 "Thailand/+7"
+                default_timezone "London"
+                background_color "#0080a0"
+                foreground_color "#ffffff"
+                pane_color "#1e1e1e"
+                enable_right_click true
+                padding_adjust 0
+                text_align "right"
+            }
+          }
+        }
+    }
+    tab name="Editor" cwd="~/Code/e-learningenglish" focus=true split_direction="vertical" {
+        pane {
+            name "Editor"
+            command "nvim" 
+            args "."
+            focus true
+        }
+        pane { 
+            name "Server"
+            command "npm" 
+            args "run" "dev"
+            start_suspended false
+        }
+    }
+}

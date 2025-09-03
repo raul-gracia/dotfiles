@@ -7,6 +7,9 @@ alias faliases='nvim ~/.config/fish/aliases.fish'
 function who-port
     lsof -n -i4TCP:(string trim $argv[1]) | grep LISTEN
 end
+function kill-port
+    who-port $argv[1] | awk '{print $2}' | xargs kill -9 2>/dev/null
+end
 
 alias ls='eza -al --git --icons'
 alias cat='bat'

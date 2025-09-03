@@ -1,0 +1,8 @@
+ruby    3.3.5
+python  3.13.0
+erlang  27.0
+elixir  1.17.2-otp-27
+rust    1.80.1
+golang  1.23.0
+nodejs  22.5.1
+bundler 2.5.9

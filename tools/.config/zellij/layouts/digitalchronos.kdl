@@ -1,0 +1,76 @@
+layout {
+    default_tab_template {
+        pane size=1 borderless=true {
+            plugin location="zellij:tab-bar"
+        }
+
+        children
+
+        pane size=1 split_direction="vertical" {
+          pane size="75%" borderless=true {
+            plugin location="zellij:status-bar"
+          }
+          pane size="25%" borderless=true {
+            plugin location="file:/Users/raulgracia/.config/zellij/plugins/zellij-datetime.wasm" {
+              timezone1 "London/+1"
+                timezone2 "Thailand/+7"
+                default_timezone "London"
+                background_color "#0080a0"
+                foreground_color "#ffffff"
+                pane_color "#1e1e1e"
+                enable_right_click true
+                padding_adjust 0
+                text_align "right"
+            }
+          }
+        }
+    }
+    tab name="Editor" cwd="~/Code/digitalchronos/digital_chronos/" focus=true split_direction="vertical" {
+        pane size="70%" {
+            name "Claude"
+            focus true
+            command "fish" 
+            args "--command" "claude"
+        }
+        pane size="30%" {
+            name "Editor"
+            command "nvim" 
+            args "~/Code/digitalchronos/digital_chronos/"
+        }
+    }
+    tab name="Rails" cwd="~/Code/digitalchronos/digital_chronos/" {
+        pane split_direction="vertical" {
+            pane {
+                name "Server"
+                command "fish" 
+                args "--command" "iex -S mix"
+            }
+        }
+        pane split_direction="vertical"{
+            pane { 
+                name "Tests" 
+                command "fish" 
+                args "--command" "mix test"
+                start_suspended true
+            }
+        }
+    }
+    tab name="Lazygit" cwd="~/Code/nexus" {
+        pane {
+            name "Lazygit"
+            command "lazygit"
+        }
+    }
+}
+keybinds {
+    locked {
+        bind "Alt 1" { GoToTab 1; }
+        bind "Alt 2" { GoToTab 2; }
+        bind "Alt 3" { GoToTab 3; }
+        bind "Alt 4" { GoToTab 4; }
+        bind "Alt ]" { GoToNextTab; }
+        bind "Alt [" { GoToPreviousTab; }
+    }
+}
+
+

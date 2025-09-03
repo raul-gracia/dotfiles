@@ -4,6 +4,7 @@ tap 'heroku/brew'
 
 brew 'gpg2'
 brew 'rcm'
+brew 'stow'
 brew 'neovim'
 brew 'git'
 brew 'the_silver_searcher'

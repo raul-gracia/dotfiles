@@ -1,0 +1,22 @@
+# Current RCM symlinks
+# Generated on Tue  2 Sep 2025 23:48:34 BST
+lrwxr-xr-x@ 1 raulgracia  staff  30  2 Sep 23:32 /Users/raulgracia/.vimrc.bundles -> dotfiles/editor/.vimrc.bundles
+lrwxr-xr-x@ 1 raulgracia  staff  25  2 Sep 23:35 /Users/raulgracia/.gemrc -> dotfiles/languages/.gemrc
+lrwxr-xr-x@ 1 raulgracia  staff  27  2 Sep 23:35 /Users/raulgracia/.iex.exs -> dotfiles/languages/.iex.exs
+lrwxr-xr-x@ 1 raulgracia  staff  20  2 Sep 23:32 /Users/raulgracia/.vim -> dotfiles/editor/.vim
+lrwxr-xr-x@ 1 raulgracia  staff  28  2 Sep 23:32 /Users/raulgracia/.tmux.conf -> dotfiles/terminal/.tmux.conf
+lrwxr-xr-x@ 1 raulgracia  staff  32  2 Sep 23:35 /Users/raulgracia/.default-gems -> dotfiles/languages/.default-gems
+lrwxr-xr-x@ 1 raulgracia  staff  33  2 Sep 23:35 /Users/raulgracia/.tool-versions -> dotfiles/languages/.tool-versions
+lrwxr-xr-x@ 1 raulgracia  staff  30  2 Sep 23:32 /Users/raulgracia/.vimrc.leaders -> dotfiles/editor/.vimrc.leaders
+lrwxr-xr-x@ 1 raulgracia  staff  30  2 Sep 23:32 /Users/raulgracia/.wezterm.lua -> dotfiles/terminal/.wezterm.lua
+lrwxr-xr-x@ 1 raulgracia  staff  27  2 Sep 23:32 /Users/raulgracia/.vimrc.good -> dotfiles/editor/.vimrc.good
+lrwxr-xr-x@ 1 raulgracia  staff  28  2 Sep 23:32 /Users/raulgracia/.vimrc.plugs -> dotfiles/editor/.vimrc.plugs
+lrwxr-xr-x@ 1 raulgracia  staff  43  2 Sep 23:35 /Users/raulgracia/.default-python-packages -> dotfiles/languages/.default-python-packages
+lrwxr-xr-x@ 1 raulgracia  staff  40  2 Sep 23:35 /Users/raulgracia/.default-npm-packages -> dotfiles/languages/.default-npm-packages
+lrwxr-xr-x@ 1 raulgracia  staff  27  2 Sep 23:35 /Users/raulgracia/.ansible.cfg -> dotfiles/tools/.ansible.cfg
+lrwxr-xr-x@ 1 raulgracia  staff  22  2 Sep 23:32 /Users/raulgracia/.vimrc -> dotfiles/editor/.vimrc
+lrwxr-xr-x@ 1 raulgracia  staff  24  2 Sep 23:35 /Users/raulgracia/.agignore -> dotfiles/tools/.agignore
+lrwxr-xr-x@ 1 raulgracia  staff  24  2 Sep 23:32 /Users/raulgracia/.gitmessage -> dotfiles/git/.gitmessage
+lrwxr-xr-x@ 1 raulgracia  staff  21  2 Sep 23:35 /Users/raulgracia/.ctags -> dotfiles/tools/.ctags
+lrwxr-xr-x@ 1 raulgracia  staff  23  2 Sep 23:32 /Users/raulgracia/.gitconfig -> dotfiles/git/.gitconfig
+lrwxr-xr-x@ 1 raulgracia  staff  26  2 Sep 23:35 /Users/raulgracia/.asdfrc -> dotfiles/languages/.asdfrc

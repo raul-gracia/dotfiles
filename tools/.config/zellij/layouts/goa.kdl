@@ -1,0 +1,95 @@
+layout {
+    default_tab_template {
+        pane size=1 borderless=true {
+            plugin location="zellij:tab-bar"
+        }
+
+        children
+
+        pane size=1 split_direction="vertical" {
+          pane size="75%" borderless=true {
+            plugin location="zellij:status-bar"
+          }
+          pane size="25%" borderless=true {
+            plugin location="file:/Users/raulgracia/.config/zellij/plugins/zellij-datetime.wasm" {
+              timezone1 "London/+1"
+                timezone2 "Thailand/+7"
+                default_timezone "London"
+                background_color "#0080a0"
+                foreground_color "#ffffff"
+                pane_color "#1e1e1e"
+                enable_right_click true
+                padding_adjust 0
+                text_align "right"
+            }
+          }
+        }
+    }
+    tab name="Editor" cwd="~/Code/goa" focus=true {
+        pane {
+            name "Editor"
+            command "nvim" 
+            args "~/Code/goa/"
+            focus true
+        }
+        pane { 
+            name "Console"
+            command "fish" 
+            args "--command" "docker-compose exec web bash"
+            start_suspended true
+            size 10
+        }
+    }
+    tab name="Rails" cwd="~/Code/goa" {
+        pane split_direction="vertical" {
+            pane {
+                name "Docker UP"
+                command "fish" 
+                args "--command" "./scripts/development_up.sh"
+            }
+            pane {
+                name "Procfile"
+                command "fish"
+                args "--command" "docker-compose exec web bash -c 'gem install foreman; foreman start -f Procfile.dev'"
+                start_suspended true
+            }
+        }
+        pane split_direction="vertical"{
+            pane { 
+                name "Tests" 
+                command "fish" 
+                args "--command" "docker-compose exec web bash -c 'bin/rails test && bin/rails test:system'"
+                start_suspended true
+            }
+            pane { 
+                name "Rails Console" 
+                command "fish" 
+                args "--command" "docker-compose exec web bash -c 'bin/rails c'"
+                start_suspended true
+            }
+        }
+    }
+    tab name="Lazygit" cwd="~/Code/goa" {
+        pane {
+            name "Lazygit"
+            command "lazygit"
+        }
+    }
+    tab name="Lazydocker" cwd="~/Code/goa" {
+        pane {
+            name "Lazydocker"
+            command "lazydocker"
+        }
+    }
+}
+keybinds {
+    shared {
+        bind "Alt 1" { GoToTab 1; }
+        bind "Alt 2" { GoToTab 2; }
+        bind "Alt 3" { GoToTab 3; }
+        bind "Alt 4" { GoToTab 4; }
+        bind "Alt ]" { GoToNextTab; }
+        bind "Alt [" { GoToPreviousTab; }
+    }
+}
+

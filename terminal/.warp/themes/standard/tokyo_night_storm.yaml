@@ -1,0 +1,29 @@
+accent: "#7aa2f7"
+background: "#24283b"
+details: darker
+foreground: "#a9b1d6"
+background_image:
+  # the path is relative to ~/.warp/themes/
+  # the full path to the picture is: ~/.warp/themes/warp.jpg
+  path: wallpaper.jpg
+  # the opacity value is required and can range from 0-100
+  opacity: 10
+terminal_colors:
+  bright:
+    black: "#444b6a"
+    blue: "#7da6ff"
+    cyan: "#0db9d7"
+    green: "#b9f27c"
+    magenta: "#bb9af7"
+    red: "#ff7a93"
+    white: "#acb0d0"
+    yellow: "#ff9e64"
+  normal:
+    black: "#cccccc"
+    blue: "#7aa2f7"
+    cyan: "#449dab"
+    green: "#9ece6a"
+    magenta: "#ad8ee6"
+    red: "#f7768e"
+    white: "#ffffff"
+    yellow: "#e0af68"

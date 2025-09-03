@@ -5,4 +5,3 @@ eslint
 prettier
 biome
 @google/gemini-cli@latest
-@anthropic-ai/claude-code@latest

@@ -37,6 +37,7 @@
 	autocrlf = false
 	editor = nvim
 	safecrlf = true
+	pager = delta
 [init]
 	defaultBranch = main
 [commit]
@@ -82,3 +83,10 @@
   prompt = false
 [diff]
   tool = difftastic
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
+  side-by-side = true
+[merge]
+	conflictStyle = zdiff3

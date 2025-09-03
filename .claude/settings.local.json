@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git commit:*)",
+      "Read(/Users/raulgracia/**)",
+      "Read(/Users/raulgracia/.config/fish/**)",
+      "Bash(find:*)",
+      "Read(/Users/raulgracia/.warp/themes/**)",
+      "Read(/Users/raulgracia/.warp/themes/standard/**)",
+      "Bash(stow:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
